@@ -1,0 +1,7 @@
+== GET /hello
+
+.request
+include::{snippets}/testHello/http-request.adoc[]
+
+.response
+include::{snippets}/testHello/http-response.adoc[]

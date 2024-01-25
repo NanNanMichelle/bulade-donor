@@ -1,0 +1,66 @@
+package com.bulade.donor.application.controller;
+
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.ApplicationContext;
+import org.springframework.http.MediaType;
+import org.springframework.restdocs.RestDocumentationContextProvider;
+import org.springframework.restdocs.RestDocumentationExtension;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.context.WebApplicationContext;
+
+import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
+import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.documentationConfiguration;
+import static org.springframework.restdocs.operation.preprocess.Preprocessors.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+@ExtendWith({RestDocumentationExtension.class, SpringExtension.class})
+@SpringBootTest
+@AutoConfigureMockMvc
+@AutoConfigureRestDocs(outputDir = "target/generated-snippets")
+public class ApplicationControllerTest {
+
+    @Autowired
+    private MockMvc mockMvc;
+
+    @Autowired
+    private ApplicationContext context;
+
+    @BeforeEach
+    public void setUp(WebApplicationContext webApplicationContext,
+                      RestDocumentationContextProvider restDocumentation) {
+        this.mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext)
+                .apply(documentationConfiguration(restDocumentation))
+                .build();
+    }
+
+    @AfterEach
+    public void Test() throws Exception{
+
+    }
+
+
+    @Test
+    public void testHello() throws Exception {
+        this.mockMvc.perform(MockMvcRequestBuilders.get("/api/dict/hello")
+                        .param("name","aaa")
+                        .accept(MediaType.APPLICATION_JSON)).andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(MockMvcResultMatchers.content().string("Hello World!aaa"))
+                .andDo(document("{methodName}",
+                        preprocessRequest(prettyPrint()),
+                        preprocessResponse(prettyPrint())));
+    }
+
+}

@@ -1,0 +1,18 @@
+spring:
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/bulade_donor_test?autoReconnect=true&useUnicode=true&characterEncoding=utf8&useSSL=false
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  flyway: # org.flywaydb.core.internal.configuration.models.FlywayModel
+    enable: true
+    ## 迁移sql脚本文件存放路径，默认db/migration,db/aaa,classpath:db/migration,
+    locations: filesystem:../database/migration
+    #    # 设置为true，当迁移发现数据库非空且存在没有元数据的表时，自动执行基准迁移，新建schema_version表
+    baseline-on-migrate: true
+mybatis:
+  type-aliases-package: com.bulade.**.model
+  configuration:
+    call-setters-on-nulls: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    mapUnderscoreToCamelCase: true
