@@ -6,7 +6,7 @@
 # separate terms of service, privacy policy, and support
 # documentation.
 
-name: Java CI with Maven
+name: Maven Test
 
 on:
   push:
@@ -36,3 +36,9 @@ jobs:
 
       - name: Test
         run: ./mvnw test
+
+      - name: Test Coverage
+        run: ./mvnw jacoco:report-aggregate
+
+      - name: Publish test coverage results
+        uses: PavanMudigonda/jacoco-reporter@v4.8
