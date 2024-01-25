@@ -16,6 +16,7 @@
         <module>bulade-donor-application</module>
         <module>bulade-donor-member</module>
         <module>bulade-donor-infra</module>
+        <module>bulade-donor-coverage</module>
     </modules>
 
     <parent>
