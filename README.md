@@ -42,9 +42,9 @@
 
 #### 其他工具
 * Swagger 文档: Springdoc 2.3.0
-* Java Bean 转换: MapStruct 1.5.5.Final
+* 待定：Java Bean 转换: MapStruct 1.5.5.Final [UserConvert.java](bulade-donor-system%2Fsrc%2Fmain%2Fjava%2Fcom%2Fbulade%2Fdonor%2Fsystem%2Fconvert%2FUserConvert.java)
 * 消除冗长的 Java 代码: Lombok 1.18.30
-* Spring REST Docs 3.2.x
+* Spring REST Docs 3.2.x [示例](bulade-donor-application%2Fsrc%2Fmain%2Fasciidoc%2Findex.adoc)
 * 数据库版本控制管理工具：Flyway 9.22.3 支持MySql 8.1.0 
 [FlyWay.md](docs%2Fdictionary%2FFlyWay.md)
 
@@ -121,4 +121,4 @@ com.bulade.donor
   * 献血排行
 
 ### 代码规范
-* [代码规范](https://github.com/bulade-platform/Java-specification)
+* [代码规范](https://github.com/bulade-platform/Java-specification/blob/main/README.md)
