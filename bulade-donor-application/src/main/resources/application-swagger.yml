@@ -3,9 +3,15 @@ springdoc:
     - http://127.0.0.1:9090
   swagger-ui:
     enabled: true
-    doc-expansion: none
+    path: /swagger-ui
     tags-sorter: alpha
     operations-sorter: alpha
   api-docs:
     enabled: true
-    path: /swagger-ui/api-docs
+    path: /v3/api-docs
+  default-flat-param-object: true
+
+knife4j:
+  enable: true
+  setting:
+    language: zh_cn

@@ -1,4 +1,4 @@
-package com.bulade.donor.application.configuration;
+package com.bulade.donor.framework.swagger.config;
 
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;
@@ -102,5 +102,7 @@ public class SwaggerConfiguration {
         wrapperSchema.addProperty("data", sourceSchema);
         return wrapperSchema;
     }
+
+
 
 }
