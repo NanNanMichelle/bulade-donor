@@ -22,3 +22,5 @@ CREATE TABLE `sys_admins` (
   `updated_at` datetime NOT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci ROW_FORMAT=DYNAMIC COMMENT='平台管理用户';
+
+insert into `sys_admins` ( `username`, `password`, `updated_at`, `created_at`) values ( 'admin', '$2a$04$fbbii0NUSE133B.YIlFlLeGrzjPSA.NuixmYJXXKLdrTDdSOMkHia', '2024-01-29 17:36:37', '2024-01-29 17:36:22');
