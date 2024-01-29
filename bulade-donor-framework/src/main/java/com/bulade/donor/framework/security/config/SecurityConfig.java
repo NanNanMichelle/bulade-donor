@@ -64,16 +64,18 @@ public class SecurityConfig {
         // 设置每个请求的权限
         httpSecurity
             .authorizeHttpRequests(c -> c
-                .requestMatchers("/swagger-ui/**", "/v3/api-docs/**")
-                .permitAll()
+                    .requestMatchers("/swagger-ui/**", "/v3/api-docs/**")
+                    .permitAll()
+                    .requestMatchers(securityProperties.getPermitAllUrls().toArray(new String[0]))
+                    .permitAll()
 
-                .requestMatchers("/api/admin/login")
-                .permitAll()
+//                .requestMatchers("/api/admin/login")
+//                .permitAll()
 
-                .requestMatchers("/error")
-                .permitAll()
+                    .requestMatchers("/error")
+                    .permitAll()
 
-                .anyRequest().authenticated()
+                    .anyRequest().authenticated()
 
             )
             .exceptionHandling(c -> c.authenticationEntryPoint(authenticationEntryPoint)

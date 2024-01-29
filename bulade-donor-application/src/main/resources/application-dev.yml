@@ -25,6 +25,8 @@ donor:
     session-timeout: 30m
     mock-enable: true
     mock-secret: test
+    permit-all_urls:
+      - /api/admin/login #不需要登录
 
 jwt:
   signing.key: nEuBwbvzrXzKmijgDvmbSx8ODyw5PGRJ0vj64t+LWzA=

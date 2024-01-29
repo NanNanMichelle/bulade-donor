@@ -10,9 +10,6 @@ donor:
   version: 0.0.1
   # 版权年份
   copyrightYear: 2024
-  security:
-    permit-all_urls:
-      - /api/open/** #不需要登录
 
 
 # Spring配置
