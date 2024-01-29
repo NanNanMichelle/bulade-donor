@@ -11,4 +11,19 @@ public class User {
 
     private String password;
 
+    public static User ofSignIn(String username, String password) {
+        var user = new User();
+        user.setPassword(password);
+        user.setUserName(username);
+        return user;
+    }
+
+    public static User ofSignIn(Long id, String username, String password) {
+        var user = new User();
+        user.setId(id);
+        user.setPassword(password);
+        user.setUserName(username);
+        return user;
+    }
+
 }

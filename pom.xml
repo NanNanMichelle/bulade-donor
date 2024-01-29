@@ -34,7 +34,7 @@
         <fastjson.version>2.0.43</fastjson.version>
         <security.version>3.2.1</security.version>
         <redis.version>3.2.1</redis.version>
-        <jwt.version>0.9.1</jwt.version>
+        <jwt.version>0.12.3</jwt.version>
         <mybatis.version>3.0.3</mybatis.version>
         <mysql.version>8.1.0</mysql.version>
         <hutool.version>5.8.25</hutool.version>

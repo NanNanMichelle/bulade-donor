@@ -42,5 +42,9 @@
             <groupId>org.mapstruct</groupId>
             <artifactId>mapstruct-processor</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.bulade.donor</groupId>
+            <artifactId>bulade-donor-framework</artifactId>
+        </dependency>
     </dependencies>
 </project>

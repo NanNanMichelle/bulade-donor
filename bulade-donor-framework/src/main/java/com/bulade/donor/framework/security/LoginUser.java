@@ -10,7 +10,6 @@ import java.util.Map;
 
 /**
  * 登录用户信息
-
  */
 @Data
 public class LoginUser {
@@ -19,6 +18,7 @@ public class LoginUser {
      * 用户编号
      */
     private Long id;
+
     /**
      * 用户类型
      */
@@ -29,12 +29,6 @@ public class LoginUser {
      */
     private List<String> scopes;
 
-    // ========== 上下文 ==========
-    /**
-     * 上下文字段，不进行持久化
-     *
-     * 1. 用于基于 LoginUser 维度的临时缓存
-     */
     @JsonIgnore
     private Map<String, Object> context;
 

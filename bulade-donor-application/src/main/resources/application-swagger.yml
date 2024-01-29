@@ -1,6 +1,6 @@
 springdoc:
   server-urls:
-    - http://127.0.0.1:9090
+    - http://127.0.0.1:48080
   swagger-ui:
     enabled: true
     path: /swagger-ui

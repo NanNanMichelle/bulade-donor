@@ -1,3 +1,7 @@
+# 服务器的HTTP端口
+server:
+  port: 48080
+
 # 项目相关配置
 donor:
   # 名称
@@ -6,13 +10,15 @@ donor:
   version: 0.0.1
   # 版权年份
   copyrightYear: 2024
+  security:
+    permit-all_urls:
+      - /api/open/** #不需要登录
 
-# 服务器的HTTP端口
-server:
-  port: 9090
 
 # Spring配置
 spring:
+  application:
+    name: 献血服务
   # 数据源配置
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
@@ -34,7 +40,7 @@ spring:
       max-request-size: 5MB # 单个文件大小
       max-file-size: 5MB # 设置总上传的文件大小
     # 资源信息
-    messages:
+#    messages:
       # 国际化资源文件路径
     # basename: static/i18n/messages
 

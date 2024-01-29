@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bulade.donor.system.dao.AdminsMapper">
+
+    <sql id="BaseColumnList">
+        id, username, password, created_at, updated_at
+    </sql>
+
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        INSERT INTO `sys_admins`( `username`, `password`, `created_at`, `updated_at`) VALUES (
+        #{username}, #{password}, now(), now())
+    </insert>
+
+    <select id="selectByUsername" resultType="com.bulade.donor.system.model.Admin">
+        select
+        <include refid="BaseColumnList"/>
+        from sys_admins
+        where username = #{username}
+        limit 1
+    </select>
+
+    <select id="selectById" resultType="com.bulade.donor.system.model.Admin">
+        select
+        <include refid="BaseColumnList"/>
+        from sys_admins
+        where `id` = #{id}
+        limit 1
+    </select>
+
+</mapper>
