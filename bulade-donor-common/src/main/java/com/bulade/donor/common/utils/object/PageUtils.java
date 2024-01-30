@@ -13,7 +13,7 @@ import static java.util.Collections.singletonList;
 
 public class PageUtils {
 
-    private PageUtils(){
+    private PageUtils() {
 
     }
 
