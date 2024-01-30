@@ -1,4 +1,4 @@
-package com.bulade.donor.common.core;
+package com.bulade.donor.common.page;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

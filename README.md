@@ -108,14 +108,8 @@ com.bulade.donor
 
 ![献血服务.png](docs%2F%E7%8C%AE%E8%A1%80%E6%9C%8D%E5%8A%A1.png)
 
-### 功能
-* [系统功能](bulade-donor-system%2FREADME.md)
-* [基础设施](bulade-donor-infra%2FREADME.md)
-* [会员中心](bulade-donor-member%2FREADME.md)
-* 业务服务
-
 ### 项目信息
 [项目信息](docs%2Fproject%2FREADME.md)
 
 ### 代码规范
-* [代码规范](https://github.com/bulade-platform/Java-specification/blob/main/README.md)
+[代码规范](https://github.com/bulade-platform/Java-specification/blob/main/README.md)

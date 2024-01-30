@@ -2,7 +2,7 @@ package com.bulade.donor.common.utils.object;
 
 import cn.hutool.core.bean.BeanUtil;
 import com.bulade.donor.common.utils.collection.CollectionUtils;
-import com.bulade.donor.common.core.PageResult;
+import com.bulade.donor.common.page.PageResult;
 
 import java.util.List;
 import java.util.function.Consumer;
