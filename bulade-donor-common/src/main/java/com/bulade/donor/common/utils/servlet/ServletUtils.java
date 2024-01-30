@@ -21,6 +21,10 @@ import java.util.Map;
  */
 public class ServletUtils {
 
+    private ServletUtils(){
+
+    }
+
     /**
      * 返回 JSON 字符串
      *

@@ -15,6 +15,10 @@ import java.util.function.Consumer;
  */
 public class BeanUtils {
 
+    private BeanUtils(){
+
+    }
+
     public static <T> T toBean(Object source, Class<T> targetClass) {
         return BeanUtil.toBean(source, targetClass);
     }

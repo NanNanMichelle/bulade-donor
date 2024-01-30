@@ -10,6 +10,10 @@ import org.springframework.aop.support.AopUtils;
  */
 public class SpringAopUtils {
 
+    private SpringAopUtils(){
+
+    }
+
     /**
      * 获取代理的目标对象
      *
