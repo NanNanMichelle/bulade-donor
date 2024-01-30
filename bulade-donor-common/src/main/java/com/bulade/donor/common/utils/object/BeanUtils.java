@@ -15,7 +15,7 @@ import java.util.function.Consumer;
  */
 public class BeanUtils {
 
-    private BeanUtils(){
+    private BeanUtils() {
 
     }
 

@@ -21,7 +21,7 @@ import java.util.Map;
  */
 public class ServletUtils {
 
-    private ServletUtils(){
+    private ServletUtils() {
 
     }
 

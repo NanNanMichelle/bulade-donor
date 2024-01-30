@@ -10,7 +10,7 @@ import org.springframework.aop.support.AopUtils;
  */
 public class SpringAopUtils {
 
-    private SpringAopUtils(){
+    private SpringAopUtils() {
 
     }
 
