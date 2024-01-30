@@ -1,4 +1,4 @@
-package com.bulade.donor.system.enums;
+package com.bulade.donor.common.enums;
 
 import com.bulade.donor.common.core.IntArrayValuable;
 import com.bulade.donor.common.exception.SystemException;

@@ -6,7 +6,6 @@ import com.bulade.donor.framework.security.LoginUser;
 import com.bulade.donor.framework.security.api.TokenApi;
 import com.bulade.donor.framework.security.config.SecurityProperties;
 import com.bulade.donor.common.exception.UnAuthorizedException;
-import com.bulade.donor.framework.security.utils.JwtUtils;
 import com.bulade.donor.framework.security.utils.SecurityFrameworkUtils;
 import com.bulade.donor.framework.security.utils.WebFrameworkUtils;
 import jakarta.annotation.Resource;

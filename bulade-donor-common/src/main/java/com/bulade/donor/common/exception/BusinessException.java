@@ -25,4 +25,8 @@ public class BusinessException extends RuntimeException {
         this.code = ResultCodeEnum.FAILED.getCode();
     }
 
+    public static BusinessException ofLogin(ResultCodeEnum codeEnum) {
+        return new BusinessException(codeEnum.getMessage());
+    }
+
 }

@@ -3,7 +3,7 @@ package com.bulade.donor.system.service.impl;
 import com.bulade.donor.framework.security.api.TokenApi;
 import com.bulade.donor.framework.security.dto.AccessTokenCheckDTO;
 import com.bulade.donor.framework.security.utils.JwtUtils;
-import com.bulade.donor.system.enums.UserType;
+import com.bulade.donor.common.enums.UserType;
 import com.bulade.donor.system.service.AdminsService;
 import com.bulade.donor.system.service.UserService;
 import jakarta.annotation.Resource;

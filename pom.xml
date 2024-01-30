@@ -47,6 +47,8 @@
         <jackson.version>2.16.1</jackson.version>
         <mapstruct.version>1.5.5.Final</mapstruct.version>
         <org.mapstruct.version>1.5.5.Final</org.mapstruct.version>
+        <!-- 监控相关 -->
+        <skywalking.version>8.12.0</skywalking.version>
     </properties>
 
     <dependencies>
@@ -187,6 +189,22 @@
                 <version>${mapstruct.version}</version>
             </dependency>
 
+            <dependency>
+                <groupId>org.apache.skywalking</groupId>
+                <artifactId>apm-toolkit-trace</artifactId>
+                <version>${skywalking.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.skywalking</groupId>
+                <artifactId>apm-toolkit-logback-1.x</artifactId>
+                <version>${skywalking.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.skywalking</groupId>
+                <artifactId>apm-toolkit-opentracing</artifactId>
+                <version>${skywalking.version}</version>
+            </dependency>
+
             <!-- 通用工具-->
             <dependency>
                 <groupId>com.bulade.donor</groupId>
@@ -312,9 +330,16 @@
                     <include>**/*.yml</include>
                     <include>**/*.xml</include>
                     <include>**/*.json</include>
-                    <include>**/*.sql</include>
                 </includes>
                 <filtering>false</filtering>
+            </resource>
+            <resource>
+                <directory>../database/migration</directory>
+                <includes>
+                    <include>*.sql</include>
+                </includes>
+                <filtering>false</filtering>
+                <targetPath>database/migration</targetPath>
             </resource>
         </resources>
     </build>
