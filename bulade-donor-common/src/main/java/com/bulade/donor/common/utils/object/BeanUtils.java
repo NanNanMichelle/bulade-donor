@@ -2,7 +2,7 @@ package com.bulade.donor.common.utils.object;
 
 import cn.hutool.core.bean.BeanUtil;
 import com.bulade.donor.common.utils.collection.CollectionUtils;
-import com.bulade.donor.common.core.PageResult;
+import com.bulade.donor.common.page.PageResult;
 
 import java.util.List;
 import java.util.function.Consumer;
@@ -14,6 +14,10 @@ import java.util.function.Consumer;
  * 2. 针对复杂的对象转换，可以搜参考 AuthConvert 实现，通过 mapstruct + default 配合实现
  */
 public class BeanUtils {
+
+    private BeanUtils() {
+
+    }
 
     public static <T> T toBean(Object source, Class<T> targetClass) {
         return BeanUtil.toBean(source, targetClass);

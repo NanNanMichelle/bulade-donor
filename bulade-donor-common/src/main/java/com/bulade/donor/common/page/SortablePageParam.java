@@ -1,4 +1,4 @@
-package com.bulade.donor.common.core;
+package com.bulade.donor.common.page;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;

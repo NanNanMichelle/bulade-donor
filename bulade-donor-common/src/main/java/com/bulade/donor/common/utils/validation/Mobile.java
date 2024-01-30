@@ -1,6 +1,5 @@
 package com.bulade.donor.common.utils.validation;
 
-import com.bulade.donor.common.core.IntArrayValuable;
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
 
@@ -12,18 +11,16 @@ import java.lang.annotation.*;
     ElementType.ANNOTATION_TYPE,
     ElementType.CONSTRUCTOR,
     ElementType.PARAMETER,
-    ElementType.TYPE_USE})
+    ElementType.TYPE_USE
+})
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-@Constraint(validatedBy = {InEnumValidator.class, InEnumCollectionValidator.class})
-public @interface InEnum {
+@Constraint(
+    validatedBy = MobileValidator.class
+)
+public @interface Mobile {
 
-    /**
-     * @return 实现 EnumValuable 接口的
-     */
-    Class<? extends IntArrayValuable> value();
-
-    String message() default "必须在指定范围 {value}";
+    String message() default "手机号格式不正确";
 
     Class<?>[] groups() default {};
 
