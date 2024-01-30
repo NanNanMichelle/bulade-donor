@@ -7,8 +7,6 @@ import org.springframework.aop.support.AopUtils;
 
 /**
  * Spring AOP 工具类
- * <p>
- * 参考波克尔 http://www.bubuko.com/infodetail-3471885.html 实现
  */
 public class SpringAopUtils {
 
@@ -33,7 +31,8 @@ public class SpringAopUtils {
 
     private static Object getCglibProxyTargetObject(Object proxy) throws Exception {
         Object dynamicAdvisedInterceptor = BeanUtil.getFieldValue(proxy, "CGLIB$CALLBACK_0");
-        AdvisedSupport advisedSupport = (AdvisedSupport) BeanUtil.getFieldValue(dynamicAdvisedInterceptor, "advised");
+        AdvisedSupport advisedSupport = (AdvisedSupport) BeanUtil.getFieldValue(dynamicAdvisedInterceptor,
+            "advised");
         return advisedSupport.getTargetSource().getTarget();
     }
 
