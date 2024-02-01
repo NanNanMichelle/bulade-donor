@@ -13,7 +13,6 @@ import jakarta.servlet.Filter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
-import org.springframework.boot.autoconfigure.web.WebProperties;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 
@@ -35,8 +34,10 @@ public class ApiLogAutoConfiguration {
      */
     @Bean
     @ConditionalOnProperty(prefix = "donor.access-log", value = "enable", matchIfMissing = true)
-    public FilterRegistrationBean<ApiAccessLogFilter> apiAccessLogFilter(@Value("${spring.application.name}") String applicationName,
-                                                                         ApiAccessLogFrameworkService apiAccessLogFrameworkService) {
+    public FilterRegistrationBean<ApiAccessLogFilter> apiAccessLogFilter(
+        @Value("${spring.application.name}") String applicationName,
+        ApiAccessLogFrameworkService apiAccessLogFrameworkService
+    ) {
         ApiAccessLogFilter filter = new ApiAccessLogFilter(applicationName, apiAccessLogFrameworkService);
         return createFilterBean(filter, WebFilterOrderEnum.API_ACCESS_LOG_FILTER);
     }

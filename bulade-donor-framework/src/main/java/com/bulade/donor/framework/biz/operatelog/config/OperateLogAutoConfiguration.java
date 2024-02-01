@@ -1,6 +1,5 @@
 package com.bulade.donor.framework.biz.operatelog.config;
 
-
 import com.bulade.donor.framework.biz.operatelog.api.OperateLogApi;
 import com.bulade.donor.framework.biz.operatelog.core.aop.OperateLogAspect;
 import com.bulade.donor.framework.biz.operatelog.core.service.OperateLogFrameworkService;

@@ -6,7 +6,7 @@ import org.springframework.validation.annotation.Validated;
 
 @Service
 @Validated
-public class ApiErrorLogApiImpl implements ApiErrorLogApi{
+public class ApiErrorLogApiImpl implements ApiErrorLogApi {
 
     @Override
     public void createApiErrorLog(ApiErrorLogCreateBO createBO) {

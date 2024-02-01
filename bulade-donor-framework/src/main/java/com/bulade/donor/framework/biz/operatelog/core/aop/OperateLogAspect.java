@@ -169,7 +169,7 @@ public class OperateLogAspect {
 
     private static void fillModuleFields(
         com.bulade.donor.framework.biz.operatelog.core.service.OperateLog operateLogObj,
-        ProceedingJoinPoint joinPoint, OperateLog operateLog,Operation operation
+        ProceedingJoinPoint joinPoint, OperateLog operateLog, Operation operation
     ) {
         // module 属性
         if (operateLog != null) {
@@ -302,7 +302,7 @@ public class OperateLogAspect {
     }
 
     private static RequestMethod[] obtainRequestMethod(ProceedingJoinPoint joinPoint) {
-        var requestMapping = AnnotationUtils.getAnnotation( // 使用 Spring 的工具类，可以处理 @RequestMapping 别名注解
+        var requestMapping = AnnotationUtils.getAnnotation(// 使用 Spring 的工具类，可以处理 @RequestMapping 别名注解
             ((MethodSignature) joinPoint.getSignature()).getMethod(), RequestMapping.class);
         return requestMapping != null ? requestMapping.method() : new RequestMethod[]{};
     }

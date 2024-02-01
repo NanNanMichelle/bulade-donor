@@ -12,7 +12,8 @@ import org.springframework.web.context.request.ServletRequestAttributes;
  */
 public class WebFrameworkUtils {
 
-    private WebFrameworkUtils(){}
+    private WebFrameworkUtils() {
+    }
 
     public static final String REQUEST_ATTRIBUTE_LOGIN_USER_TYPE = "login_user_type";
 

@@ -121,6 +121,13 @@ public class OperateLogCreateBO {
 
     @Override
     public String toString() {
-        return "{" + "traceId='" + traceId + '\'' + ", userId=" + userId + ", userType=" + userType + ", module='" + module + '\'' + ", name='" + name + '\'' + ", type=" + type + ", content='" + content + '\'' + ", exts=" + exts + ", requestMethod='" + requestMethod + '\'' + ", requestUrl='" + requestUrl + '\'' + ", userIp='" + userIp + '\'' + ", userAgent='" + userAgent + '\'' + ", javaMethod='" + javaMethod + '\'' + ", javaMethodArgs='" + javaMethodArgs + '\'' + ", startTime=" + startTime + ", duration=" + duration + ", resultCode=" + resultCode + ", resultMsg='" + resultMsg + '\'' + ", resultData='" + resultData + '\'' + '}';
+        return "{" + "traceId='" + traceId + '\'' + ", userId=" + userId + ", userType="
+            + userType + ", module='" + module + '\'' + ", name='" + name + '\'' + ", type="
+            + type + ", content='" + content + '\'' + ", exts=" + exts + ", requestMethod='"
+            + requestMethod + '\'' + ", requestUrl='" + requestUrl + '\'' + ", userIp='" + userIp
+            + '\'' + ", userAgent='" + userAgent + '\'' + ", javaMethod='" + javaMethod + '\''
+            + ", javaMethodArgs='" + javaMethodArgs + '\'' + ", startTime=" + startTime
+            + ", duration=" + duration + ", resultCode=" + resultCode + ", resultMsg='"
+            + resultMsg + '\'' + ", resultData='" + resultData + '\'' + '}';
     }
 }

@@ -102,7 +102,10 @@ public class ApiAccessLogFilter extends OncePerRequestFilter {
         accessLog.setTraceId(TracerUtils.getTraceId());
         accessLog.setApplicationName(applicationName);
         accessLog.setRequestUrl(request.getRequestURI());
-        var requestParams = MapUtil.<String, Object>builder().put("query", queryString).put("body", requestBody).build();
+        var requestParams = MapUtil.<String, Object>builder()
+            .put("query", queryString)
+            .put("body", requestBody)
+            .build();
         accessLog.setRequestParams(toJsonString(requestParams));
         accessLog.setRequestMethod(request.getMethod());
         accessLog.setUserAgent(ServletUtils.getUserAgent(request));
@@ -113,6 +116,5 @@ public class ApiAccessLogFilter extends OncePerRequestFilter {
         accessLog.setDuration((int) LocalDateTimeUtil.between(accessLog.getBeginTime(),
             accessLog.getEndTime(), ChronoUnit.MILLIS));
     }
-
 
 }

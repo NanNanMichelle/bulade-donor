@@ -14,7 +14,6 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
-
 import com.alibaba.fastjson2.support.config.FastJsonConfig;
 
 import java.nio.charset.StandardCharsets;
