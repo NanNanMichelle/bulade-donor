@@ -100,7 +100,15 @@ public enum ResultCodeEnum {
     /**
      * 没有权限
      */
-    NO_PERMISSION(403, "当前用户无该接口权限");
+    NO_PERMISSION(403, "当前用户无该接口权限"),
+
+    NOT_FOUND(404, "请求未找到"),
+
+    METHOD_NOT_ALLOWED(405, "请求方法不正确"),
+
+    TOO_MANY_REQUESTS(429, "请求过于频繁，请稍后重试"),
+
+    NOT_IMPLEMENTED(501, "功能未实现/未开启");
 
     private final Integer code;
 

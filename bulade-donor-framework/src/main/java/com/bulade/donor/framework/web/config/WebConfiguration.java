@@ -1,9 +1,12 @@
 package com.bulade.donor.framework.web.config;
 
 import com.bulade.donor.common.enums.WebFilterOrderEnum;
+import com.bulade.donor.framework.web.apilog.service.ApiErrorLogFrameworkService;
 import com.bulade.donor.framework.web.core.BuladeFastJsonHttpMessageConverter;
 import com.bulade.donor.framework.web.core.filter.CacheRequestBodyFilter;
+import com.bulade.donor.framework.web.core.handler.GlobalExceptionHandler;
 import jakarta.servlet.Filter;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -24,6 +27,14 @@ import static com.alibaba.fastjson2.JSONWriter.Feature.WriteNullStringAsEmpty;
 
 @Configuration
 public class WebConfiguration {
+
+    @Value("${spring.application.name}")
+    private String applicationName;
+
+    @Bean
+    public GlobalExceptionHandler globalExceptionHandler(ApiErrorLogFrameworkService apiErrorLogFrameworkService) {
+        return new GlobalExceptionHandler(applicationName, apiErrorLogFrameworkService);
+    }
 
     @Bean
     public CorsFilter corsFilter() {

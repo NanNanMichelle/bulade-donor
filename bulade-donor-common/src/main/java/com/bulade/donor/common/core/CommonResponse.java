@@ -50,6 +50,10 @@ public class CommonResponse<T> {
         return new CommonResponse<>(ResultCodeEnum.SUCCESS, message);
     }
 
+    public static <T> CommonResponse<T> error(ResultCodeEnum resultCode) {
+        return new CommonResponse<>(resultCode, resultCode.getMessage());
+    }
+
     public static <T> CommonResponse<T> error(String message) {
         return new CommonResponse<>(ResultCodeEnum.ERROR, message);
     }

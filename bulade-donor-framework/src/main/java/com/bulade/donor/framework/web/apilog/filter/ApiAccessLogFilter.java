@@ -4,14 +4,13 @@ import cn.hutool.core.date.LocalDateTimeUtil;
 import cn.hutool.core.exceptions.ExceptionUtil;
 import cn.hutool.core.map.MapUtil;
 import cn.hutool.core.text.CharSequenceUtil;
-import cn.hutool.core.util.StrUtil;
 import com.bulade.donor.common.core.CommonResponse;
 import com.bulade.donor.common.enums.ResultCodeEnum;
 import com.bulade.donor.common.utils.monitor.TracerUtils;
 import com.bulade.donor.common.utils.servlet.ServletUtils;
 import com.bulade.donor.framework.security.config.SecurityProperties;
 import com.bulade.donor.framework.security.utils.SecurityFrameworkUtils;
-import com.bulade.donor.framework.web.apilog.service.ApiAccessLog;
+import com.bulade.donor.framework.web.apilog.bo.ApiAccessLogCreateBO;
 import com.bulade.donor.framework.web.apilog.service.ApiAccessLogFrameworkService;
 import com.bulade.donor.framework.web.utils.WebFrameworkUtils;
 import jakarta.servlet.FilterChain;
@@ -77,17 +76,17 @@ public class ApiAccessLogFilter extends OncePerRequestFilter {
 
     private void createApiAccessLog(HttpServletRequest request, LocalDateTime beginTime,
                                     Map<String, String> queryString, String requestBody, Exception ex) {
-        var accessLog = new ApiAccessLog();
+        var accessLogBO = new ApiAccessLogCreateBO();
         try {
-            this.buildApiAccessLogDTO(accessLog, request, beginTime, queryString, requestBody, ex);
-            apiAccessLogFrameworkService.createApiAccessLog(accessLog);
+            this.buildApiAccessLogDTO(accessLogBO, request, beginTime, queryString, requestBody, ex);
+            apiAccessLogFrameworkService.createApiAccessLog(accessLogBO);
         } catch (Throwable th) {
             log.error("[createApiAccessLog][url({}) log({}) 发生异常]", request.getRequestURI(),
-                toJsonString(accessLog), th);
+                toJsonString(accessLogBO), th);
         }
     }
 
-    private void buildApiAccessLogDTO(ApiAccessLog accessLog, HttpServletRequest request, LocalDateTime beginTime,
+    private void buildApiAccessLogDTO(ApiAccessLogCreateBO accessLog, HttpServletRequest request, LocalDateTime beginTime,
                                       Map<String, String> queryString, String requestBody, Exception ex) {
         var token = SecurityFrameworkUtils.obtainAuthorization(request,
             securityProperties.getTokenHeader(), securityProperties.getTokenParameter());
