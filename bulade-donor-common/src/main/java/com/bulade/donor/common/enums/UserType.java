@@ -1,4 +1,4 @@
-package com.bulade.donor.system.enums;
+package com.bulade.donor.common.enums;
 
 import com.bulade.donor.common.core.IntArrayValuable;
 import com.bulade.donor.common.exception.SystemException;
@@ -21,6 +21,7 @@ public enum UserType implements IntArrayValuable {
      * 类型
      */
     private final Integer code;
+
     /**
      * 类型名
      */

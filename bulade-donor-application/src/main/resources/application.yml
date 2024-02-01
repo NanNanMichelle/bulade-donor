@@ -2,20 +2,10 @@
 server:
   port: 48080
 
-# 项目相关配置
-donor:
-  # 名称
-  name: bulade-donor
-  # 版本
-  version: 0.0.1
-  # 版权年份
-  copyrightYear: 2024
-
-
 # Spring配置
 spring:
   application:
-    name: 献血服务
+    name: bulade-donor
   # 数据源配置
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
@@ -64,5 +54,3 @@ token:
   secret: abcdefghijklmnopqrstuvwxyz
   # 令牌有效期（默认30分钟）
   expireTime: 30
-
-

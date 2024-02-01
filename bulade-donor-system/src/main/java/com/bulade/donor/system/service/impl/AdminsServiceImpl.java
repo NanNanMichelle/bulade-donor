@@ -17,9 +17,7 @@ public class AdminsServiceImpl implements AdminsService {
 
     @Override
     public Admin selectByUsername(String username) {
-        var admin = adminsMapper.selectByUsername(username);
-        Assert.notNull(admin, "admin不存在username[%s]".formatted(username));
-        return admin;
+        return adminsMapper.selectByUsername(username);
     }
 
     @Override
@@ -27,6 +25,11 @@ public class AdminsServiceImpl implements AdminsService {
         var admin = adminsMapper.selectById(id);
         Assert.notNull(admin, "admin不存在id[%s]".formatted(id));
         return admin;
+    }
+
+    @Override
+    public void updateUserLogin(Long userId, String clientIP) {
+
     }
 
 }

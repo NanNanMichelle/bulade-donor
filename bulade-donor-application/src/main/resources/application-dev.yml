@@ -27,6 +27,8 @@ donor:
     mock-secret: test
     permit-all_urls:
       - /api/admin/login #不需要登录
+  access-log:
+    enable: true
 
 jwt:
   signing.key: nEuBwbvzrXzKmijgDvmbSx8ODyw5PGRJ0vj64t+LWzA=

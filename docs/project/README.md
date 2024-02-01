@@ -14,3 +14,6 @@
 
 #### 测试
 * [Spring REST Docs 示例](..%2F..%2Fbulade-donor-application%2Fsrc%2Fmain%2Fasciidoc%2Findex.adoc)
+
+#### 系统日志
+[log.md](log.md)

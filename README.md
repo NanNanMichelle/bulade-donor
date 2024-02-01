@@ -46,7 +46,7 @@
 * 消除冗长的 Java 代码: Lombok 1.18.30
 * Spring REST Docs 3.2.x [示例](bulade-donor-application%2Fsrc%2Fmain%2Fasciidoc%2Findex.adoc)
 * 数据库版本控制管理工具：Flyway 9.22.3 支持MySql 8.1.0 
-[flyWay.md](docs%2Fconvention%2FflyWay.md)
+[Flyway.md](docs%2Fconvention%2FFlyway.md)
 
 
 ### 系统监控

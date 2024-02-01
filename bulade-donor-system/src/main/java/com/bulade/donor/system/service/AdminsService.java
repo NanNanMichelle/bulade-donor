@@ -8,4 +8,5 @@ public interface AdminsService {
 
     Admin selectById(Long id);
 
+    void updateUserLogin(Long userId, String clientIP);
 }

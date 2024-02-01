@@ -19,16 +19,16 @@ public class Admin {
 
     private LocalDateTime updatedAt;
 
-    public static Admin ofSignIn(String username, String password) {
-        return new Admin()
-            .setUsername(username)
-            .setPassword(password);
-    }
+    private LocalDateTime deletedAt;
 
-    public static Admin ofInsert(String username, String password) {
-        return new Admin()
-            .setUsername(username)
-            .setPassword(password);
-    }
+    /**
+     * 最后登录IP
+     */
+    private String loginIp;
+
+    /**
+     * 最后登录时间
+     */
+    private LocalDateTime loginDate;
 
 }

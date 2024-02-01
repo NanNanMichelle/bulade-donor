@@ -3,8 +3,7 @@ package com.bulade.donor.application.controller.admin;
 import com.bulade.donor.application.payload.request.AdminSignInReq;
 import com.bulade.donor.application.payload.response.AuthLoginResp;
 import com.bulade.donor.application.service.AdminAuthenticationService;
-import com.bulade.donor.framework.security.utils.WebFrameworkUtils;
-import com.bulade.donor.system.enums.UserType;
+import com.bulade.donor.common.enums.UserType;
 import com.bulade.donor.system.model.User;
 import com.bulade.donor.system.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -31,8 +30,6 @@ public class AdminsController {
     private UserService userService;
 
     @PostMapping("/login")
-    @Operation(summary = "登录")
-    @PermitAll
     public AuthLoginResp signIn(@Valid @RequestBody AdminSignInReq adminSignInReq) {
         var user = adminAuthenticationService.signIn(adminSignInReq.getUsername(), adminSignInReq.getPassword());
         return AuthLoginResp.of(user, UserType.ADMIN.getCode());
@@ -40,7 +37,6 @@ public class AdminsController {
 
     @Operation(summary = "列表")
     @GetMapping("/hello")
-//    @PreAuthorize("hasAuthority('test')")
     Object hello(String name) {
         return "Hello World!" + name;
     }

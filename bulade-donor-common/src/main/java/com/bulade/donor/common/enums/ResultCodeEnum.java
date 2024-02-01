@@ -80,6 +80,8 @@ public enum ResultCodeEnum {
      */
     INVALID_USERNAME(209, "用户名不存在"),
 
+    AUTH_LOGIN_USER_DISABLED(203, "账号被禁用"),
+
     /**
      * 角色不存在
      */

@@ -54,7 +54,8 @@ public class SecurityConfig {
     private AuthorizationManager<RequestAuthorizationContext> authorizationManager;
 
     @Bean
-    public AuthenticationManager authenticationManagerBean(AuthenticationConfiguration authenticationConfiguration) throws Exception {
+    public AuthenticationManager authenticationManagerBean(AuthenticationConfiguration authenticationConfiguration)
+        throws Exception {
         return authenticationConfiguration.getAuthenticationManager();
     }
 
@@ -62,23 +63,21 @@ public class SecurityConfig {
     protected SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
         // 登出
         httpSecurity
-                .cors((cors) -> cors.configure(httpSecurity))
-                .csrf(AbstractHttpConfigurer::disable)
-                .sessionManagement(c -> c.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+            .cors((cors) -> cors.configure(httpSecurity))
+            .csrf(AbstractHttpConfigurer::disable)
+            .sessionManagement(c -> c.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 
         // 设置每个请求的权限
         httpSecurity
-                .authorizeHttpRequests(c -> c
-                        .requestMatchers("/swagger-ui/**", "/v3/api-docs/**")
-                        .permitAll()
+            .authorizeHttpRequests(c -> c
+                .requestMatchers("/swagger-ui/**", "/error", "/v3/api-docs/**", "/favicon.ico",
+                    "/swagger-resources/**")
+                .permitAll()
 
-                        .requestMatchers(securityProperties.getPermitAllUrls().toArray(new String[0]))
-                        .permitAll()
+                .requestMatchers(securityProperties.getPermitAllUrls().toArray(new String[0]))
+                .permitAll()
 
-                        .requestMatchers("/error")
-                        .permitAll()
-
-                        .anyRequest().access(authorizationManager)
+                .anyRequest().access(authorizationManager)
 
             )
             .exceptionHandling(c -> c.authenticationEntryPoint(authenticationEntryPoint)
