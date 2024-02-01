@@ -17,7 +17,8 @@ import java.security.spec.X509EncodedKeySpec;
 import java.util.Base64;
 
 public class RsaUtils {
-    record PPKeys(String privateKey, String publicKey) { }
+    record PPKeys(String privateKey, String publicKey) {
+    }
 
     public static PPKeys createKeys(int keySize) throws NoSuchAlgorithmException, IOException {
         // Create keyPair
