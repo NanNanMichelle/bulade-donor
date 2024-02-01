@@ -45,10 +45,6 @@
             <artifactId>bulade-donor-system</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>com.bulade.donor</groupId>
-            <artifactId>bulade-donor-infra</artifactId>
-        </dependency>
     </dependencies>
 
     <build>

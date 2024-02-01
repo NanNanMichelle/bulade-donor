@@ -58,8 +58,6 @@ public class ApiAccessLogFilter extends OncePerRequestFilter {
         HttpServletResponse response,
         FilterChain filterChain
     ) throws ServletException, IOException {
-        var token = SecurityFrameworkUtils.obtainAuthorization(request,
-            securityProperties.getTokenHeader(), securityProperties.getTokenParameter());
         // 获得开始时间
         LocalDateTime beginTime = LocalDateTime.now();
         // 提前获得参数，避免 XssFilter 过滤处理
