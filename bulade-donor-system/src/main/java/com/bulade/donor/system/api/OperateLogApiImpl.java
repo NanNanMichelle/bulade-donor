@@ -16,8 +16,7 @@ public class OperateLogApiImpl implements OperateLogApi {
 
     @Override
     public void createOperateLog(OperateLogCreateBO createReqBO) {
-
-        log.info("操作日志：" + createReqBO.toString());
+        System.err.println("操作日志：" + createReqBO.toString());
     }
 
 }

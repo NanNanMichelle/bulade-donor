@@ -1,11 +1,12 @@
 package com.bulade.donor.framework.security.utils;
 
-import cn.hutool.core.util.StrUtil;
+import cn.hutool.core.text.CharSequenceUtil;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.util.StringUtils;
+
 /**
  * 安全服务工具类
  */
@@ -30,7 +31,7 @@ public class SecurityFrameworkUtils {
                                              String headerName, String parameterName) {
         // 1. 获得 Token。优先级：Header > Parameter
         String token = request.getHeader(headerName);
-        if (StrUtil.isEmpty(token)) {
+        if (CharSequenceUtil.isEmpty(token)) {
             token = request.getParameter(parameterName);
         }
         if (!StringUtils.hasText(token)) {
@@ -54,11 +55,6 @@ public class SecurityFrameworkUtils {
         return context.getAuthentication();
     }
 
-    public static Object getLoginUser() {
-        Authentication authentication = getAuthentication();
-        if (authentication == null) {
-            return null;
-        }
-        return authentication.getPrincipal();
-    }
+
+
 }
