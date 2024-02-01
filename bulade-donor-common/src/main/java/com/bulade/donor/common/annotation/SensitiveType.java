@@ -1,7 +1,6 @@
 package com.bulade.donor.common.annotation;
 
 import org.apache.commons.lang3.StringUtils;
-
 import java.util.function.Function;
 
 public enum SensitiveType {
