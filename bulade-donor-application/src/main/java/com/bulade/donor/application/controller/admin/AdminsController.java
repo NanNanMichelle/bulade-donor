@@ -4,12 +4,12 @@ import com.bulade.donor.application.payload.request.AdminSignInReq;
 import com.bulade.donor.application.payload.response.AuthLoginResp;
 import com.bulade.donor.application.service.AdminAuthenticationService;
 import com.bulade.donor.common.enums.UserType;
+import com.bulade.donor.framework.biz.operatelog.core.annotations.OperateLog;
 import com.bulade.donor.system.model.User;
 import com.bulade.donor.system.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.Resource;
-import jakarta.annotation.security.PermitAll;
 import jakarta.validation.Valid;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -38,12 +38,24 @@ public class AdminsController {
     @Operation(summary = "列表")
     @GetMapping("/hello")
     Object hello(String name) {
-        return "Hello World!" + name;
+        return "Hello World! " + name + "\n 是个Get请求，默认不记录操作日志";
+    }
+
+    @Operation(summary = "列表")
+    @GetMapping("/hello/get")
+    @OperateLog(module = "操作模块")
+    Object helloa(String name) {
+        return "Hello World! " + name + "\n 是个Get请求，有 @OperateLog 记录操作日志";
+    }
+
+    @Operation(summary = "列表")
+    @PostMapping("/add")
+    Object add() {
+        return "是个post请求，默认记录操作日志";
     }
 
     @Operation(summary = "用户")
     @GetMapping("/user")
-    @PermitAll
     User user(Long id) {
         return userService.selectById(id);
     }

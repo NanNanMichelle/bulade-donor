@@ -17,8 +17,8 @@ public class OperateLogFrameworkServiceImpl implements OperateLogFrameworkServic
     @Override
     @Async
     public void createOperateLog(OperateLog operateLog) {
-        OperateLogCreateBO reqDTO = BeanUtil.toBean(operateLog, OperateLogCreateBO.class);
-        operateLogApi.createOperateLog(reqDTO);
+        var reqBO = BeanUtil.toBean(operateLog, OperateLogCreateBO.class);
+        operateLogApi.createOperateLog(reqBO);
     }
 
 }

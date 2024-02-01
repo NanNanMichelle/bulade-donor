@@ -1,5 +1,6 @@
-package com.bulade.donor.framework.biz.operatelog.api;
+package com.bulade.donor.system.api;
 
+import com.bulade.donor.framework.biz.operatelog.api.OperateLogApi;
 import com.bulade.donor.framework.biz.operatelog.bo.OperateLogCreateBO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -15,7 +16,7 @@ public class OperateLogApiImpl implements OperateLogApi {
 
     @Override
     public void createOperateLog(OperateLogCreateBO createReqBO) {
-        log.info(createReqBO.toString());
+        System.err.println("操作日志：" + createReqBO.toString());
     }
 
 }

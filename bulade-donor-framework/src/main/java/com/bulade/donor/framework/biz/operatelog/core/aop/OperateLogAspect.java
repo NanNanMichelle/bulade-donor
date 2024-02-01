@@ -12,9 +12,8 @@ import com.bulade.donor.framework.biz.operatelog.core.annotations.OperateLog;
 import com.bulade.donor.framework.biz.operatelog.core.enums.OperateTypeEnum;
 import com.bulade.donor.framework.biz.operatelog.core.service.OperateLogFrameworkService;
 import com.bulade.donor.framework.security.config.SecurityProperties;
-import com.bulade.donor.framework.security.utils.JwtUtils;
 import com.bulade.donor.framework.security.utils.SecurityFrameworkUtils;
-import com.bulade.donor.framework.security.utils.WebFrameworkUtils;
+import com.bulade.donor.framework.web.utils.WebFrameworkUtils;
 import com.google.common.collect.Maps;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -76,7 +75,7 @@ public class OperateLogAspect {
         LocalDateTime startTime = LocalDateTime.now(); // 记录开始时间
         try {
             Object result = joinPoint.proceed();  // 执行原有方法
-            this.log(joinPoint, operateLog, operation, startTime, result, null);  // 记录正常执行时的操作日志
+            this.log(joinPoint, operateLog, operation, startTime, result, null);// 记录正常执行时的操作日志
             return result;
         } catch (Throwable exception) {
             this.log(joinPoint, operateLog, operation, startTime, null, exception);
@@ -162,9 +161,10 @@ public class OperateLogAspect {
     private void fillUserFields(com.bulade.donor.framework.biz.operatelog.core.service.OperateLog operateLogObj) {
         String token = SecurityFrameworkUtils.obtainAuthorization(Objects.requireNonNull(ServletUtils.getRequest()),
             securityProperties.getTokenHeader(), securityProperties.getTokenParameter());
-        var userId = JwtUtils.getByKey(token, "id", Long.class);
+        var userId = WebFrameworkUtils.getLoginUserId(token);
+        var userType = WebFrameworkUtils.getLoginUserType(token);
         operateLogObj.setUserId(Objects.isNull(userId) ? -1L : userId);
-        operateLogObj.setUserType(WebFrameworkUtils.getLoginUserType());
+        operateLogObj.setUserType(Objects.isNull(userType) ? -1 : userType);
     }
 
     private static void fillModuleFields(
@@ -178,9 +178,9 @@ public class OperateLogAspect {
             if (ArrayUtil.isNotEmpty(operateLog.type())) {
                 operateLogObj.setType(operateLog.type()[0].getType());
             }
-            if (CharSequenceUtil.isEmpty(operateLogObj.getName()) && operation != null) {
-                operateLogObj.setName(operation.summary());
-            }
+        }
+        if (CharSequenceUtil.isEmpty(operateLogObj.getName()) && operation != null) {
+            operateLogObj.setName(operation.summary());
         }
         if (CharSequenceUtil.isEmpty(operateLogObj.getModule())) {
             Tag tag = getClassAnnotation(joinPoint, Tag.class);
@@ -254,7 +254,7 @@ public class OperateLogAspect {
         if (operateLog != null) {
             return operateLog.enable();
         }
-        // 没有 @ApiOperation 注解的情况下，只记录 POST、PUT、DELETE 的情况
+        // 没有 @OperateLog 注解的情况下，只记录 POST、PUT、DELETE 的情况
         return obtainFirstLogRequestMethod(obtainRequestMethod(joinPoint)) != null;
     }
 
