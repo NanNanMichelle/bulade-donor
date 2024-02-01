@@ -5,7 +5,7 @@ server:
 # Spring配置
 spring:
   application:
-    name: 献血服务
+    name: bulade-donor
   # 数据源配置
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
