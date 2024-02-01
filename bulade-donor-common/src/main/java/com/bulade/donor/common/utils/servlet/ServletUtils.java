@@ -3,7 +3,6 @@ package com.bulade.donor.common.utils.servlet;
 import cn.hutool.core.exceptions.UtilException;
 import cn.hutool.core.io.IoUtil;
 import cn.hutool.core.text.CharSequenceUtil;
-import cn.hutool.core.util.StrUtil;
 import cn.hutool.extra.servlet.JakartaServletUtil;
 import com.bulade.donor.common.utils.json.JsonUtils;
 
@@ -56,8 +55,8 @@ public class ServletUtils {
     )
         throws IOException {
         // 设置 header 和 contentType
-        response.setHeader("Content-Disposition", "attachment;filename=" +
-            URLEncoder.encode(filename, StandardCharsets.UTF_8));
+        response.setHeader("Content-Disposition", "attachment;filename="
+            + URLEncoder.encode(filename, StandardCharsets.UTF_8));
         response.setContentType(MediaType.APPLICATION_OCTET_STREAM_VALUE);
         // 输出附件
         IoUtil.write(response.getOutputStream(), false, content);
