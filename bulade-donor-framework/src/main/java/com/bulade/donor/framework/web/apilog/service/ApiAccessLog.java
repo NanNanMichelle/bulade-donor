@@ -25,6 +25,7 @@ public class ApiAccessLog {
      * 用户类型
      */
     private Integer userType;
+
     /**
      * 应用名
      */

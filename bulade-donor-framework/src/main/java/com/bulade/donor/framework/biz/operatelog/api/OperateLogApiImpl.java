@@ -1,6 +1,5 @@
 package com.bulade.donor.framework.biz.operatelog.api;
 
-import com.bulade.donor.framework.biz.operatelog.api.OperateLogApi;
 import com.bulade.donor.framework.biz.operatelog.bo.OperateLogCreateBO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
