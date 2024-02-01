@@ -1,21 +1,13 @@
-package com.bulade.donor.application.utils;
+package utils;
 
-import com.bulade.donor.application.payload.request.AdminSignInReq;
 import com.bulade.donor.common.utils.crypto.CryptoUtils;
-import com.github.jsonzou.jmockdata.JMockData;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.restdocs.RestDocumentationExtension;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@ExtendWith({RestDocumentationExtension.class, SpringExtension.class})
-@SpringBootTest
 @AutoConfigureMockMvc
 @AutoConfigureRestDocs(outputDir = "target/generated-snippets")
 public class CryptoUtilsTest {
@@ -44,12 +36,6 @@ public class CryptoUtilsTest {
     public void testHMAC() {
         var s1 = CryptoUtils.hmacSha256("a36aa6b79-OptServiceAPI-0c284700", "shinow");
         assertThat(s1).isEqualTo("2ddfe5f664cdf297eeafd419bfe2d3b8dc1c4e871ffec9a1deb0063810e9b61f");
-    }
-
-    @Test
-    public void testMock() {
-        AdminSignInReq adminSignReq = JMockData.mock(AdminSignInReq.class);
-        assertThat(adminSignReq).isNotNull();
     }
 
 }
