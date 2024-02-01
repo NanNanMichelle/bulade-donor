@@ -40,7 +40,6 @@ import java.util.*;
 import java.util.function.Predicate;
 import java.util.stream.IntStream;
 
-
 /**
  * 拦截使用 @OperateLog 注解，如果满足条件，则生成操作日志。
  * 满足如下任一条件，则会进行记录：
