@@ -1,4 +1,4 @@
-package com.bulade.donor.infra.model.logger;
+package com.bulade.donor.infra.model;
 
 import lombok.Data;
 
