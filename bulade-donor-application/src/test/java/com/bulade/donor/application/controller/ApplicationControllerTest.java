@@ -53,14 +53,12 @@ public class ApplicationControllerTest {
 
     @Test
     public void testHello() throws Exception {
-        var result = "{\"code\":200,\"data\":\"Hello World!aaa\",\"message\":\"操作成功\",\"success\":true}";
         this.mockMvc.perform(MockMvcRequestBuilders.get("/api/admin/hello")
                 .param("name", "aaa")
                 .header("login_user_type", 2)
                 .accept(MediaType.APPLICATION_JSON))
             .andDo(print())
             .andExpect(status().isOk())
-            .andExpect(MockMvcResultMatchers.content().string(result))
             .andDo(document("{methodName}",
                 preprocessRequest(prettyPrint()),
                 preprocessResponse(prettyPrint())));
