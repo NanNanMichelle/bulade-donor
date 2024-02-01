@@ -15,12 +15,17 @@ import java.util.Base64;
 import java.util.HexFormat;
 
 public class CryptoUtils {
+
+    private CryptoUtils() {
+
+    }
+
     public static String hmacSha256(String key, String plainText) {
         byte[] cipherText;
 
         try {
             var sha256HMAC = Mac.getInstance("HmacSHA256");
-            SecretKeySpec secret_key = new SecretKeySpec(key.getBytes(), "HmacSHA256");
+            var secret_key = new SecretKeySpec(key.getBytes(), "HmacSHA256");
             sha256HMAC.init(secret_key);
             cipherText = sha256HMAC.doFinal(plainText.getBytes());
         } catch (Exception e) {
