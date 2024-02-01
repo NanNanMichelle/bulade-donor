@@ -32,6 +32,8 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <donor.version>1.0-SNAPSHOT</donor.version>
         <fastjson.version>2.0.43</fastjson.version>
+        <fastjson2-extension-spring6.version>2.0.25</fastjson2-extension-spring6.version>
+        <jsoup.version>1.15.4</jsoup.version>
         <security.version>3.2.1</security.version>
         <redis.version>3.2.1</redis.version>
         <jwt.version>0.12.3</jwt.version>
@@ -47,6 +49,7 @@
         <jackson.version>2.16.1</jackson.version>
         <mapstruct.version>1.5.5.Final</mapstruct.version>
         <org.mapstruct.version>1.5.5.Final</org.mapstruct.version>
+        <bcprov-jdk18on>1.74</bcprov-jdk18on>
         <!-- 监控相关 -->
         <skywalking.version>8.12.0</skywalking.version>
     </properties>
@@ -203,6 +206,24 @@
                 <groupId>org.apache.skywalking</groupId>
                 <artifactId>apm-toolkit-opentracing</artifactId>
                 <version>${skywalking.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.jsoup</groupId>
+                <artifactId>jsoup</artifactId>
+                <version>${jsoup.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.bouncycastle</groupId>
+                <artifactId>bcprov-jdk18on</artifactId>
+                <version>${bcprov-jdk18on.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.alibaba.fastjson2</groupId>
+                <artifactId>fastjson2-extension-spring6</artifactId>
+                <version>${fastjson2-extension-spring6.version}</version>
             </dependency>
 
             <!-- 通用工具-->
