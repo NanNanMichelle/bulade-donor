@@ -21,6 +21,7 @@ public enum UserType implements IntArrayValuable {
      * 类型
      */
     private final Integer code;
+
     /**
      * 类型名
      */

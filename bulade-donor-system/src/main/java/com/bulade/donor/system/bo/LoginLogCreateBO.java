@@ -25,11 +25,13 @@ public class LoginLogCreateBO {
      * 用户编号
      */
     private Long userId;
+
     /**
      * 用户类型
      */
     @NotNull(message = "用户类型不能为空")
     private Integer userType;
+
     /**
      * 用户账号
      *
@@ -48,6 +50,7 @@ public class LoginLogCreateBO {
      */
     @NotEmpty(message = "用户 IP 不能为空")
     private String userIp;
+
     /**
      * 浏览器 UserAgent
      *

@@ -1,4 +1,4 @@
-package com.bulade.donor.infra.api;
+package com.bulade.donor.framework.biz.operatelog.api;
 
 import com.bulade.donor.framework.biz.operatelog.api.OperateLogApi;
 import com.bulade.donor.framework.biz.operatelog.bo.OperateLogCreateBO;

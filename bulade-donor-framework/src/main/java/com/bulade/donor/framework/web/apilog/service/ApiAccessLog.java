@@ -15,10 +15,12 @@ public class ApiAccessLog {
      * 链路追踪编号
      */
     private String traceId;
+
     /**
      * 用户编号
      */
     private Long userId;
+
     /**
      * 用户类型
      */
@@ -34,21 +36,25 @@ public class ApiAccessLog {
      */
     @NotNull(message = "http 请求方法不能为空")
     private String requestMethod;
+
     /**
      * 访问地址
      */
     @NotNull(message = "访问地址不能为空")
     private String requestUrl;
+
     /**
      * 请求参数
      */
     @NotNull(message = "请求参数不能为空")
     private String requestParams;
+
     /**
      * 用户 IP
      */
     @NotNull(message = "ip 不能为空")
     private String userIp;
+
     /**
      * 浏览器 UA
      */
