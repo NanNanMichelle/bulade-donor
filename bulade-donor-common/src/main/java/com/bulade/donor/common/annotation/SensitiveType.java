@@ -19,11 +19,11 @@ public enum SensitiveType {
 
     private final Function<String, String> desensitizer;
 
-    private static final Integer length = 4;
+    private static final Integer LENGTH = 4;
 
-    private static final Integer length10 = 10;
+    private static final Integer LENGTH_10 = 10;
 
-    private static final Integer idNumberLength = 18;
+    private static final Integer ID_NUMBER_LENGTH = 18;
 
     SensitiveType(Function<String, String> desensitizer) {
         this.desensitizer = desensitizer;
@@ -41,18 +41,18 @@ public enum SensitiveType {
             return idNumber;
         }
 
-        if (idNumber.length() <= length) {
+        if (idNumber.length() <= LENGTH) {
             return idNumber;
         }
 
-        if (idNumber.length() == idNumberLength) {
+        if (idNumber.length() == ID_NUMBER_LENGTH) {
             var regex = "(\\S{6})\\S*(\\S{2})";
-            var replacement = "$1" + "*".repeat(Math.max(0, idNumber.length() - length10)) + "$2";
+            var replacement = "$1" + "*".repeat(Math.max(0, idNumber.length() - LENGTH_10)) + "$2";
             return idNumber.replaceAll(regex, replacement);
         }
 
         var regex = "(\\S{2})\\S*(\\S{2})";
-        var replacement = "$1" + "*".repeat(Math.max(0, idNumber.length() - length)) + "$2";
+        var replacement = "$1" + "*".repeat(Math.max(0, idNumber.length() - LENGTH)) + "$2";
 
         return idNumber.replaceAll(regex, replacement);
     }

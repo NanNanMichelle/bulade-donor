@@ -17,6 +17,10 @@ import java.security.spec.X509EncodedKeySpec;
 import java.util.Base64;
 
 public class RsaUtils {
+
+    private RsaUtils() {
+    }
+
     record PPKeys(String privateKey, String publicKey) {
     }
 
@@ -64,7 +68,6 @@ public class RsaUtils {
 
         return Base64.getEncoder().encodeToString(encryptedBytes);
     }
-
 
     public static String decrypt(String privateKeyPem, String encryptedString) throws Exception {
         // Read PEM Format
