@@ -51,7 +51,8 @@ public class GlobalResponseBodyHandler implements ResponseBodyAdvice<Object> {
         ServerHttpResponse response
     ) {
         // 记录 Controller 结果
-        WebFrameworkUtils.setCommonResult(((ServletServerHttpRequest) request).getServletRequest(), (CommonResponse<?>) body);
+        WebFrameworkUtils.setCommonResult(((ServletServerHttpRequest) request).getServletRequest(),
+            (CommonResponse<?>) body);
         return CommonResponse.data(body);
     }
 }

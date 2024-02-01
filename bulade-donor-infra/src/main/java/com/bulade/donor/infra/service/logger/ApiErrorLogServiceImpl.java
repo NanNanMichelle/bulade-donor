@@ -15,14 +15,11 @@ import org.springframework.validation.annotation.Validated;
 @Validated
 public class ApiErrorLogServiceImpl implements ApiErrorLogService {
 
-
     @Override
     public void createApiErrorLog(ApiAccessLogCreateBO createBO) {
         var apiErrorLog = BeanUtils.toBean(createBO, ApiErrorLog.class);
         apiErrorLog.setProcessStatus(ApiErrorLogProcessStatusEnum.INIT.getStatus());
         System.err.println("API 错误日志: " + apiErrorLog);
-
     }
-
 
 }

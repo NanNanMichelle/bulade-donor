@@ -86,8 +86,14 @@ public class ApiAccessLogFilter extends OncePerRequestFilter {
         }
     }
 
-    private void buildApiAccessLogDTO(ApiAccessLogCreateBO accessLog, HttpServletRequest request, LocalDateTime beginTime,
-                                      Map<String, String> queryString, String requestBody, Exception ex) {
+    private void buildApiAccessLogDTO(
+        ApiAccessLogCreateBO accessLog,
+        HttpServletRequest request,
+        LocalDateTime beginTime,
+        Map<String, String> queryString,
+        String requestBody,
+        Exception ex
+    ) {
         var token = SecurityFrameworkUtils.obtainAuthorization(request,
             securityProperties.getTokenHeader(), securityProperties.getTokenParameter());
         // 处理用户信息

@@ -48,7 +48,12 @@ public class ServletUtils {
      * @param filename 文件名
      * @param content  附件内容
      */
-    public static void writeAttachment(HttpServletResponse response, String filename, byte[] content) throws IOException {
+    public static void writeAttachment(
+        HttpServletResponse response,
+        String filename,
+         byte[] content
+    )
+        throws IOException {
         // 设置 header 和 contentType
         response.setHeader("Content-Disposition", "attachment;filename=" + URLEncoder.encode(filename, "UTF-8"));
         response.setContentType(MediaType.APPLICATION_OCTET_STREAM_VALUE);
@@ -109,8 +114,7 @@ public class ServletUtils {
     public static byte[] getBodyBytes(HttpServletRequest request) {
         return JakartaServletUtil.getBodyBytes(request);
     }
-
-
+    
     public static void write(HttpServletResponse response, String text, String contentType) {
         response.setContentType(contentType);
         Writer writer = null;

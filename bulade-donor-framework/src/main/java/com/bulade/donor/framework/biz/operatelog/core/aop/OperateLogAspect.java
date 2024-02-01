@@ -74,7 +74,7 @@ public class OperateLogAspect {
         LocalDateTime startTime = LocalDateTime.now(); // 记录开始时间
         try {
             Object result = joinPoint.proceed();  // 执行原有方法
-            this.log(joinPoint, operateLog, operation, startTime, result, null);// 记录正常执行时的操作日志
+            this.log(joinPoint, operateLog, operation, startTime, result, null);
             return result;
         } catch (Throwable exception) {
             this.log(joinPoint, operateLog, operation, startTime, null, exception);
@@ -167,7 +167,8 @@ public class OperateLogAspect {
     }
 
     private static void fillModuleFields(
-        com.bulade.donor.framework.biz.operatelog.core.service.OperateLog operateLogObj,
+        com.bulade.donor.framework.biz.operatelog.core.service.OperateLog
+            operateLogObj,
         ProceedingJoinPoint joinPoint, OperateLog operateLog, Operation operation
     ) {
         // module 属性
