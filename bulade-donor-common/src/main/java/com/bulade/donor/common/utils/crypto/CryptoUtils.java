@@ -25,8 +25,8 @@ public class CryptoUtils {
 
         try {
             var sha256HMAC = Mac.getInstance("HmacSHA256");
-            var secret_key = new SecretKeySpec(key.getBytes(), "HmacSHA256");
-            sha256HMAC.init(secret_key);
+            var secretary = new SecretKeySpec(key.getBytes(), "HmacSHA256");
+            sha256HMAC.init(secretary);
             cipherText = sha256HMAC.doFinal(plainText.getBytes());
         } catch (Exception e) {
             throw new BusinessException(e.getMessage());

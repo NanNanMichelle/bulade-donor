@@ -10,6 +10,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @AutoConfigureMockMvc
 @AutoConfigureRestDocs(outputDir = "target/generated-snippets")
 public class CryptoUtilsTest {
+
     @Test
     public void testDES() {
         var s1 = CryptoUtils.encryptByDesEcb("shinowkey", "shinow");
