@@ -190,19 +190,27 @@ public class OperateLogAspect {
                     operateLogObj.setModule(tag.name());
                 }
                 // 没有的话，读取 @API 的 description 属性
-                if (CharSequenceUtil.isEmpty(operateLogObj.getModule()) && ArrayUtil.isNotEmpty(tag.description())) {
+                if (CharSequenceUtil.isEmpty(operateLogObj.getModule())
+                    && ArrayUtil.isNotEmpty(tag.description())) {
                     operateLogObj.setModule(tag.description());
                 }
             }
         }
+        fillModuleType(operateLogObj, joinPoint);
+        // content 和 exts 属性
+        operateLogObj.setContent(CONTENT.get());
+        operateLogObj.setExts(EXTS.get());
+    }
+
+    private static void fillModuleType(
+        com.bulade.donor.framework.biz.operatelog.core.service.OperateLog operateLogObj,
+        ProceedingJoinPoint joinPoint
+    ) {
         if (operateLogObj.getType() == null) {
             RequestMethod requestMethod = obtainFirstMatchRequestMethod(obtainRequestMethod(joinPoint));
             OperateTypeEnum operateLogType = convertOperateLogType(requestMethod);
             operateLogObj.setType(operateLogType != null ? operateLogType.getType() : null);
         }
-        // content 和 exts 属性
-        operateLogObj.setContent(CONTENT.get());
-        operateLogObj.setExts(EXTS.get());
     }
 
     private static void fillRequestFields(

@@ -18,6 +18,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import java.io.IOException;
 import java.io.Writer;
 import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.Map;
 
 /**
@@ -51,11 +52,12 @@ public class ServletUtils {
     public static void writeAttachment(
         HttpServletResponse response,
         String filename,
-         byte[] content
+        byte[] content
     )
         throws IOException {
         // 设置 header 和 contentType
-        response.setHeader("Content-Disposition", "attachment;filename=" + URLEncoder.encode(filename, "UTF-8"));
+        response.setHeader("Content-Disposition", "attachment;filename=" +
+            URLEncoder.encode(filename, StandardCharsets.UTF_8));
         response.setContentType(MediaType.APPLICATION_OCTET_STREAM_VALUE);
         // 输出附件
         IoUtil.write(response.getOutputStream(), false, content);
@@ -104,7 +106,7 @@ public class ServletUtils {
     }
 
     public static boolean isJsonRequest(ServletRequest request) {
-        return StrUtil.startWithIgnoreCase(request.getContentType(), MediaType.APPLICATION_JSON_VALUE);
+        return CharSequenceUtil.startWithIgnoreCase(request.getContentType(), MediaType.APPLICATION_JSON_VALUE);
     }
 
     public static String getBody(HttpServletRequest request) {
@@ -114,7 +116,7 @@ public class ServletUtils {
     public static byte[] getBodyBytes(HttpServletRequest request) {
         return JakartaServletUtil.getBodyBytes(request);
     }
-    
+
     public static void write(HttpServletResponse response, String text, String contentType) {
         response.setContentType(contentType);
         Writer writer = null;
