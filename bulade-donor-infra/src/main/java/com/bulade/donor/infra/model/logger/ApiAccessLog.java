@@ -1,4 +1,4 @@
-package com.bulade.donor.framework.web.apilog.service;
+package com.bulade.donor.infra.model.logger;
 
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;

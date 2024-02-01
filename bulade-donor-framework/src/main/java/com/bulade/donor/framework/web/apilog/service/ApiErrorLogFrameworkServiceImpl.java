@@ -1,6 +1,5 @@
 package com.bulade.donor.framework.web.apilog.service;
 
-import cn.hutool.core.bean.BeanUtil;
 import com.bulade.donor.framework.web.apilog.api.ApiErrorLogApi;
 import com.bulade.donor.framework.web.apilog.bo.ApiErrorLogCreateBO;
 import lombok.RequiredArgsConstructor;
@@ -16,9 +15,8 @@ public class ApiErrorLogFrameworkServiceImpl implements ApiErrorLogFrameworkServ
 
     @Override
     @Async
-    public void createApiErrorLog(ApiErrorLog apiErrorLog) {
-        var reqDTO = BeanUtil.copyProperties(apiErrorLog, ApiErrorLogCreateBO.class);
-        apiErrorLogApi.createApiErrorLog(reqDTO);
+    public void createApiErrorLog(ApiErrorLogCreateBO createBO) {
+        apiErrorLogApi.createApiErrorLog(createBO);
     }
 
 }

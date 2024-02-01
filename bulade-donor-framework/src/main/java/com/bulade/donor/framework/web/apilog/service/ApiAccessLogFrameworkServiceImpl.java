@@ -1,7 +1,5 @@
 package com.bulade.donor.framework.web.apilog.service;
 
-import cn.hutool.core.bean.BeanUtil;
-import com.bulade.donor.framework.biz.operatelog.bo.OperateLogCreateBO;
 import com.bulade.donor.framework.web.apilog.api.ApiAccessLogApi;
 import com.bulade.donor.framework.web.apilog.bo.ApiAccessLogCreateBO;
 import lombok.RequiredArgsConstructor;
@@ -17,9 +15,8 @@ public class ApiAccessLogFrameworkServiceImpl implements ApiAccessLogFrameworkSe
 
     @Override
     @Async
-    public void createApiAccessLog(ApiAccessLog apiAccessLog) {
-        var reqDTO = BeanUtil.copyProperties(apiAccessLog, ApiAccessLogCreateBO.class);
-        apiAccessLogApi.createApiAccessLog(reqDTO);
+    public void createApiAccessLog(ApiAccessLogCreateBO createBO) {
+        apiAccessLogApi.createApiAccessLog(createBO);
     }
 
 }
