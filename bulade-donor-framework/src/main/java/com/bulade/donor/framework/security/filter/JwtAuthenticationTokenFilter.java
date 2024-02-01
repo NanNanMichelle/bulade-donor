@@ -1,13 +1,13 @@
 package com.bulade.donor.framework.security.filter;
 
+import cn.hutool.core.text.CharSequenceUtil;
 import cn.hutool.core.util.ObjectUtil;
-import cn.hutool.core.util.StrUtil;
 import com.bulade.donor.framework.security.LoginUser;
 import com.bulade.donor.framework.security.api.TokenApi;
 import com.bulade.donor.framework.security.config.SecurityProperties;
 import com.bulade.donor.common.exception.UnAuthorizedException;
+import com.bulade.donor.framework.security.utils.JwtUtils;
 import com.bulade.donor.framework.security.utils.SecurityFrameworkUtils;
-import com.bulade.donor.framework.security.utils.WebFrameworkUtils;
 import jakarta.annotation.Resource;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -47,12 +47,14 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
     ) throws ServletException, IOException {
         String token = SecurityFrameworkUtils.obtainAuthorization(request,
             securityProperties.getTokenHeader(), securityProperties.getTokenParameter());
-        if (StrUtil.isNotEmpty(token)) {
-            Integer userType = WebFrameworkUtils.getLoginUserType(request);
+        if (CharSequenceUtil.isNotEmpty(token)) {
             LoginUser user = null;
-            if (StrUtil.isNotEmpty(token)) {
+            if (CharSequenceUtil.isNotEmpty(token)) {
+                //todo 临时
+                var userType = JwtUtils.getByKey(token, "userType", Integer.class);
                 // 1.1 基于 token 构建登录用户
                 user = buildLoginUserByToken(token, userType);
+                log.info("基于 token 构建登录用户: " + user);
                 // 1.2 模拟 Login 功能，方便日常开发调试
                 if (user == null) {
                     user = mockLoginUser(token, userType);
@@ -77,6 +79,7 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
 
     private LoginUser buildLoginUserByToken(String token, Integer userType) {
         var accessToken = tokenApi.checkAccessToken(token);
+        log.info("login token: " + accessToken);
         if (accessToken == null) {
             return null;
         }
@@ -93,7 +96,7 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
     }
 
     private LoginUser mockLoginUser(String token, Integer userType) {
-        if (!securityProperties.getMockEnable()) {
+        if (Boolean.FALSE.equals(securityProperties.getMockEnable())) {
             return null;
         }
         if (!token.startsWith(securityProperties.getMockSecret())) {

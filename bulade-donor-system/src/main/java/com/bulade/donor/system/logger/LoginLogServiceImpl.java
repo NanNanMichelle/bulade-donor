@@ -17,7 +17,7 @@ public class LoginLogServiceImpl implements LoginLogService {
     @Override
     public void createLoginLog(LoginLogCreateBO reqBO) {
         var loginLog = BeanUtils.toBean(reqBO, LoginLog.class);
-        System.err.println(loginLog.toString());
+        System.err.println("登录日志：" + loginLog.toString());
     }
 
 }

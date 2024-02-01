@@ -1,6 +1,9 @@
-package com.bulade.donor.framework.web.apilog.api;
+package com.bulade.donor.infra.api;
 
+import com.bulade.donor.framework.web.apilog.api.ApiErrorLogApi;
 import com.bulade.donor.framework.web.apilog.bo.ApiErrorLogCreateBO;
+import com.bulade.donor.infra.service.logger.ApiErrorLogService;
+import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
@@ -8,9 +11,12 @@ import org.springframework.validation.annotation.Validated;
 @Validated
 public class ApiErrorLogApiImpl implements ApiErrorLogApi {
 
+    @Resource
+    private ApiErrorLogService apiErrorLogService;
+
     @Override
     public void createApiErrorLog(ApiErrorLogCreateBO createBO) {
-        System.err.println(createBO.toString());
+        apiErrorLogService.createApiErrorLog(createBO);
     }
 
 }

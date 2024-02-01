@@ -43,13 +43,20 @@
             <groupId>org.mapstruct</groupId>
             <artifactId>mapstruct-jdk8</artifactId> <!-- use mapstruct-jdk8 for Java 8 or higher -->
         </dependency>
+
         <dependency>
             <groupId>org.mapstruct</groupId>
             <artifactId>mapstruct-processor</artifactId>
         </dependency>
+
         <dependency>
             <groupId>com.bulade.donor</groupId>
             <artifactId>bulade-donor-framework</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.bulade.donor</groupId>
+            <artifactId>bulade-donor-infra</artifactId>
         </dependency>
     </dependencies>
 </project>

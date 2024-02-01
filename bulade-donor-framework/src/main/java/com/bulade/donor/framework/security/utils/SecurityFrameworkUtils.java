@@ -1,11 +1,12 @@
 package com.bulade.donor.framework.security.utils;
 
-import cn.hutool.core.util.StrUtil;
+import cn.hutool.core.text.CharSequenceUtil;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.util.StringUtils;
+
 /**
  * 安全服务工具类
  */
@@ -16,13 +17,16 @@ public class SecurityFrameworkUtils {
      */
     public static final String AUTHORIZATION_BEARER = "Bearer";
 
-    private SecurityFrameworkUtils() {}
+    public static final Integer AUTHORIZATION_BEARER_LENGTH = 7;
+
+    private SecurityFrameworkUtils() {
+    }
 
     /**
      * 从请求中，获得认证 Token
      *
-     * @param request 请求
-     * @param headerName 认证 Token 对应的 Header 名字
+     * @param request       请求
+     * @param headerName    认证 Token 对应的 Header 名字
      * @param parameterName 认证 Token 对应的 Parameter 名字
      * @return 认证 Token
      */
@@ -30,7 +34,7 @@ public class SecurityFrameworkUtils {
                                              String headerName, String parameterName) {
         // 1. 获得 Token。优先级：Header > Parameter
         String token = request.getHeader(headerName);
-        if (StrUtil.isEmpty(token)) {
+        if (CharSequenceUtil.isEmpty(token)) {
             token = request.getParameter(parameterName);
         }
         if (!StringUtils.hasText(token)) {
@@ -38,7 +42,7 @@ public class SecurityFrameworkUtils {
         }
         // 2. 去除 Token 中带的 Bearer
         int index = token.indexOf(AUTHORIZATION_BEARER + " ");
-        return index >= 0 ? token.substring(index + 7).trim() : token;
+        return index >= 0 ? token.substring(index + AUTHORIZATION_BEARER_LENGTH).trim() : token;
     }
 
     /**
@@ -54,11 +58,4 @@ public class SecurityFrameworkUtils {
         return context.getAuthentication();
     }
 
-    public static Object getLoginUser() {
-        Authentication authentication = getAuthentication();
-        if (authentication == null) {
-            return null;
-        }
-        return authentication.getPrincipal();
-    }
 }

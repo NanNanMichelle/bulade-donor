@@ -12,9 +12,8 @@ import com.bulade.donor.framework.biz.operatelog.core.annotations.OperateLog;
 import com.bulade.donor.framework.biz.operatelog.core.enums.OperateTypeEnum;
 import com.bulade.donor.framework.biz.operatelog.core.service.OperateLogFrameworkService;
 import com.bulade.donor.framework.security.config.SecurityProperties;
-import com.bulade.donor.framework.security.utils.JwtUtils;
 import com.bulade.donor.framework.security.utils.SecurityFrameworkUtils;
-import com.bulade.donor.framework.security.utils.WebFrameworkUtils;
+import com.bulade.donor.framework.web.utils.WebFrameworkUtils;
 import com.google.common.collect.Maps;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -40,7 +39,6 @@ import java.time.LocalDateTime;
 import java.util.*;
 import java.util.function.Predicate;
 import java.util.stream.IntStream;
-
 
 /**
  * 拦截使用 @OperateLog 注解，如果满足条件，则生成操作日志。
@@ -76,7 +74,7 @@ public class OperateLogAspect {
         LocalDateTime startTime = LocalDateTime.now(); // 记录开始时间
         try {
             Object result = joinPoint.proceed();  // 执行原有方法
-            this.log(joinPoint, operateLog, operation, startTime, result, null);  // 记录正常执行时的操作日志
+            this.log(joinPoint, operateLog, operation, startTime, result, null);
             return result;
         } catch (Throwable exception) {
             this.log(joinPoint, operateLog, operation, startTime, null, exception);
@@ -162,13 +160,15 @@ public class OperateLogAspect {
     private void fillUserFields(com.bulade.donor.framework.biz.operatelog.core.service.OperateLog operateLogObj) {
         String token = SecurityFrameworkUtils.obtainAuthorization(Objects.requireNonNull(ServletUtils.getRequest()),
             securityProperties.getTokenHeader(), securityProperties.getTokenParameter());
-        var userId = JwtUtils.getByKey(token, "id", Long.class);
+        var userId = WebFrameworkUtils.getLoginUserId(token);
+        var userType = WebFrameworkUtils.getLoginUserType(token);
         operateLogObj.setUserId(Objects.isNull(userId) ? -1L : userId);
-        operateLogObj.setUserType(WebFrameworkUtils.getLoginUserType());
+        operateLogObj.setUserType(Objects.isNull(userType) ? -1 : userType);
     }
 
     private static void fillModuleFields(
-        com.bulade.donor.framework.biz.operatelog.core.service.OperateLog operateLogObj,
+        com.bulade.donor.framework.biz.operatelog.core.service.OperateLog
+            operateLogObj,
         ProceedingJoinPoint joinPoint, OperateLog operateLog, Operation operation
     ) {
         // module 属性
@@ -178,9 +178,9 @@ public class OperateLogAspect {
             if (ArrayUtil.isNotEmpty(operateLog.type())) {
                 operateLogObj.setType(operateLog.type()[0].getType());
             }
-            if (CharSequenceUtil.isEmpty(operateLogObj.getName()) && operation != null) {
-                operateLogObj.setName(operation.summary());
-            }
+        }
+        if (CharSequenceUtil.isEmpty(operateLogObj.getName()) && operation != null) {
+            operateLogObj.setName(operation.summary());
         }
         if (CharSequenceUtil.isEmpty(operateLogObj.getModule())) {
             Tag tag = getClassAnnotation(joinPoint, Tag.class);
@@ -190,19 +190,27 @@ public class OperateLogAspect {
                     operateLogObj.setModule(tag.name());
                 }
                 // 没有的话，读取 @API 的 description 属性
-                if (CharSequenceUtil.isEmpty(operateLogObj.getModule()) && ArrayUtil.isNotEmpty(tag.description())) {
+                if (CharSequenceUtil.isEmpty(operateLogObj.getModule())
+                    && ArrayUtil.isNotEmpty(tag.description())) {
                     operateLogObj.setModule(tag.description());
                 }
             }
         }
+        fillModuleType(operateLogObj, joinPoint);
+        // content 和 exts 属性
+        operateLogObj.setContent(CONTENT.get());
+        operateLogObj.setExts(EXTS.get());
+    }
+
+    private static void fillModuleType(
+        com.bulade.donor.framework.biz.operatelog.core.service.OperateLog operateLogObj,
+        ProceedingJoinPoint joinPoint
+    ) {
         if (operateLogObj.getType() == null) {
             RequestMethod requestMethod = obtainFirstMatchRequestMethod(obtainRequestMethod(joinPoint));
             OperateTypeEnum operateLogType = convertOperateLogType(requestMethod);
             operateLogObj.setType(operateLogType != null ? operateLogType.getType() : null);
         }
-        // content 和 exts 属性
-        operateLogObj.setContent(CONTENT.get());
-        operateLogObj.setExts(EXTS.get());
     }
 
     private static void fillRequestFields(
@@ -254,7 +262,7 @@ public class OperateLogAspect {
         if (operateLog != null) {
             return operateLog.enable();
         }
-        // 没有 @ApiOperation 注解的情况下，只记录 POST、PUT、DELETE 的情况
+        // 没有 @OperateLog 注解的情况下，只记录 POST、PUT、DELETE 的情况
         return obtainFirstLogRequestMethod(obtainRequestMethod(joinPoint)) != null;
     }
 

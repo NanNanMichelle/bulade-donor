@@ -3,14 +3,16 @@ package com.bulade.donor.framework.web.apilog.filter;
 import cn.hutool.core.date.LocalDateTimeUtil;
 import cn.hutool.core.exceptions.ExceptionUtil;
 import cn.hutool.core.map.MapUtil;
-import cn.hutool.core.util.StrUtil;
+import cn.hutool.core.text.CharSequenceUtil;
 import com.bulade.donor.common.core.CommonResponse;
 import com.bulade.donor.common.enums.ResultCodeEnum;
 import com.bulade.donor.common.utils.monitor.TracerUtils;
 import com.bulade.donor.common.utils.servlet.ServletUtils;
-import com.bulade.donor.framework.security.utils.WebFrameworkUtils;
-import com.bulade.donor.framework.web.apilog.service.ApiAccessLog;
+import com.bulade.donor.framework.security.config.SecurityProperties;
+import com.bulade.donor.framework.security.utils.SecurityFrameworkUtils;
+import com.bulade.donor.framework.web.apilog.bo.ApiAccessLogCreateBO;
 import com.bulade.donor.framework.web.apilog.service.ApiAccessLogFrameworkService;
+import com.bulade.donor.framework.web.utils.WebFrameworkUtils;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -24,7 +26,6 @@ import java.util.Map;
 
 import static com.bulade.donor.common.utils.json.JsonUtils.toJsonString;
 
-
 /**
  * API 访问日志 Filter
  */
@@ -35,23 +36,27 @@ public class ApiAccessLogFilter extends OncePerRequestFilter {
 
     private final ApiAccessLogFrameworkService apiAccessLogFrameworkService;
 
-    public ApiAccessLogFilter(String applicationName, ApiAccessLogFrameworkService apiAccessLogFrameworkService) {
+    private final SecurityProperties securityProperties;
+
+    public ApiAccessLogFilter(String applicationName, ApiAccessLogFrameworkService apiAccessLogFrameworkService,
+                              SecurityProperties securityProperties) {
         this.applicationName = applicationName;
         this.apiAccessLogFrameworkService = apiAccessLogFrameworkService;
+        this.securityProperties = securityProperties;
     }
 
     @Override
     protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
         // 只过滤 API 请求的地址
-        return !StrUtil.startWithAny(request.getRequestURI(), "/api");
+        return !CharSequenceUtil.startWithAny(request.getRequestURI(), "/api");
     }
 
     @Override
-    protected void doFilterInternal(HttpServletRequest request,
-                                    HttpServletResponse response,
-                                    FilterChain filterChain
+    protected void doFilterInternal(
+        HttpServletRequest request,
+        HttpServletResponse response,
+        FilterChain filterChain
     ) throws ServletException, IOException {
-
         // 获得开始时间
         LocalDateTime beginTime = LocalDateTime.now();
         // 提前获得参数，避免 XssFilter 过滤处理
@@ -71,21 +76,29 @@ public class ApiAccessLogFilter extends OncePerRequestFilter {
 
     private void createApiAccessLog(HttpServletRequest request, LocalDateTime beginTime,
                                     Map<String, String> queryString, String requestBody, Exception ex) {
-        ApiAccessLog accessLog = new ApiAccessLog();
+        var accessLogBO = new ApiAccessLogCreateBO();
         try {
-            this.buildApiAccessLogDTO(accessLog, request, beginTime, queryString, requestBody, ex);
-            apiAccessLogFrameworkService.createApiAccessLog(accessLog);
+            this.buildApiAccessLogDTO(accessLogBO, request, beginTime, queryString, requestBody, ex);
+            apiAccessLogFrameworkService.createApiAccessLog(accessLogBO);
         } catch (Throwable th) {
             log.error("[createApiAccessLog][url({}) log({}) 发生异常]", request.getRequestURI(),
-                toJsonString(accessLog), th);
+                toJsonString(accessLogBO), th);
         }
     }
 
-    private void buildApiAccessLogDTO(ApiAccessLog accessLog, HttpServletRequest request, LocalDateTime beginTime,
-                                      Map<String, String> queryString, String requestBody, Exception ex) {
+    private void buildApiAccessLogDTO(
+        ApiAccessLogCreateBO accessLog,
+        HttpServletRequest request,
+        LocalDateTime beginTime,
+        Map<String, String> queryString,
+        String requestBody,
+        Exception ex
+    ) {
+        var token = SecurityFrameworkUtils.obtainAuthorization(request,
+            securityProperties.getTokenHeader(), securityProperties.getTokenParameter());
         // 处理用户信息
-        accessLog.setUserId(WebFrameworkUtils.getLoginUserId(request));
-        accessLog.setUserType(WebFrameworkUtils.getLoginUserType(request));
+        accessLog.setUserId(WebFrameworkUtils.getLoginUserId(token));
+        accessLog.setUserType(WebFrameworkUtils.getLoginUserType(token));
         // 设置访问结果
         CommonResponse<?> result = WebFrameworkUtils.getCommonResult(request);
         if (result != null) {

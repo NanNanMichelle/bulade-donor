@@ -4,6 +4,7 @@ import com.bulade.donor.framework.security.api.TokenApi;
 import com.bulade.donor.framework.security.dto.AccessTokenCheckDTO;
 import com.bulade.donor.framework.security.utils.JwtUtils;
 import com.bulade.donor.common.enums.UserType;
+import com.bulade.donor.framework.web.utils.WebFrameworkUtils;
 import com.bulade.donor.system.service.AdminsService;
 import com.bulade.donor.system.service.UserService;
 import jakarta.annotation.Resource;
@@ -26,9 +27,8 @@ public class TokenApiImpl implements TokenApi {
         if (isNotValid) {
             return null;
         }
-
-        var userId = JwtUtils.getByKey(accessToken, "id", Long.class);
-        var userType = JwtUtils.getByKey(accessToken, "userType", Integer.class);
+        var userId = WebFrameworkUtils.getLoginUserId(accessToken);
+        var userType = WebFrameworkUtils.getLoginUserType(accessToken);
         if (UserType.ADMIN.getCode().equals(userType)) {
             adminService.selectById(userId);
         }

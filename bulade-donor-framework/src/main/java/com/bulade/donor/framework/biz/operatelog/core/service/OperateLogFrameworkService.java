@@ -1,9 +1,7 @@
 package com.bulade.donor.framework.biz.operatelog.core.service;
 
 /**
- * 操作日志 Framework Service 接口
- *
- * @author 芋道源码
+ * 操作日志 Framework Service
  */
 public interface OperateLogFrameworkService {
 

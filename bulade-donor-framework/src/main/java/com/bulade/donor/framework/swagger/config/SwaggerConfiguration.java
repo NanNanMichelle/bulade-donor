@@ -1,6 +1,5 @@
 package com.bulade.donor.framework.swagger.config;
 
-import com.bulade.donor.framework.security.utils.WebFrameworkUtils;
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
@@ -8,7 +7,6 @@ import io.swagger.v3.oas.models.media.BooleanSchema;
 import io.swagger.v3.oas.models.media.IntegerSchema;
 import io.swagger.v3.oas.models.media.Schema;
 import io.swagger.v3.oas.models.media.StringSchema;
-import io.swagger.v3.oas.models.parameters.Parameter;
 import io.swagger.v3.oas.models.security.SecurityRequirement;
 import io.swagger.v3.oas.models.security.SecurityScheme;
 import io.swagger.v3.oas.models.servers.Server;
@@ -18,7 +16,6 @@ import org.springdoc.core.models.GroupedOpenApi;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpHeaders;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -88,7 +85,6 @@ public class SwaggerConfiguration {
                 openApi.setInfo(info);
             })
             .addOperationCustomizer((operation, handlerMethod) -> {
-                operation.addParametersItem(buildSecurityHeaderParameter());
                 var content = operation.getResponses().get("200").getContent();
                 content.values().forEach(mediaType -> {
                     mediaType.schema(this.customizeSchema(mediaType.getSchema()));
@@ -96,16 +92,6 @@ public class SwaggerConfiguration {
                 return operation;
             })
             .build();
-    }
-
-    private static Parameter buildSecurityHeaderParameter() {
-        return new Parameter()
-            .name(WebFrameworkUtils.REQUEST_ATTRIBUTE_LOGIN_USER_TYPE)
-            .description("用户类型") // 描述
-            .in(String.valueOf(SecurityScheme.In.HEADER)) // 请求 header
-            .schema(new StringSchema()._default("2")
-                .name(WebFrameworkUtils.REQUEST_ATTRIBUTE_LOGIN_USER_TYPE)
-                .description("用户类型")); // 默认：使用用户编号为 1
     }
 
     private Schema<?> customizeSchema(Schema<?> sourceSchema) {
@@ -116,7 +102,5 @@ public class SwaggerConfiguration {
         wrapperSchema.addProperty("data", sourceSchema);
         return wrapperSchema;
     }
-
-
 
 }

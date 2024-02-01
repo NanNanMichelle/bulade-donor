@@ -2,6 +2,7 @@ package com.bulade.donor.framework.biz.operatelog.bo;
 
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
+import lombok.Data;
 
 import java.time.LocalDateTime;
 import java.util.Map;
@@ -9,6 +10,7 @@ import java.util.Map;
 /**
  * 操作日志创建 Request DTO
  */
+@Data
 public class OperateLogCreateBO {
 
     /**
