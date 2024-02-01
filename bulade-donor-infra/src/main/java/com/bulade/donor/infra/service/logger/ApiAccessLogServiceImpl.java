@@ -18,7 +18,7 @@ public class ApiAccessLogServiceImpl implements ApiAccessLogService {
     @Override
     public void createApiAccessLog(ApiAccessLogCreateBO createBO) {
         var apiAccessLog = BeanUtils.toBean(createBO, ApiAccessLog.class);
-        System.err.println(apiAccessLog.toString());
+        System.err.println("API 日志记录:" + apiAccessLog);
     }
 
 }

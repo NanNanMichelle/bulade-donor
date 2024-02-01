@@ -3,6 +3,7 @@ package com.bulade.donor.framework.web.apilog.filter;
 import cn.hutool.core.date.LocalDateTimeUtil;
 import cn.hutool.core.exceptions.ExceptionUtil;
 import cn.hutool.core.map.MapUtil;
+import cn.hutool.core.text.CharSequenceUtil;
 import cn.hutool.core.util.StrUtil;
 import com.bulade.donor.common.core.CommonResponse;
 import com.bulade.donor.common.enums.ResultCodeEnum;
@@ -26,7 +27,6 @@ import java.util.Map;
 
 import static com.bulade.donor.common.utils.json.JsonUtils.toJsonString;
 
-
 /**
  * API 访问日志 Filter
  */
@@ -49,15 +49,17 @@ public class ApiAccessLogFilter extends OncePerRequestFilter {
     @Override
     protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
         // 只过滤 API 请求的地址
-        return !StrUtil.startWithAny(request.getRequestURI(), "/api");
+        return !CharSequenceUtil.startWithAny(request.getRequestURI(), "/api");
     }
 
     @Override
-    protected void doFilterInternal(HttpServletRequest request,
-                                    HttpServletResponse response,
-                                    FilterChain filterChain
+    protected void doFilterInternal(
+        HttpServletRequest request,
+        HttpServletResponse response,
+        FilterChain filterChain
     ) throws ServletException, IOException {
-
+        var token = SecurityFrameworkUtils.obtainAuthorization(request,
+            securityProperties.getTokenHeader(), securityProperties.getTokenParameter());
         // 获得开始时间
         LocalDateTime beginTime = LocalDateTime.now();
         // 提前获得参数，避免 XssFilter 过滤处理
@@ -77,7 +79,7 @@ public class ApiAccessLogFilter extends OncePerRequestFilter {
 
     private void createApiAccessLog(HttpServletRequest request, LocalDateTime beginTime,
                                     Map<String, String> queryString, String requestBody, Exception ex) {
-        ApiAccessLog accessLog = new ApiAccessLog();
+        var accessLog = new ApiAccessLog();
         try {
             this.buildApiAccessLogDTO(accessLog, request, beginTime, queryString, requestBody, ex);
             apiAccessLogFrameworkService.createApiAccessLog(accessLog);
@@ -89,9 +91,8 @@ public class ApiAccessLogFilter extends OncePerRequestFilter {
 
     private void buildApiAccessLogDTO(ApiAccessLog accessLog, HttpServletRequest request, LocalDateTime beginTime,
                                       Map<String, String> queryString, String requestBody, Exception ex) {
-        String token = SecurityFrameworkUtils.obtainAuthorization(request,
+        var token = SecurityFrameworkUtils.obtainAuthorization(request,
             securityProperties.getTokenHeader(), securityProperties.getTokenParameter());
-
         // 处理用户信息
         accessLog.setUserId(WebFrameworkUtils.getLoginUserId(token));
         accessLog.setUserType(WebFrameworkUtils.getLoginUserType(token));

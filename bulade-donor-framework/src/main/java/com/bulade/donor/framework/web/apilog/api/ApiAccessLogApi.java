@@ -1,6 +1,6 @@
 package com.bulade.donor.framework.web.apilog.api;
 
-import com.bulade.donor.framework.biz.operatelog.bo.OperateLogCreateBO;
+import com.bulade.donor.framework.web.apilog.bo.ApiAccessLogCreateBO;
 import jakarta.validation.Valid;
 
 /**
@@ -11,5 +11,5 @@ public interface ApiAccessLogApi {
     /**
      * 创建 API 访问日志
      */
-    void createApiAccessLog(@Valid OperateLogCreateBO createBO);
+    void createApiAccessLog(@Valid ApiAccessLogCreateBO createBO);
 }
