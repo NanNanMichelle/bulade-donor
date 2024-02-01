@@ -74,7 +74,7 @@ public class OperateLogAspect {
         LocalDateTime startTime = LocalDateTime.now(); // 记录开始时间
         try {
             Object result = joinPoint.proceed();  // 执行原有方法
-            this.log(joinPoint, operateLog, operation, startTime, result, null);// 记录正常执行时的操作日志
+            this.log(joinPoint, operateLog, operation, startTime, result, null);
             return result;
         } catch (Throwable exception) {
             this.log(joinPoint, operateLog, operation, startTime, null, exception);
@@ -167,7 +167,8 @@ public class OperateLogAspect {
     }
 
     private static void fillModuleFields(
-        com.bulade.donor.framework.biz.operatelog.core.service.OperateLog operateLogObj,
+        com.bulade.donor.framework.biz.operatelog.core.service.OperateLog
+            operateLogObj,
         ProceedingJoinPoint joinPoint, OperateLog operateLog, Operation operation
     ) {
         // module 属性
@@ -189,19 +190,27 @@ public class OperateLogAspect {
                     operateLogObj.setModule(tag.name());
                 }
                 // 没有的话，读取 @API 的 description 属性
-                if (CharSequenceUtil.isEmpty(operateLogObj.getModule()) && ArrayUtil.isNotEmpty(tag.description())) {
+                if (CharSequenceUtil.isEmpty(operateLogObj.getModule())
+                    && ArrayUtil.isNotEmpty(tag.description())) {
                     operateLogObj.setModule(tag.description());
                 }
             }
         }
+        fillModuleType(operateLogObj, joinPoint);
+        // content 和 exts 属性
+        operateLogObj.setContent(CONTENT.get());
+        operateLogObj.setExts(EXTS.get());
+    }
+
+    private static void fillModuleType(
+        com.bulade.donor.framework.biz.operatelog.core.service.OperateLog operateLogObj,
+        ProceedingJoinPoint joinPoint
+    ) {
         if (operateLogObj.getType() == null) {
             RequestMethod requestMethod = obtainFirstMatchRequestMethod(obtainRequestMethod(joinPoint));
             OperateTypeEnum operateLogType = convertOperateLogType(requestMethod);
             operateLogObj.setType(operateLogType != null ? operateLogType.getType() : null);
         }
-        // content 和 exts 属性
-        operateLogObj.setContent(CONTENT.get());
-        operateLogObj.setExts(EXTS.get());
     }
 
     private static void fillRequestFields(

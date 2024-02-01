@@ -53,7 +53,9 @@ public class GlobalExceptionHandler {
      * 例如说，接口上设置了 @RequestParam("xx") 参数，结果并未传递 xx 参数
      */
     @ExceptionHandler(value = MissingServletRequestParameterException.class)
-    public CommonResponse<?> missingServletRequestParameterExceptionHandler(MissingServletRequestParameterException ex) {
+    public CommonResponse<?> missingServletRequestParameterExceptionHandler(
+        MissingServletRequestParameterException ex
+    ) {
         log.warn("[missingServletRequestParameterExceptionHandler]", ex);
         return CommonResponse.error(ResultCodeEnum.ILLEGAL_REQUEST, ex,
             String.format("请求参数类型错误:%s", ex.getMessage()));
@@ -78,7 +80,8 @@ public class GlobalExceptionHandler {
         log.warn("[methodArgumentNotValidExceptionExceptionHandler]", ex);
         FieldError fieldError = ex.getBindingResult().getFieldError();
         assert fieldError != null; // 断言，避免告警
-        return CommonResponse.error(ResultCodeEnum.PARAM_VALID_ERROR, String.format("请求参数不正确:%s", fieldError.getDefaultMessage()));
+        return CommonResponse.error(ResultCodeEnum.PARAM_VALID_ERROR,
+            String.format("请求参数不正确:%s", fieldError.getDefaultMessage()));
     }
 
     /**
@@ -174,7 +177,8 @@ public class GlobalExceptionHandler {
             // 执行插入 errorLog
             apiErrorLogFrameworkService.createApiErrorLog(errorLog);
         } catch (Throwable th) {
-            log.error("[createExceptionLog][url({}) log({}) 发生异常]", req.getRequestURI(),  JsonUtils.toJsonString(errorLog), th);
+            log.error("[createExceptionLog][url({}) log({}) 发生异常]", req.getRequestURI(),
+                JsonUtils.toJsonString(errorLog), th);
         }
     }
 

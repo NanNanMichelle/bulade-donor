@@ -1,6 +1,5 @@
-package com.bulade.donor.infra.model.logger;
+package com.bulade.donor.infra.model;
 
-import com.bulade.donor.infra.service.logger.ApiErrorLogProcessStatusEnum;
 import lombok.Data;
 
 import java.time.LocalDateTime;
@@ -15,6 +14,7 @@ public class ApiErrorLog {
      * 编号
      */
     private Long id;
+
     /**
      * 用户编号
      */
@@ -22,7 +22,6 @@ public class ApiErrorLog {
 
     /**
      * 链路追踪编号
-     *
      * 一般来说，通过链路追踪编号，可以将访问日志，错误日志，链路追踪日志，logger 打印日志等，结合在一起，从而进行排错。
      */
     private String traceId;
@@ -128,8 +127,6 @@ public class ApiErrorLog {
 
     /**
      * 处理状态
-     *
-     * 枚举 {@link ApiErrorLogProcessStatusEnum}
      */
     private Integer processStatus;
 
