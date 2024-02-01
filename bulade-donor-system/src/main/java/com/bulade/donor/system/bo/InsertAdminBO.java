@@ -3,8 +3,6 @@ package com.bulade.donor.system.bo;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
-
-
 @Data
 @Accessors(chain = true)
 public class InsertAdminBO {
