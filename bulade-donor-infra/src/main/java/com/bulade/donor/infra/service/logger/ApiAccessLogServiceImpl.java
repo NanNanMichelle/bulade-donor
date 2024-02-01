@@ -2,7 +2,7 @@ package com.bulade.donor.infra.service.logger;
 
 import com.bulade.donor.common.utils.object.BeanUtils;
 import com.bulade.donor.framework.web.apilog.bo.ApiAccessLogCreateBO;
-import com.bulade.donor.infra.model.ApiAccessLog;
+import com.bulade.donor.framework.web.apilog.service.ApiAccessLog;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;

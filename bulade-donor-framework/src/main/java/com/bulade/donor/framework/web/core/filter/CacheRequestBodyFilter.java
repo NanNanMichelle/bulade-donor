@@ -1,7 +1,6 @@
 package com.bulade.donor.framework.web.core.filter;
 
 import com.bulade.donor.common.utils.servlet.ServletUtils;
-import jakarta.annotation.Resource;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -18,7 +17,7 @@ public class CacheRequestBodyFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
-            throws IOException, ServletException {
+        throws IOException, ServletException {
         filterChain.doFilter(new CacheRequestBodyWrapper(request), response);
     }
 

@@ -7,7 +7,7 @@
 - R__truncate_user.sql 
 
 ### sql文件地址
-src/main/resources/db/migration
+database/migration
 
 如有其它地址，在[application-dev.yml](..%2F..%2Fbulade-donor-application%2Fsrc%2Fmain%2Fresources%2Fapplication-dev.yml)
 里进行添加

@@ -76,7 +76,8 @@ public class ApiAccessLogFilter extends OncePerRequestFilter {
             this.buildApiAccessLogDTO(accessLog, request, beginTime, queryString, requestBody, ex);
             apiAccessLogFrameworkService.createApiAccessLog(accessLog);
         } catch (Throwable th) {
-            log.error("[createApiAccessLog][url({}) log({}) 发生异常]", request.getRequestURI(), toJsonString(accessLog), th);
+            log.error("[createApiAccessLog][url({}) log({}) 发生异常]", request.getRequestURI(),
+                toJsonString(accessLog), th);
         }
     }
 
@@ -101,7 +102,7 @@ public class ApiAccessLogFilter extends OncePerRequestFilter {
         accessLog.setTraceId(TracerUtils.getTraceId());
         accessLog.setApplicationName(applicationName);
         accessLog.setRequestUrl(request.getRequestURI());
-        Map<String, Object> requestParams = MapUtil.<String, Object>builder().put("query", queryString).put("body", requestBody).build();
+        var requestParams = MapUtil.<String, Object>builder().put("query", queryString).put("body", requestBody).build();
         accessLog.setRequestParams(toJsonString(requestParams));
         accessLog.setRequestMethod(request.getMethod());
         accessLog.setUserAgent(ServletUtils.getUserAgent(request));
@@ -109,7 +110,8 @@ public class ApiAccessLogFilter extends OncePerRequestFilter {
         // 持续时间
         accessLog.setBeginTime(beginTime);
         accessLog.setEndTime(LocalDateTime.now());
-        accessLog.setDuration((int) LocalDateTimeUtil.between(accessLog.getBeginTime(), accessLog.getEndTime(), ChronoUnit.MILLIS));
+        accessLog.setDuration((int) LocalDateTimeUtil.between(accessLog.getBeginTime(),
+            accessLog.getEndTime(), ChronoUnit.MILLIS));
     }
 
 

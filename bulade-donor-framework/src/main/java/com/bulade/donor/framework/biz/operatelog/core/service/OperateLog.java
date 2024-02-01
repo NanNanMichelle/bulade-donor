@@ -11,7 +11,6 @@ import java.util.Map;
 @Data
 public class OperateLog {
 
-
     /**
      * 用户编号
      */

@@ -10,6 +10,7 @@ import java.util.Map;
  * 操作日志创建 Request DTO
  */
 public class OperateLogCreateBO {
+
     /**
      * 链路追踪编号
      */
@@ -20,6 +21,7 @@ public class OperateLogCreateBO {
      */
     @NotNull(message = "用户编号不能为空")
     private Long userId;
+
     /**
      * 用户类型
      */
@@ -119,26 +121,6 @@ public class OperateLogCreateBO {
 
     @Override
     public String toString() {
-        return "{" +
-            "traceId='" + traceId + '\'' +
-            ", userId=" + userId +
-            ", userType=" + userType +
-            ", module='" + module + '\'' +
-            ", name='" + name + '\'' +
-            ", type=" + type +
-            ", content='" + content + '\'' +
-            ", exts=" + exts +
-            ", requestMethod='" + requestMethod + '\'' +
-            ", requestUrl='" + requestUrl + '\'' +
-            ", userIp='" + userIp + '\'' +
-            ", userAgent='" + userAgent + '\'' +
-            ", javaMethod='" + javaMethod + '\'' +
-            ", javaMethodArgs='" + javaMethodArgs + '\'' +
-            ", startTime=" + startTime +
-            ", duration=" + duration +
-            ", resultCode=" + resultCode +
-            ", resultMsg='" + resultMsg + '\'' +
-            ", resultData='" + resultData + '\'' +
-            '}';
+        return "{" + "traceId='" + traceId + '\'' + ", userId=" + userId + ", userType=" + userType + ", module='" + module + '\'' + ", name='" + name + '\'' + ", type=" + type + ", content='" + content + '\'' + ", exts=" + exts + ", requestMethod='" + requestMethod + '\'' + ", requestUrl='" + requestUrl + '\'' + ", userIp='" + userIp + '\'' + ", userAgent='" + userAgent + '\'' + ", javaMethod='" + javaMethod + '\'' + ", javaMethodArgs='" + javaMethodArgs + '\'' + ", startTime=" + startTime + ", duration=" + duration + ", resultCode=" + resultCode + ", resultMsg='" + resultMsg + '\'' + ", resultData='" + resultData + '\'' + '}';
     }
 }

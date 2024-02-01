@@ -8,6 +8,8 @@ import com.bulade.donor.framework.biz.operatelog.core.aop.OperateLogAspect;
  */
 public class OperateLogUtils {
 
+    private OperateLogUtils(){}
+
     public static void setContent(String content) {
         OperateLogAspect.setContent(content);
     }

@@ -167,10 +167,10 @@ public class OperateLogAspect {
         operateLogObj.setUserType(WebFrameworkUtils.getLoginUserType());
     }
 
-    private static void fillModuleFields(com.bulade.donor.framework.biz.operatelog.core.service.OperateLog operateLogObj,
-                                         ProceedingJoinPoint joinPoint,
-                                         OperateLog operateLog,
-                                         Operation operation) {
+    private static void fillModuleFields(
+        com.bulade.donor.framework.biz.operatelog.core.service.OperateLog operateLogObj,
+        ProceedingJoinPoint joinPoint, OperateLog operateLog,Operation operation
+    ) {
         // module 属性
         if (operateLog != null) {
             operateLogObj.setModule(operateLog.module());
@@ -205,7 +205,9 @@ public class OperateLogAspect {
         operateLogObj.setExts(EXTS.get());
     }
 
-    private static void fillRequestFields(com.bulade.donor.framework.biz.operatelog.core.service.OperateLog operateLogObj) {
+    private static void fillRequestFields(
+        com.bulade.donor.framework.biz.operatelog.core.service.OperateLog operateLogObj
+    ) {
         // 获得 Request 对象
         var request = ServletUtils.getRequest();
         if (request == null) {
@@ -218,10 +220,11 @@ public class OperateLogAspect {
         operateLogObj.setUserAgent(ServletUtils.getUserAgent(request));
     }
 
-    private static void fillMethodFields(com.bulade.donor.framework.biz.operatelog.core.service.OperateLog operateLogObj,
-                                         ProceedingJoinPoint joinPoint,
-                                         OperateLog operateLog,
-                                         LocalDateTime startTime, Object result, Throwable exception) {
+    private static void fillMethodFields(
+        com.bulade.donor.framework.biz.operatelog.core.service.OperateLog operateLogObj,
+        ProceedingJoinPoint joinPoint, OperateLog operateLog,
+        LocalDateTime startTime, Object result, Throwable exception
+    ) {
         MethodSignature methodSignature = (MethodSignature) joinPoint.getSignature();
         operateLogObj.setJavaMethod(methodSignature.toString());
         if (operateLog == null || operateLog.logArgs()) {
@@ -299,19 +302,29 @@ public class OperateLogAspect {
     }
 
     private static RequestMethod[] obtainRequestMethod(ProceedingJoinPoint joinPoint) {
-        RequestMapping requestMapping = AnnotationUtils.getAnnotation( // 使用 Spring 的工具类，可以处理 @RequestMapping 别名注解
+        var requestMapping = AnnotationUtils.getAnnotation( // 使用 Spring 的工具类，可以处理 @RequestMapping 别名注解
             ((MethodSignature) joinPoint.getSignature()).getMethod(), RequestMapping.class);
         return requestMapping != null ? requestMapping.method() : new RequestMethod[]{};
     }
 
     @SuppressWarnings("SameParameterValue")
-    private static <T extends Annotation> T getMethodAnnotation(ProceedingJoinPoint joinPoint, Class<T> annotationClass) {
+    private static <T extends Annotation> T getMethodAnnotation(
+        ProceedingJoinPoint joinPoint,
+        Class<T> annotationClass
+    ) {
         return ((MethodSignature) joinPoint.getSignature()).getMethod().getAnnotation(annotationClass);
     }
 
     @SuppressWarnings("SameParameterValue")
-    private static <T extends Annotation> T getClassAnnotation(ProceedingJoinPoint joinPoint, Class<T> annotationClass) {
-        return ((MethodSignature) joinPoint.getSignature()).getMethod().getDeclaringClass().getAnnotation(annotationClass);
+    private static <T extends Annotation> T getClassAnnotation(
+        ProceedingJoinPoint joinPoint,
+        Class<T> annotationClass
+    ) {
+        return ((MethodSignature) joinPoint
+            .getSignature())
+            .getMethod()
+            .getDeclaringClass()
+            .getAnnotation(annotationClass);
     }
 
     private static String obtainMethodArgs(ProceedingJoinPoint joinPoint) {
