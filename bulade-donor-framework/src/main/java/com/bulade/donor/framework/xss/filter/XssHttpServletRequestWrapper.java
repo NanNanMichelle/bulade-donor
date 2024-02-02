@@ -10,7 +10,7 @@ import org.apache.commons.lang3.StringUtils;
  */
 public class XssHttpServletRequestWrapper extends HttpServletRequestWrapper {
 
-    HttpServletRequest orgRequest = null;
+    private HttpServletRequest orgRequest = null;
 
     private boolean isIncludeRichText = false;
 
