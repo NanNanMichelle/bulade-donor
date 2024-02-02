@@ -6,7 +6,7 @@ import com.bulade.donor.common.utils.monitor.TracerUtils;
 import com.bulade.donor.common.utils.servlet.ServletUtils;
 import com.bulade.donor.framework.security.utils.JwtUtils;
 import com.bulade.donor.system.bo.LoginLogCreateBO;
-import com.bulade.donor.system.logger.LoginLogService;
+import com.bulade.donor.system.service.LoginLogService;
 import com.bulade.donor.system.model.Admin;
 import com.bulade.donor.system.service.AdminsService;
 import jakarta.annotation.Resource;

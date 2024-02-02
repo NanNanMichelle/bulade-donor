@@ -1,4 +1,4 @@
-package com.bulade.donor.framework.biz.operatelog.core.util;
+package com.bulade.donor.framework.biz.operatelog.core.utils;
 
 import com.bulade.donor.framework.biz.operatelog.core.aop.OperateLogAspect;
 

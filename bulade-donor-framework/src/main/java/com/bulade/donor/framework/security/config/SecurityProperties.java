@@ -21,6 +21,7 @@ public class SecurityProperties {
      */
     @NotEmpty(message = "Token Header 不能为空")
     private String tokenHeader = "Authorization";
+
     /**
      * HTTP 请求时，访问令牌的请求参数
      *
@@ -34,6 +35,7 @@ public class SecurityProperties {
      */
     @NotNull(message = "mock 模式的开关不能为空")
     private Boolean mockEnable = false;
+
     /**
      * mock 模式的密钥
      * 一定要配置密钥，保证安全性

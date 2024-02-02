@@ -1,8 +1,8 @@
-package com.bulade.donor.infra.api;
+package com.bulade.donor.system.api;
 
 import com.bulade.donor.framework.web.apilog.api.ApiAccessLogApi;
 import com.bulade.donor.framework.web.apilog.bo.ApiAccessLogCreateBO;
-import com.bulade.donor.infra.service.logger.ApiAccessLogService;
+import com.bulade.donor.system.service.ApiAccessLogService;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;

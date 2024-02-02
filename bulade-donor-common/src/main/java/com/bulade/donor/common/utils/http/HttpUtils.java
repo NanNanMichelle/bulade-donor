@@ -16,8 +16,9 @@ import java.util.concurrent.CompletableFuture;
 import java.util.zip.GZIPInputStream;
 
 @Slf4j
-public class HttpUtil {
-    private HttpUtil() {
+public class HttpUtils {
+
+    private HttpUtils() {
     }
 
     private static final Integer SECONDS = 10;
@@ -44,66 +45,66 @@ public class HttpUtil {
 
     public static String get(String url, Map<String, String> headers) throws Exception {
         var requestBuilder = HttpRequest.newBuilder()
-                .timeout(Duration.ofSeconds(SECONDS));
+            .timeout(Duration.ofSeconds(SECONDS));
         headers.forEach(requestBuilder::header);
         var request = requestBuilder
-                .uri(new URI(url))
-                .GET()
-                .build();
+            .uri(new URI(url))
+            .GET()
+            .build();
 
         var response = HTTP_CLIENT
-                .send(request, HttpResponse.BodyHandlers.ofByteArray());
+            .send(request, HttpResponse.BodyHandlers.ofByteArray());
 
         return extractResponse(response);
     }
 
     public static String post(String url, String requestBody, Map<String, String> headers) throws Exception {
         var requestBuilder = HttpRequest.newBuilder()
-                .timeout(Duration.ofSeconds(SECONDS));
+            .timeout(Duration.ofSeconds(SECONDS));
         headers.forEach(requestBuilder::header);
         var request = requestBuilder
-                .uri(new URI(url))
-                .POST(HttpRequest.BodyPublishers.ofString(requestBody))
-                .build();
+            .uri(new URI(url))
+            .POST(HttpRequest.BodyPublishers.ofString(requestBody))
+            .build();
 
         var response = HttpClient.newHttpClient()
-                .send(request, HttpResponse.BodyHandlers.ofByteArray());
+            .send(request, HttpResponse.BodyHandlers.ofByteArray());
 
         return extractResponse(response);
     }
 
     public static CompletableFuture<String> postAsync(String url, String requestBody, Map<String, String> headers)
-            throws Exception {
+        throws Exception {
         var requestBuilder = HttpRequest.newBuilder()
-                .timeout(Duration.ofSeconds(SECONDS));
+            .timeout(Duration.ofSeconds(SECONDS));
         headers.forEach(requestBuilder::header);
         var request = requestBuilder
-                .uri(new URI(url))
-                .POST(HttpRequest.BodyPublishers.ofString(requestBody))
-                .build();
+            .uri(new URI(url))
+            .POST(HttpRequest.BodyPublishers.ofString(requestBody))
+            .build();
 
         return HTTP_CLIENT
-                .sendAsync(request, HttpResponse.BodyHandlers.ofByteArray())
-                .thenApply((response) -> {
-                    try {
-                        return extractResponse(response);
-                    } catch (Exception e) {
-                        throw new RuntimeException(e);
-                    }
-                });
+            .sendAsync(request, HttpResponse.BodyHandlers.ofByteArray())
+            .thenApply((response) -> {
+                try {
+                    return extractResponse(response);
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+            });
     }
 
     public static byte[] postForArrayBuffer(String url, String requestBody, Map<String, String> headers)
-            throws Exception {
+        throws Exception {
         var requestBuilder = HttpRequest.newBuilder();
         headers.forEach(requestBuilder::header);
         var request = requestBuilder
-                .uri(new URI(url))
-                .POST(HttpRequest.BodyPublishers.ofString(requestBody))
-                .build();
+            .uri(new URI(url))
+            .POST(HttpRequest.BodyPublishers.ofString(requestBody))
+            .build();
 
         var response = HttpClient.newHttpClient()
-                .send(request, HttpResponse.BodyHandlers.ofByteArray());
+            .send(request, HttpResponse.BodyHandlers.ofByteArray());
 
         return response.body();
     }

@@ -1,4 +1,4 @@
-package com.bulade.donor.framework.xss.filter;
+package com.bulade.donor.framework.xss.utils;
 
 import org.apache.commons.lang3.StringUtils;
 import org.jsoup.Jsoup;
@@ -7,7 +7,10 @@ import org.jsoup.safety.Safelist;
 
 import java.util.regex.Pattern;
 
-public class XssFilterUtil {
+public class XssFilterUtils {
+
+    private XssFilterUtils() {
+    }
 
     /**
      * 使用自带的basicWithImages 白名单
@@ -30,7 +33,7 @@ public class XssFilterUtil {
     }
 
     public static String clean(String content) {
-        content =  Jsoup.clean(content, "", whitelist, outputSettings);
+        content = Jsoup.clean(content, "", whitelist, outputSettings);
         return striptXSS(content);
     }
 
@@ -57,7 +60,7 @@ public class XssFilterUtil {
             value = scriptPattern.matcher(value).replaceAll("");
             scriptPattern = Pattern.compile("onload(.*?)=", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE | Pattern.DOTALL);
             value = scriptPattern.matcher(value).replaceAll("");
-            scriptPattern = Pattern.compile(".*<.*", Pattern.CASE_INSENSITIVE );
+            scriptPattern = Pattern.compile(".*<.*", Pattern.CASE_INSENSITIVE);
             value = scriptPattern.matcher(value).replaceAll("");
         }
         return value;

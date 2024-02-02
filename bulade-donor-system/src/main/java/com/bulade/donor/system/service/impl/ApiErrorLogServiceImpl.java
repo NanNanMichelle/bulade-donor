@@ -1,8 +1,10 @@
-package com.bulade.donor.infra.service.logger;
+package com.bulade.donor.system.service.impl;
 
 import com.bulade.donor.common.utils.object.BeanUtils;
 import com.bulade.donor.framework.web.apilog.bo.ApiErrorLogCreateBO;
-import com.bulade.donor.infra.model.ApiErrorLog;
+import com.bulade.donor.common.enums.ApiErrorLogProcessStatusEnum;
+import com.bulade.donor.system.model.ApiErrorLog;
+import com.bulade.donor.system.service.ApiErrorLogService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;

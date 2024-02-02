@@ -1,4 +1,4 @@
-package com.bulade.donor.system.logger;
+package com.bulade.donor.system.service;
 
 import com.bulade.donor.system.bo.LoginLogCreateBO;
 import jakarta.validation.Valid;
