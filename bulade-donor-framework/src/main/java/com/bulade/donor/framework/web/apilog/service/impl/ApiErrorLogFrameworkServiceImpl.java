@@ -1,7 +1,8 @@
-package com.bulade.donor.framework.web.apilog.service;
+package com.bulade.donor.framework.web.apilog.service.impl;
 
 import com.bulade.donor.framework.web.apilog.api.ApiErrorLogApi;
 import com.bulade.donor.framework.web.apilog.bo.ApiErrorLogCreateBO;
+import com.bulade.donor.framework.web.apilog.service.ApiErrorLogFrameworkService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.scheduling.annotation.Async;
 

@@ -1,4 +1,4 @@
-package com.bulade.donor.infra.service.logger;
+package com.bulade.donor.common.enums;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

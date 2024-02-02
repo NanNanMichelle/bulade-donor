@@ -1,4 +1,4 @@
-package com.bulade.donor.infra.service.logger;
+package com.bulade.donor.system.service;
 
 import com.bulade.donor.framework.web.apilog.bo.ApiAccessLogCreateBO;
 

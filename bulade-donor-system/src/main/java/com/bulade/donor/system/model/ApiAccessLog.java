@@ -1,4 +1,4 @@
-package com.bulade.donor.infra.model;
+package com.bulade.donor.system.model;
 
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;

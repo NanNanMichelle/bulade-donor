@@ -1,8 +1,9 @@
-package com.bulade.donor.system.logger;
+package com.bulade.donor.system.service.impl;
 
 import com.bulade.donor.common.utils.object.BeanUtils;
 import com.bulade.donor.system.bo.LoginLogCreateBO;
 import com.bulade.donor.system.model.LoginLog;
+import com.bulade.donor.system.service.LoginLogService;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
