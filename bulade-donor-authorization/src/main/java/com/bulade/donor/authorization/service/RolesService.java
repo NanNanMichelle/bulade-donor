@@ -8,6 +8,7 @@ import com.bulade.donor.authorization.model.Role;
 import com.bulade.donor.common.page.PageParam;
 
 import java.util.List;
+
 public interface RolesService {
 
     Long insert(RoleInsertBO roleInsertBO);

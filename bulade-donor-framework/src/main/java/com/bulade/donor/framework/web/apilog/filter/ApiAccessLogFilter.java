@@ -69,17 +69,30 @@ public class ApiAccessLogFilter extends OncePerRequestFilter {
         }
     }
 
-    private void createApiAccessLog(HttpServletRequest request, LocalDateTime beginTime, Map<String, String> queryString, String requestBody, Exception ex) {
+    private void createApiAccessLog(
+        HttpServletRequest request,
+        LocalDateTime beginTime,
+        Map<String, String> queryString,
+        String requestBody,
+        Exception ex) {
         var accessLogBO = new ApiAccessLogCreateBO();
         try {
             this.buildApiAccessLogDTO(accessLogBO, request, beginTime, queryString, requestBody, ex);
             apiAccessLogFrameworkService.createApiAccessLog(accessLogBO);
         } catch (Throwable th) {
-            log.error("[createApiAccessLog][url({}) log({}) 发生异常]", request.getRequestURI(), toJsonString(accessLogBO), th);
+            log.error("[createApiAccessLog][url({}) log({}) 发生异常]",
+                request.getRequestURI(), toJsonString(accessLogBO), th);
         }
     }
 
-    private void buildApiAccessLogDTO(ApiAccessLogCreateBO accessLog, HttpServletRequest request, LocalDateTime beginTime, Map<String, String> queryString, String requestBody, Exception ex) {
+    private void buildApiAccessLogDTO(
+        ApiAccessLogCreateBO accessLog,
+        HttpServletRequest request,
+        LocalDateTime beginTime,
+        Map<String, String> queryString,
+        String requestBody,
+        Exception ex
+    ) {
         // 处理用户信息
         accessLog.setUserId(WebFrameworkUtils.getLoginUserId(request));
         accessLog.setUserType(WebFrameworkUtils.getLoginUserType(request));
@@ -107,7 +120,8 @@ public class ApiAccessLogFilter extends OncePerRequestFilter {
         // 持续时间
         accessLog.setBeginTime(beginTime);
         accessLog.setEndTime(LocalDateTime.now());
-        accessLog.setDuration((int) LocalDateTimeUtil.between(accessLog.getBeginTime(), accessLog.getEndTime(), ChronoUnit.MILLIS));
+        accessLog.setDuration((int) LocalDateTimeUtil.between(accessLog.getBeginTime(),
+            accessLog.getEndTime(), ChronoUnit.MILLIS));
     }
 
 }
