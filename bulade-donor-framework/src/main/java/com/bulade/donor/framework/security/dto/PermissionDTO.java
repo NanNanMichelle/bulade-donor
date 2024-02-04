@@ -22,7 +22,7 @@ public class PermissionDTO {
      */
     private String controller;
 
-    public static PermissionDTO of(Long id, String name, String controller){
+    public static PermissionDTO of(Long id, String name, String controller) {
         var permission = new PermissionDTO();
         permission.setId(id);
         permission.setName(name);
