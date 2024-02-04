@@ -108,7 +108,22 @@ public enum ResultCodeEnum {
 
     TOO_MANY_REQUESTS(429, "请求过于频繁，请稍后重试"),
 
-    NOT_IMPLEMENTED(501, "功能未实现/未开启");
+    NOT_IMPLEMENTED(501, "功能未实现/未开启"),
+
+    UNKNOWN(999, "未知错误"),
+
+    // ========== 定时任务 1-001-001-000 ==========
+    JOB_NOT_EXISTS(1_001_001_000, "定时任务不存在"),
+
+    JOB_HANDLER_EXISTS(1_001_001_001, "定时任务的处理器已经存在"),
+
+    JOB_CHANGE_STATUS_INVALID(1_001_001_002, "只允许修改为开启或者关闭状态"),
+
+    JOB_CHANGE_STATUS_EQUALS(1_001_001_003, "定时任务已经处于该状态，无需修改"),
+
+    JOB_UPDATE_ONLY_NORMAL_STATUS(1_001_001_004, "只有开启状态的任务，才可以修改"),
+
+    JOB_CRON_EXPRESSION_VALID(1_001_001_005, "CRON 表达式不正确");
 
     private final Integer code;
 

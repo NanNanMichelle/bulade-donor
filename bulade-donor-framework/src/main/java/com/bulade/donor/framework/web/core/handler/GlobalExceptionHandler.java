@@ -5,6 +5,7 @@ import cn.hutool.core.map.MapUtil;
 import com.bulade.donor.common.core.CommonResponse;
 import com.bulade.donor.common.enums.ResultCodeEnum;
 import com.bulade.donor.common.exception.BusinessException;
+import com.bulade.donor.common.exception.SystemException;
 import com.bulade.donor.common.utils.json.JsonUtils;
 import com.bulade.donor.common.utils.monitor.TracerUtils;
 import com.bulade.donor.common.utils.servlet.ServletUtils;
@@ -135,12 +136,34 @@ public class GlobalExceptionHandler {
         return CommonResponse.error(ResultCodeEnum.NO_PERMISSION);
     }
 
+    @ExceptionHandler(value = {IllegalStateException.class})
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    public CommonResponse<List<String>> handlerIllegalStateException(IllegalStateException exception) {
+        return CommonResponse.error(ResultCodeEnum.ERROR, exception, exception.getMessage());
+    }
+
+    @ExceptionHandler(value = {IllegalArgumentException.class})
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    public CommonResponse<List<String>> handlerIllegalArgumentException(IllegalArgumentException exception) {
+        return CommonResponse.error(ResultCodeEnum.ERROR, exception, exception.getMessage());
+    }
+
     /**
      * 处理业务异常 BusinessException
      */
     @ExceptionHandler(value = {BusinessException.class})
     @ResponseStatus(value = HttpStatus.BAD_REQUEST)
     public CommonResponse<List<String>> businessExceptionHandler(BusinessException exception) {
+        String errorMessage = exception.getMessage();
+        return CommonResponse.error(ResultCodeEnum.ERROR, exception, errorMessage);
+    }
+
+    /**
+     * 自定义系统异常-SystemException
+     */
+    @ExceptionHandler(value = {SystemException.class})
+    @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
+    public CommonResponse<List<String>> handlerCustomException(SystemException exception) {
         String errorMessage = exception.getMessage();
         return CommonResponse.error(ResultCodeEnum.ERROR, exception, errorMessage);
     }

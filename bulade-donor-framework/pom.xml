@@ -57,5 +57,10 @@
             <scope>compile</scope>
         </dependency>
 
+        <!-- Job 定时任务相关 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-quartz</artifactId>
+        </dependency>
     </dependencies>
 </project>
