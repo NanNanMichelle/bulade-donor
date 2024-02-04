@@ -18,11 +18,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
+
 /**
  * 自定义枚举属性转换器
- *
- * @author hubin
- * @since 2017-10-11
  */
 public class MybatisEnumTypeHandler<E extends Enum<E>> extends BaseTypeHandler<E> {
 

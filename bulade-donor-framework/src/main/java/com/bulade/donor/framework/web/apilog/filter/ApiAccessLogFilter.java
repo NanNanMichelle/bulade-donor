@@ -8,8 +8,6 @@ import com.bulade.donor.common.core.CommonResponse;
 import com.bulade.donor.common.enums.ResultCodeEnum;
 import com.bulade.donor.common.utils.monitor.TracerUtils;
 import com.bulade.donor.common.utils.servlet.ServletUtils;
-import com.bulade.donor.framework.security.config.SecurityProperties;
-import com.bulade.donor.framework.security.utils.SecurityFrameworkUtils;
 import com.bulade.donor.framework.web.apilog.bo.ApiAccessLogCreateBO;
 import com.bulade.donor.framework.web.apilog.service.ApiAccessLogFrameworkService;
 import com.bulade.donor.framework.web.utils.WebFrameworkUtils;
@@ -18,8 +16,8 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.util.CollectionUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
+
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
@@ -37,23 +35,14 @@ public class ApiAccessLogFilter extends OncePerRequestFilter {
 
     private final ApiAccessLogFrameworkService apiAccessLogFrameworkService;
 
-    private final SecurityProperties securityProperties;
-
-    public ApiAccessLogFilter(String applicationName, ApiAccessLogFrameworkService apiAccessLogFrameworkService,
-                              SecurityProperties securityProperties) {
+    public ApiAccessLogFilter(String applicationName, ApiAccessLogFrameworkService apiAccessLogFrameworkService) {
         this.applicationName = applicationName;
         this.apiAccessLogFrameworkService = apiAccessLogFrameworkService;
-        this.securityProperties = securityProperties;
     }
 
     @Override
     protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
         // 只过滤 API 请求的地址
-//        var uri = request.getRequestURI();
-//        var urlList = securityProperties.getPermitAllUrls();
-//        if (!CollectionUtils.isEmpty(urlList)) {
-//            return !urlList.contains(uri);
-//        }
         return !CharSequenceUtil.startWithAny(request.getRequestURI(), "/api");
     }
 
@@ -80,26 +69,17 @@ public class ApiAccessLogFilter extends OncePerRequestFilter {
         }
     }
 
-    private void createApiAccessLog(HttpServletRequest request, LocalDateTime beginTime,
-                                    Map<String, String> queryString, String requestBody, Exception ex) {
+    private void createApiAccessLog(HttpServletRequest request, LocalDateTime beginTime, Map<String, String> queryString, String requestBody, Exception ex) {
         var accessLogBO = new ApiAccessLogCreateBO();
         try {
             this.buildApiAccessLogDTO(accessLogBO, request, beginTime, queryString, requestBody, ex);
             apiAccessLogFrameworkService.createApiAccessLog(accessLogBO);
         } catch (Throwable th) {
-            log.error("[createApiAccessLog][url({}) log({}) 发生异常]", request.getRequestURI(),
-                toJsonString(accessLogBO), th);
+            log.error("[createApiAccessLog][url({}) log({}) 发生异常]", request.getRequestURI(), toJsonString(accessLogBO), th);
         }
     }
 
-    private void buildApiAccessLogDTO(
-        ApiAccessLogCreateBO accessLog,
-        HttpServletRequest request,
-        LocalDateTime beginTime,
-        Map<String, String> queryString,
-        String requestBody,
-        Exception ex
-    ) {
+    private void buildApiAccessLogDTO(ApiAccessLogCreateBO accessLog, HttpServletRequest request, LocalDateTime beginTime, Map<String, String> queryString, String requestBody, Exception ex) {
         // 处理用户信息
         accessLog.setUserId(WebFrameworkUtils.getLoginUserId(request));
         accessLog.setUserType(WebFrameworkUtils.getLoginUserType(request));
@@ -119,10 +99,7 @@ public class ApiAccessLogFilter extends OncePerRequestFilter {
         accessLog.setTraceId(TracerUtils.getTraceId());
         accessLog.setApplicationName(applicationName);
         accessLog.setRequestUrl(request.getRequestURI());
-        var requestParams = MapUtil.<String, Object>builder()
-            .put("query", queryString)
-            .put("body", requestBody)
-            .build();
+        var requestParams = MapUtil.<String, Object>builder().put("query", queryString).put("body", requestBody).build();
         accessLog.setRequestParams(toJsonString(requestParams));
         accessLog.setRequestMethod(request.getMethod());
         accessLog.setUserAgent(ServletUtils.getUserAgent(request));
@@ -130,8 +107,7 @@ public class ApiAccessLogFilter extends OncePerRequestFilter {
         // 持续时间
         accessLog.setBeginTime(beginTime);
         accessLog.setEndTime(LocalDateTime.now());
-        accessLog.setDuration((int) LocalDateTimeUtil.between(accessLog.getBeginTime(),
-            accessLog.getEndTime(), ChronoUnit.MILLIS));
+        accessLog.setDuration((int) LocalDateTimeUtil.between(accessLog.getBeginTime(), accessLog.getEndTime(), ChronoUnit.MILLIS));
     }
 
 }

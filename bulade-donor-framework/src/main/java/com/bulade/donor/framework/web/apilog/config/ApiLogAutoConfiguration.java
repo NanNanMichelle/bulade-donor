@@ -1,7 +1,6 @@
 package com.bulade.donor.framework.web.apilog.config;
 
 import com.bulade.donor.common.enums.WebFilterOrderEnum;
-import com.bulade.donor.framework.security.config.SecurityProperties;
 import com.bulade.donor.framework.web.apilog.api.ApiAccessLogApi;
 import com.bulade.donor.framework.web.apilog.api.ApiErrorLogApi;
 import com.bulade.donor.framework.web.apilog.filter.ApiAccessLogFilter;
@@ -37,10 +36,9 @@ public class ApiLogAutoConfiguration {
     @ConditionalOnProperty(prefix = "donor.access-log", value = "enable", matchIfMissing = true)
     public FilterRegistrationBean<ApiAccessLogFilter> apiAccessLogFilter(
         @Value("${spring.application.name}") String applicationName,
-        ApiAccessLogFrameworkService apiAccessLogFrameworkService,
-        SecurityProperties securityProperties
+        ApiAccessLogFrameworkService apiAccessLogFrameworkService
     ) {
-        var filter = new ApiAccessLogFilter(applicationName, apiAccessLogFrameworkService, securityProperties);
+        var filter = new ApiAccessLogFilter(applicationName, apiAccessLogFrameworkService);
         return createFilterBean(filter, WebFilterOrderEnum.API_ACCESS_LOG_FILTER);
     }
 
