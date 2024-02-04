@@ -28,7 +28,7 @@ public class AreaUtils {
      * 初始化 SEARCHER
      */
     @SuppressWarnings("InstantiationOfUtilityClass")
-    private final static AreaUtils INSTANCE = new AreaUtils();
+    private static final AreaUtils INSTANCE = new AreaUtils();
 
     /**
      * Area 内存缓存，提升访问速度
@@ -54,7 +54,7 @@ public class AreaUtils {
         // 构建父子关系：因为 Area 中没有 parentId 字段，所以需要重复读取
         for (CsvRow row : rows) {
             Area area = areas.get(Integer.valueOf(row.get(0))); // 自己
-            Area parent = areas.get(Integer.valueOf(row.get(3))); // 父
+            Area parent = areas.get(Integer.valueOf(row.get(Integer.valueOf("3")))); // 父
             Assert.isTrue(area != parent, "{}:父子节点相同", area.getName());
             area.setParent(parent);
             parent.getChildren().add(area);

@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 class AreaUtilsTest {
+
     @Test
     public void testGetArea() {
         // 调用：北京
