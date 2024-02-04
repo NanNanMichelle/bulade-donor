@@ -24,7 +24,7 @@ public class IPUtils {
     /**
      * IP 查询器，启动加载到内存中
      */
-    private static Searcher SEAR_CHER;
+    private static Searcher searcher;
 
     /**
      * 私有化构造
@@ -33,7 +33,7 @@ public class IPUtils {
         try {
             long now = System.currentTimeMillis();
             byte[] bytes = ResourceUtil.readBytes("ip2region.xdb");
-            SEAR_CHER = Searcher.newWithBuffer(bytes);
+            searcher = Searcher.newWithBuffer(bytes);
             log.info("启动加载 IPUtils 成功，耗时 ({}) 毫秒", System.currentTimeMillis() - now);
         } catch (IOException e) {
             log.error("启动加载 IPUtils 失败", e);
@@ -48,7 +48,7 @@ public class IPUtils {
      */
     @SneakyThrows
     public static Integer getAreaId(String ip) {
-        return Integer.parseInt(SEAR_CHER.search(ip.trim()));
+        return Integer.parseInt(searcher.search(ip.trim()));
     }
 
     /**
@@ -59,7 +59,7 @@ public class IPUtils {
      */
     @SneakyThrows
     public static Integer getAreaId(long ip) {
-        return Integer.parseInt(SEAR_CHER.search(ip));
+        return Integer.parseInt(searcher.search(ip));
     }
 
     /**

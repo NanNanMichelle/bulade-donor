@@ -6,6 +6,7 @@ import com.bulade.donor.framework.ip.core.utils.AreaUtils;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
+
 class AreaUtilsTest {
 
     @Test

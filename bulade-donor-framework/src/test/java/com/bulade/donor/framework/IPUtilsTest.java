@@ -13,26 +13,26 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class IPUtilsTest {
 
     @Test
-    public void testGetAreaId_string() {
+    public void testGetAreaIdString() {
         Integer areaId = IPUtils.getAreaId("120.202.4.50");
         assertEquals(420600, areaId);
     }
 
     @Test
-    public void testGetAreaId_long() throws Exception {
+    public void testGetAreaIdLong() throws Exception {
         long ip = Searcher.checkIP("120.203.123.250");
         Integer areaId = IPUtils.getAreaId(ip);
         assertEquals(360900, areaId);
     }
 
     @Test
-    public void testGetArea_string() {
+    public void testGetAreaString() {
         Area area = IPUtils.getArea("120.202.4.50");
         assertEquals("襄阳市", area.getName());
     }
 
     @Test
-    public void testGetArea_long() throws Exception {
+    public void testGetAreaLong() throws Exception {
         long ip = Searcher.checkIP("120.203.123.252");
         Area area = IPUtils.getArea(ip);
         assertEquals("宜春市", area.getName());
