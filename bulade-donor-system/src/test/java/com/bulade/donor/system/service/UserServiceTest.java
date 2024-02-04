@@ -13,7 +13,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 class UserServiceTest {
 
     @Resource
-    private UserService userService;
+    private UsersService userService;
 
     @Test
     void testSelectById() {
