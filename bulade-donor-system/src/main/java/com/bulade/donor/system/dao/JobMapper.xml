@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bulade.donor.system.dao.JobMapper">
+
+    <sql id="BaseColumnList">
+        id, name, status, handler_name, handler_param, cron_expression, retry_count, retry_interval, monitor_timeout,
+        created_at, updated_at, deleted_at
+    </sql>
+
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        INSERT INTO `sys_job`(name, status, handler_name, handler_param, cron_expression, retry_count,
+        retry_interval, monitor_timeout, `created_at`, `updated_at`) VALUES (
+        #{name}, #{status}, #{handlerName}, #{handlerParam}, #{cronExpression}, #{retryCount},
+        #{retryInterval}, #{monitorTimeout}, now(), now())
+    </insert>
+
+    <update id="deleteById">
+        update `sys_job` set deleted_at = now() where id = #{id}
+    </update>
+
+    <update id="updateById">
+        UPDATE `sys_job`
+        <set>
+            <if test="name != null">
+                name = #{name},
+            </if>
+            <if test="status != null">
+                `status` = #{status},
+            </if>
+            <if test="handlerName != null">
+                handler_name = #{handlerName},
+            </if>
+            <if test="handlerParam != null">
+                handler_param = #{handlerParam},
+            </if>
+            <if test="cronExpression != null">
+                cron_expression = #{cronExpression},
+            </if>
+            <if test="retryCount != null">
+                retry_count = #{retryCount},
+            </if>
+            <if test="retryInterval != null">
+                retry_interval = #{retryInterval},
+            </if>
+            <if test="monitorTimeout != null">
+                monitor_timeout = #{monitorTimeout},
+            </if>
+            updated_at = now(),
+        </set>
+        WHERE id = #{id}
+    </update>
+
+    <select id="selectByHandlerName" resultType="com.bulade.donor.system.model.Job">
+        select
+        <include refid="BaseColumnList"/>
+        from sys_job
+        where `handler_name` = #{handlerName}
+        limit 1
+    </select>
+
+    <select id="selectById" resultType="com.bulade.donor.system.model.Job">
+        select
+        <include refid="BaseColumnList"/>
+        from sys_job
+        where `id` = #{id}
+        limit 1
+    </select>
+
+</mapper>
