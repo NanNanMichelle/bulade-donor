@@ -1,4 +1,4 @@
-package com.bulade.donor.framework;
+package com.bulade.donor.framework.ip.core.utils;
 
 import cn.hutool.core.io.resource.ResourceUtil;
 import cn.hutool.core.lang.Assert;

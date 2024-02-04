@@ -1,6 +1,7 @@
 package com.bulade.donor.framework;
 
 import com.bulade.donor.framework.ip.core.Area;
+import com.bulade.donor.framework.ip.core.utils.IPUtils;
 import org.junit.jupiter.api.Test;
 import org.lionsoul.ip2region.xdb.Searcher;
 

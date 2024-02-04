@@ -1,4 +1,4 @@
-package com.bulade.donor.application.service;
+package com.bulade.donor.application.manage;
 
 public interface AdminAuthenticationService {
 

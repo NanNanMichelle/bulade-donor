@@ -1,4 +1,4 @@
-package com.bulade.donor.framework.typehandler;
+package com.bulade.donor.framework.mybatis.typehandler;
 
 import org.apache.ibatis.type.EnumTypeHandler;
 import org.apache.ibatis.type.JdbcType;

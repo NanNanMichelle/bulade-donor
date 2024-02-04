@@ -2,6 +2,7 @@ package com.bulade.donor.framework;
 
 import com.bulade.donor.framework.ip.core.Area;
 import com.bulade.donor.framework.ip.core.enums.AreaTypeEnum;
+import com.bulade.donor.framework.ip.core.utils.AreaUtils;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

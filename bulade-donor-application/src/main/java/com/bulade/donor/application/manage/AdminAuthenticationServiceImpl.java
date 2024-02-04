@@ -1,4 +1,4 @@
-package com.bulade.donor.application.service;
+package com.bulade.donor.application.manage;
 
 import com.bulade.donor.common.enums.*;
 import com.bulade.donor.common.exception.BusinessException;

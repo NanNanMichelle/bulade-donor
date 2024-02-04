@@ -86,9 +86,7 @@ public class SwaggerConfiguration {
             })
             .addOperationCustomizer((operation, handlerMethod) -> {
                 var content = operation.getResponses().get("200").getContent();
-                content.values().forEach(mediaType -> {
-                    mediaType.schema(this.customizeSchema(mediaType.getSchema()));
-                });
+                content.values().forEach(mediaType -> mediaType.schema(this.customizeSchema(mediaType.getSchema())));
                 return operation;
             })
             .build();
