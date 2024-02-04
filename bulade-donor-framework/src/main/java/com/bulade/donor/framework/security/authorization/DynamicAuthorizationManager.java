@@ -1,8 +1,7 @@
-package com.bulade.donor.application.security.authorization;
+package com.bulade.donor.framework.security.authorization;
 
-import com.bulade.donor.authorization.enums.PermissionType;
-import com.bulade.donor.authorization.model.Permission;
-import com.bulade.donor.authorization.service.PermissionsService;
+import com.bulade.donor.framework.security.api.PermissionApi;
+import com.bulade.donor.framework.security.dto.PermissionDTO;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
@@ -29,7 +28,7 @@ public class DynamicAuthorizationManager implements AuthorizationManager<Request
     private static final AuthorizationDecision DENY = new AuthorizationDecision(false);
 
     @Resource
-    private PermissionsService permissionsService;
+    private PermissionApi permissionApi;
 
     @Resource
     private ApplicationContext applicationContext;
@@ -41,7 +40,7 @@ public class DynamicAuthorizationManager implements AuthorizationManager<Request
         var authentication = supplier.get();
 
         // 无需登录即可访问的接口
-        var noSignInPermissions = permissionsService.listByType(PermissionType.NO_SIGN_IN);
+        var noSignInPermissions = permissionApi.listNoSignInPermissionsUrl();
         var noSignInPermission = determinePermission(noSignInPermissions, request);
         if (noSignInPermission != null) {
             log.info("当前为无需登录即可访问的接口permissionId[{}] requestURI[{}]", noSignInPermission.getId(), requestURI);
@@ -55,7 +54,7 @@ public class DynamicAuthorizationManager implements AuthorizationManager<Request
         }
 
         // 查找当前的url对应的permission
-        var permissions = permissionsService.listByType(PermissionType.AUTHORIZATION);
+        var permissions = permissionApi.listAuthorizationPermissionsUrl();
         var permission = determinePermission(permissions, request);
         if (permission == null) {
             log.info("没有匹配到定义的权限，直接放行 requestURI[{}]", requestURI);
@@ -72,10 +71,13 @@ public class DynamicAuthorizationManager implements AuthorizationManager<Request
         return DENY;
     }
 
-    private Permission determinePermission(List<Permission> permissions, HttpServletRequest request) {
-        var introspector = applicationContext.getBean(HandlerMappingIntrospector.class);
-        for (Permission permission : permissions) {
-            var mvcRequestMatcher = new MvcRequestMatcher(introspector, permission.getController());
+    private PermissionDTO determinePermission(List<PermissionDTO> permissions, HttpServletRequest request) {
+        if (permissions == null || permissions.isEmpty()) {
+            return null;
+        }
+        var introspection = applicationContext.getBean(HandlerMappingIntrospector.class);
+        for (var permission : permissions) {
+            var mvcRequestMatcher = new MvcRequestMatcher(introspection, permission.getController());
             var matchResult = mvcRequestMatcher.matcher(request);
             if (matchResult.isMatch()) {
                 return permission;

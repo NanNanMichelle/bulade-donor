@@ -1,4 +1,4 @@
-package com.bulade.donor.system.service.impl;
+package com.bulade.donor.system.api;
 
 import com.bulade.donor.authorization.enums.RoleType;
 import com.bulade.donor.authorization.service.GrantedAuthorityService;
