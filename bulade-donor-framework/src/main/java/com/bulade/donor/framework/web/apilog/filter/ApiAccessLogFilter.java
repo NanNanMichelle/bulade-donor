@@ -18,6 +18,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -48,6 +49,11 @@ public class ApiAccessLogFilter extends OncePerRequestFilter {
     @Override
     protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
         // 只过滤 API 请求的地址
+//        var uri = request.getRequestURI();
+//        var urlList = securityProperties.getPermitAllUrls();
+//        if (!CollectionUtils.isEmpty(urlList)) {
+//            return !urlList.contains(uri);
+//        }
         return !CharSequenceUtil.startWithAny(request.getRequestURI(), "/api");
     }
 
@@ -94,11 +100,9 @@ public class ApiAccessLogFilter extends OncePerRequestFilter {
         String requestBody,
         Exception ex
     ) {
-        var token = SecurityFrameworkUtils.obtainAuthorization(request,
-            securityProperties.getTokenHeader(), securityProperties.getTokenParameter());
         // 处理用户信息
-        accessLog.setUserId(WebFrameworkUtils.getLoginUserId(token));
-        accessLog.setUserType(WebFrameworkUtils.getLoginUserType(token));
+        accessLog.setUserId(WebFrameworkUtils.getLoginUserId(request));
+        accessLog.setUserType(WebFrameworkUtils.getLoginUserType(request));
         // 设置访问结果
         CommonResponse<?> result = WebFrameworkUtils.getCommonResult(request);
         if (result != null) {

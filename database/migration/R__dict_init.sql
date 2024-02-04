@@ -1,3 +1,4 @@
+delete from flyway_schema_history;
 DROP TABLE IF EXISTS `sys_dict_type`;
 CREATE TABLE `sys_dict_type` (
   `id` bigint NOT NULL AUTO_INCREMENT COMMENT '字典主键',

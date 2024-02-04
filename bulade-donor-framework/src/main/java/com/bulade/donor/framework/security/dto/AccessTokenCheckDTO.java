@@ -19,9 +19,9 @@ public class AccessTokenCheckDTO {
     /**
      * 授权范围的数组
      */
-    private List<String> scopes;
+    private List<Long> scopes;
 
-    public static AccessTokenCheckDTO of(Long userId, Integer userType, List<String> scopes) {
+    public static AccessTokenCheckDTO of(Long userId, Integer userType, List<Long> scopes) {
         var accessTokenCheck = new AccessTokenCheckDTO();
         accessTokenCheck.setUserId(userId);
         accessTokenCheck.setUserType(userType);

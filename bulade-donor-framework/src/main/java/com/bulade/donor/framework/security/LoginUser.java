@@ -27,7 +27,7 @@ public class LoginUser {
     /**
      * 授权范围
      */
-    private List<String> scopes;
+    private List<Long> scopes;
 
     @JsonIgnore
     private Map<String, Object> context;
