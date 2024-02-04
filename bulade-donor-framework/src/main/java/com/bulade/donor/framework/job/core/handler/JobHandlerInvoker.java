@@ -53,7 +53,8 @@ public class JobHandlerInvoker extends QuartzJobBean {
         Throwable exception = null;
         try {
             // 记录 Job 日志（初始）
-            jobLogId = jobLogFrameworkService.createJobLog(jobId, startTime, jobHandlerName, jobHandlerParam, refireCount + 1);
+            jobLogId = jobLogFrameworkService.createJobLog(jobId, startTime,
+                jobHandlerName, jobHandlerParam, refireCount + 1);
             // 执行任务
             data = this.executeInternal(jobHandlerName, jobHandlerParam);
         } catch (Throwable ex) {
