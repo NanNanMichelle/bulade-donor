@@ -8,8 +8,6 @@ import com.bulade.donor.common.core.CommonResponse;
 import com.bulade.donor.common.enums.ResultCodeEnum;
 import com.bulade.donor.common.utils.monitor.TracerUtils;
 import com.bulade.donor.common.utils.servlet.ServletUtils;
-import com.bulade.donor.framework.security.config.SecurityProperties;
-import com.bulade.donor.framework.security.utils.SecurityFrameworkUtils;
 import com.bulade.donor.framework.web.apilog.bo.ApiAccessLogCreateBO;
 import com.bulade.donor.framework.web.apilog.service.ApiAccessLogFrameworkService;
 import com.bulade.donor.framework.web.utils.WebFrameworkUtils;
@@ -19,6 +17,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.filter.OncePerRequestFilter;
+
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
@@ -36,13 +35,9 @@ public class ApiAccessLogFilter extends OncePerRequestFilter {
 
     private final ApiAccessLogFrameworkService apiAccessLogFrameworkService;
 
-    private final SecurityProperties securityProperties;
-
-    public ApiAccessLogFilter(String applicationName, ApiAccessLogFrameworkService apiAccessLogFrameworkService,
-                              SecurityProperties securityProperties) {
+    public ApiAccessLogFilter(String applicationName, ApiAccessLogFrameworkService apiAccessLogFrameworkService) {
         this.applicationName = applicationName;
         this.apiAccessLogFrameworkService = apiAccessLogFrameworkService;
-        this.securityProperties = securityProperties;
     }
 
     @Override
@@ -74,15 +69,19 @@ public class ApiAccessLogFilter extends OncePerRequestFilter {
         }
     }
 
-    private void createApiAccessLog(HttpServletRequest request, LocalDateTime beginTime,
-                                    Map<String, String> queryString, String requestBody, Exception ex) {
+    private void createApiAccessLog(
+        HttpServletRequest request,
+        LocalDateTime beginTime,
+        Map<String, String> queryString,
+        String requestBody,
+        Exception ex) {
         var accessLogBO = new ApiAccessLogCreateBO();
         try {
             this.buildApiAccessLogDTO(accessLogBO, request, beginTime, queryString, requestBody, ex);
             apiAccessLogFrameworkService.createApiAccessLog(accessLogBO);
         } catch (Throwable th) {
-            log.error("[createApiAccessLog][url({}) log({}) 发生异常]", request.getRequestURI(),
-                toJsonString(accessLogBO), th);
+            log.error("[createApiAccessLog][url({}) log({}) 发生异常]",
+                request.getRequestURI(), toJsonString(accessLogBO), th);
         }
     }
 
@@ -94,11 +93,9 @@ public class ApiAccessLogFilter extends OncePerRequestFilter {
         String requestBody,
         Exception ex
     ) {
-        var token = SecurityFrameworkUtils.obtainAuthorization(request,
-            securityProperties.getTokenHeader(), securityProperties.getTokenParameter());
         // 处理用户信息
-        accessLog.setUserId(WebFrameworkUtils.getLoginUserId(token));
-        accessLog.setUserType(WebFrameworkUtils.getLoginUserType(token));
+        accessLog.setUserId(WebFrameworkUtils.getLoginUserId(request));
+        accessLog.setUserType(WebFrameworkUtils.getLoginUserType(request));
         // 设置访问结果
         CommonResponse<?> result = WebFrameworkUtils.getCommonResult(request);
         if (result != null) {
@@ -117,8 +114,7 @@ public class ApiAccessLogFilter extends OncePerRequestFilter {
         accessLog.setRequestUrl(request.getRequestURI());
         var requestParams = MapUtil.<String, Object>builder()
             .put("query", queryString)
-            .put("body", requestBody)
-            .build();
+            .put("body", requestBody).build();
         accessLog.setRequestParams(toJsonString(requestParams));
         accessLog.setRequestMethod(request.getMethod());
         accessLog.setUserAgent(ServletUtils.getUserAgent(request));

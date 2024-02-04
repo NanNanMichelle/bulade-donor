@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bulade.donor.authorization.dao.RolesMapper">
+
+    <sql id="baseColumn">
+        `id`,
+        `name`,
+        `type`,
+        `is_default`,
+        `created_at`,
+        `updated_at`,
+        `deleted_at`
+    </sql>
+
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        INSERT INTO `t_roles` (
+        `name`,
+        `type`,
+        `is_default`,
+        `created_at`,
+        `updated_at`
+        )
+        VALUES
+        (
+        #{name},
+        #{type},
+        #{isDefault},
+        now(),
+        now()
+        )
+    </insert>
+
+    <select id="selectById" resultType="com.bulade.donor.authorization.model.Role">
+        select
+        <include refid="baseColumn"/>
+        from `t_roles`
+        where `id` = #{id}
+        and deleted_at is null
+    </select>
+
+    <sql id="listAllCondition">
+        <where>
+            <if test="role.name != null and role.name != ''">
+                and `name` = #{role.name}
+            </if>
+            <if test="role.type != null">
+                and `type` = #{role.type}
+            </if>
+            <if test="role.isDefault != null">
+                and `is_default` = #{role.isDefault}
+            </if>
+            <if test="isDeleted != null">
+                <if test="isDeleted">
+                    and deleted_at is not null
+                </if>
+                <if test="!isDeleted">
+                    and deleted_at is null
+                </if>
+            </if>
+        </where>
+    </sql>
+
+    <select id="listAll" resultType="com.bulade.donor.authorization.model.Role">
+        select
+        <include refid="baseColumn"/>
+        from `t_roles`
+        <include refid="listAllCondition"/>
+        limit #{pageParam.offset}, #{pageParam.limit}
+    </select>
+
+    <select id="countAll" resultType="int">
+        select
+        count(*)
+        from `t_roles`
+        <include refid="listAllCondition"/>
+    </select>
+
+    <update id="updateById">
+        update t_roles
+        set `name` = #{name},
+        `type` = #{type},
+        `is_default` = #{isDefault},
+        `updated_at` = now()
+        where `id` = #{id}
+        and deleted_at is null
+    </update>
+
+    <update id="deleteById">
+        update t_roles
+        set deleted_at = now()
+        where `id` = #{id}
+        and deleted_at is null
+    </update>
+
+    <select id="listByTypeAndDefault" resultType="com.bulade.donor.authorization.model.Role">
+        select
+        <include refid="baseColumn"/>
+        from `t_roles`
+        where `type` = #{type}
+        and `is_default` = 1
+        and deleted_at is null
+    </select>
+
+</mapper>

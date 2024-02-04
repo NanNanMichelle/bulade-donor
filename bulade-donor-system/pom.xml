@@ -53,5 +53,10 @@
             <groupId>com.bulade.donor</groupId>
             <artifactId>bulade-donor-framework</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>com.bulade.donor</groupId>
+            <artifactId>bulade-donor-authorization</artifactId>
+        </dependency>
     </dependencies>
 </project>

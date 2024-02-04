@@ -38,7 +38,8 @@ mybatis:
   configuration:
     call-setters-on-nulls: true
     mapUnderscoreToCamelCase: true
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    default-enum-type-handler: com.bulade.donor.framework.typehandler.CompositeEnumTypeHandler
 
 # 日志配置
 logging:

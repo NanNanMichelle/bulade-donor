@@ -16,6 +16,7 @@
         <module>bulade-donor-application</module>
         <module>bulade-donor-member</module>
         <module>bulade-donor-coverage</module>
+        <module>bulade-donor-authorization</module>
     </modules>
 
     <parent>
@@ -250,6 +251,12 @@
             <dependency>
                 <groupId>com.bulade.donor</groupId>
                 <artifactId>bulade-donor-framework</artifactId>
+                <version>${donor.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.bulade.donor</groupId>
+                <artifactId>bulade-donor-authorization</artifactId>
                 <version>${donor.version}</version>
             </dependency>
         </dependencies>

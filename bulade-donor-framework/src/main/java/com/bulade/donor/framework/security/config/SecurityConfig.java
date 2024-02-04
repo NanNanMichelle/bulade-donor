@@ -70,9 +70,12 @@ public class SecurityConfig {
         // 设置每个请求的权限
         httpSecurity
             .authorizeHttpRequests(c -> c
-                .requestMatchers("/swagger-ui/**", "/error", "/v3/api-docs/**", "/favicon.ico",
-                    "/swagger-resources/**")
-                .permitAll()
+                .requestMatchers("/v3/api-docs/**").permitAll()
+                .requestMatchers("/swagger-ui.html").permitAll()
+                .requestMatchers("/swagger-ui/**").permitAll()
+                .requestMatchers("/swagger-resources/**").permitAll()
+                .requestMatchers("/webjars/**").permitAll()
+                .requestMatchers("/*/api-docs").permitAll()
 
                 .requestMatchers(securityProperties.getPermitAllUrls().toArray(new String[0]))
                 .permitAll()

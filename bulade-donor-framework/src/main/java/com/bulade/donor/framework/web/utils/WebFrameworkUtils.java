@@ -2,6 +2,7 @@ package com.bulade.donor.framework.web.utils;
 
 import com.bulade.donor.common.core.CommonResponse;
 import com.bulade.donor.framework.security.utils.JwtUtils;
+import jakarta.servlet.ServletRequest;
 import jakarta.servlet.http.HttpServletRequest;
 
 public class WebFrameworkUtils {
@@ -50,6 +51,14 @@ public class WebFrameworkUtils {
             return null;
         }
         return (Long) request.getAttribute(REQUEST_ATTRIBUTE_LOGIN_USER_ID);
+    }
+
+    public static void setLoginUserId(ServletRequest request, Long userId) {
+        request.setAttribute(REQUEST_ATTRIBUTE_LOGIN_USER_ID, userId);
+    }
+
+    public static void setLoginUserType(ServletRequest request, Integer userType) {
+        request.setAttribute(REQUEST_ATTRIBUTE_LOGIN_USER_TYPE, userType);
     }
 
 }

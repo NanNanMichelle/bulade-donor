@@ -6,7 +6,7 @@ import com.bulade.donor.application.service.AdminAuthenticationService;
 import com.bulade.donor.common.enums.UserType;
 import com.bulade.donor.framework.biz.operatelog.core.annotations.OperateLog;
 import com.bulade.donor.system.model.User;
-import com.bulade.donor.system.service.UserService;
+import com.bulade.donor.system.service.UsersService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.Resource;
@@ -24,12 +24,12 @@ public class AdminsController {
     private AdminAuthenticationService adminAuthenticationService;
 
     @Resource
-    private UserService adminsService;
+    private UsersService adminsService;
 
     @Resource
-    private UserService userService;
+    private UsersService userService;
 
-    @PostMapping("/login")
+    @PostMapping("/sign-in")
     public AuthLoginResp signIn(@Valid @RequestBody AdminSignInReq adminSignInReq) {
         var user = adminAuthenticationService.signIn(adminSignInReq.getUsername(), adminSignInReq.getPassword());
         return AuthLoginResp.of(user, UserType.ADMIN.getCode());

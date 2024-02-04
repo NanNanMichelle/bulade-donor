@@ -1,25 +1,30 @@
-package com.bulade.donor.system.service.impl;
+package com.bulade.donor.system.api;
 
+import com.bulade.donor.authorization.enums.RoleType;
+import com.bulade.donor.authorization.service.GrantedAuthorityService;
 import com.bulade.donor.framework.security.api.TokenApi;
 import com.bulade.donor.framework.security.dto.AccessTokenCheckDTO;
 import com.bulade.donor.framework.security.utils.JwtUtils;
 import com.bulade.donor.common.enums.UserType;
 import com.bulade.donor.framework.web.utils.WebFrameworkUtils;
 import com.bulade.donor.system.service.AdminsService;
-import com.bulade.donor.system.service.UserService;
+import com.bulade.donor.system.service.UsersService;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.util.ArrayList;
 
 @Service
 public class TokenApiImpl implements TokenApi {
 
     @Resource
-    private UserService userService;
+    private UsersService userService;
 
     @Resource
     private AdminsService adminService;
+
+    @Resource
+    private GrantedAuthorityService grantedAuthorityService;
 
     @Override
     public AccessTokenCheckDTO checkAccessToken(String accessToken) {
@@ -29,12 +34,15 @@ public class TokenApiImpl implements TokenApi {
         }
         var userId = WebFrameworkUtils.getLoginUserId(accessToken);
         var userType = WebFrameworkUtils.getLoginUserType(accessToken);
+        var scopes = new ArrayList<Long>();
         if (UserType.ADMIN.getCode().equals(userType)) {
             adminService.selectById(userId);
+            scopes.addAll(grantedAuthorityService.authorities(userId, RoleType.PLATFORM));
         }
         if (UserType.MEMBER.getCode().equals(userType)) {
             userService.selectById(userId);
+            scopes.addAll(grantedAuthorityService.authorities(userId, RoleType.USER));
         }
-        return AccessTokenCheckDTO.of(userId, userType, List.of());
+        return AccessTokenCheckDTO.of(userId, userType, scopes);
     }
 }
