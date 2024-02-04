@@ -58,7 +58,8 @@ public class SchedulerManager {
             throws SchedulerException {
         validateScheduler();
         // 创建新 Trigger 对象
-        Trigger newTrigger = this.buildTrigger(jobHandlerName, jobHandlerParam, cronExpression, retryCount, retryInterval);
+        Trigger newTrigger = this.buildTrigger(jobHandlerName, jobHandlerParam,
+            cronExpression, retryCount, retryInterval);
         // 修改调度
         scheduler.rescheduleJob(new TriggerKey(jobHandlerName), newTrigger);
     }

@@ -24,7 +24,7 @@ public class ApiAccessLogServiceImpl implements ApiAccessLogService {
 
     @Override
     public Integer cleanAccessLog(Integer jobCleanRetainDay, Integer deleteLimit) {
-        System.err.println("清理日志了" );
+        System.err.println("清理日志了");
         return 1;
     }
 

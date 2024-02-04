@@ -21,6 +21,7 @@ public class JobLog {
      * 处理器的名字
      */
     private String handlerName;
+
     /**
      * 处理器的参数
      */

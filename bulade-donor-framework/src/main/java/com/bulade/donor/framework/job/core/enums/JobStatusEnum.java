@@ -18,12 +18,12 @@ public enum JobStatusEnum {
     /**
      * 初始化中
      */
-    INIT(0,Collections.emptySet()),
+    INIT(0, Collections.emptySet()),
 
     /**
      * 开启
      */
-    NORMAL(1,Sets.newHashSet(Constants.STATE_WAITING, Constants.STATE_ACQUIRED, Constants.STATE_BLOCKED)),
+    NORMAL(1, Sets.newHashSet(Constants.STATE_WAITING, Constants.STATE_ACQUIRED, Constants.STATE_BLOCKED)),
 
     /**
      * 暂停
