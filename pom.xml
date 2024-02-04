@@ -364,6 +364,8 @@
                     <include>**/*.yml</include>
                     <include>**/*.xml</include>
                     <include>**/*.json</include>
+                    <include>**/*.csv</include>
+                    <include>**/*.xdb</include>
                 </includes>
                 <filtering>false</filtering>
             </resource>
