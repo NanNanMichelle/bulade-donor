@@ -22,4 +22,10 @@ public class ApiAccessLogServiceImpl implements ApiAccessLogService {
         System.err.println("API 日志记录:" + apiAccessLog);
     }
 
+    @Override
+    public Integer cleanAccessLog(Integer jobCleanRetainDay, Integer deleteLimit) {
+        System.err.println("清理日志了" );
+        return 1;
+    }
+
 }

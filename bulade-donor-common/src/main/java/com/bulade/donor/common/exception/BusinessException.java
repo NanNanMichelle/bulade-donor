@@ -29,4 +29,8 @@ public class BusinessException extends RuntimeException {
         return new BusinessException(codeEnum.getMessage());
     }
 
+    public static BusinessException of(ResultCodeEnum codeEnum) {
+        return new BusinessException(codeEnum.getMessage());
+    }
+
 }

@@ -12,4 +12,5 @@ public interface ApiAccessLogService {
      */
     void createApiAccessLog(ApiAccessLogCreateBO createBO);
 
+    Integer cleanAccessLog(Integer jobCleanRetainDay, Integer deleteLimit);
 }
