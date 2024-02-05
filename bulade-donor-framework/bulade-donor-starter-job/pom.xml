@@ -3,14 +3,20 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+
     <parent>
         <groupId>com.bulade.donor</groupId>
-        <artifactId>bulade-donor</artifactId>
+        <artifactId>bulade-donor-framework</artifactId>
         <version>${revision}</version>
     </parent>
 
-    <artifactId>bulade-donor-authorization</artifactId>
+    <artifactId>bulade-donor-starter-job</artifactId>
     <packaging>jar</packaging>
+
+    <description>任务拓展
+        1. 定时任务，基于 Quartz 拓展
+    </description>
+
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
@@ -20,7 +26,20 @@
     <dependencies>
         <dependency>
             <groupId>com.bulade.donor</groupId>
-            <artifactId>bulade-donor-starter-mybatis</artifactId>
+            <artifactId>bulade-donor-common</artifactId>
         </dependency>
+
+        <!-- Job 定时任务相关 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-quartz</artifactId>
+        </dependency>
+
+        <!-- 工具类相关 -->
+        <dependency>
+            <groupId>jakarta.validation</groupId>
+            <artifactId>jakarta.validation-api</artifactId>
+        </dependency>
+
     </dependencies>
 </project>

@@ -2,10 +2,10 @@ package com.bulade.donor.system.api;
 
 import com.bulade.donor.authorization.enums.RoleType;
 import com.bulade.donor.authorization.service.GrantedAuthorityService;
+import com.bulade.donor.common.enums.UserType;
 import com.bulade.donor.framework.security.api.TokenApi;
 import com.bulade.donor.framework.security.dto.AccessTokenCheckDTO;
 import com.bulade.donor.framework.security.utils.JwtUtils;
-import com.bulade.donor.common.enums.UserType;
 import com.bulade.donor.framework.web.utils.WebFrameworkUtils;
 import com.bulade.donor.system.service.AdminsService;
 import com.bulade.donor.system.service.UsersService;
@@ -32,8 +32,8 @@ public class TokenApiImpl implements TokenApi {
         if (isNotValid) {
             return null;
         }
-        var userId = WebFrameworkUtils.getLoginUserId(accessToken);
-        var userType = WebFrameworkUtils.getLoginUserType(accessToken);
+        var userId = JwtUtils.getByKey(accessToken, "id", Long.class);
+        var userType = JwtUtils.getByKey(accessToken, "userType", Integer.class);
         var scopes = new ArrayList<Long>();
         if (UserType.ADMIN.getCode().equals(userType)) {
             adminService.selectById(userId);
