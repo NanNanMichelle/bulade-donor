@@ -7,6 +7,7 @@ import org.mapstruct.factory.Mappers;
 @Mapper
 public interface OperateLogConvert {
 
-    com.bulade.donor.system.convert.OperateLogConvert INSTANCE = Mappers.getMapper(com.bulade.donor.system.convert.OperateLogConvert.class);
+    com.bulade.donor.system.convert.OperateLogConvert INSTANCE =
+        Mappers.getMapper(com.bulade.donor.system.convert.OperateLogConvert.class);
     OperateLog convertBoToModel(OperateLogCreateBO createReqBO);
 }
