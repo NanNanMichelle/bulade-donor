@@ -6,12 +6,11 @@
 
     <groupId>com.bulade.donor</groupId>
     <artifactId>bulade-donor</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>${revision}</version>
     <packaging>pom</packaging>
 
     <modules>
         <module>bulade-donor-system</module>
-        <module>bulade-donor-common</module>
         <module>bulade-donor-framework</module>
         <module>bulade-donor-application</module>
         <module>bulade-donor-coverage</module>
@@ -26,10 +25,11 @@
     </parent>
 
     <properties>
+        <revision>1.0-SNAPSHOT</revision>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <donor.version>1.0-SNAPSHOT</donor.version>
+        <flatten-maven-plugin.version>1.5.0</flatten-maven-plugin.version>
         <fastjson.version>2.0.43</fastjson.version>
         <fastjson2-extension-spring6.version>2.0.25</fastjson2-extension-spring6.version>
         <jsoup.version>1.15.4</jsoup.version>
@@ -236,33 +236,88 @@
             <dependency>
                 <groupId>com.bulade.donor</groupId>
                 <artifactId>bulade-donor-common</artifactId>
-                <version>${donor.version}</version>
+                <version>${revision}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.bulade.donor</groupId>
+                <artifactId>bulade-donor-starter-ip</artifactId>
+                <version>${revision}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.bulade.donor</groupId>
+                <artifactId>bulade-donor-starter-job</artifactId>
+                <version>${revision}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.bulade.donor</groupId>
+                <artifactId>bulade-donor-starter-web</artifactId>
+                <version>${revision}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.bulade.donor</groupId>
+                <artifactId>bulade-donor-starter-mybatis</artifactId>
+                <version>${revision}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.bulade.donor</groupId>
+                <artifactId>bulade-donor-starter-security</artifactId>
+                <version>${revision}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.bulade.donor</groupId>
+                <artifactId>bulade-donor-starter-biz-operatelog</artifactId>
+                <version>${revision}</version>
             </dependency>
 
             <!-- 系统模块-->
             <dependency>
                 <groupId>com.bulade.donor</groupId>
                 <artifactId>bulade-donor-system</artifactId>
-                <version>${donor.version}</version>
-            </dependency>
-
-            <!-- 核心模块-->
-            <dependency>
-                <groupId>com.bulade.donor</groupId>
-                <artifactId>bulade-donor-framework</artifactId>
-                <version>${donor.version}</version>
+                <version>${revision}</version>
             </dependency>
 
             <dependency>
                 <groupId>com.bulade.donor</groupId>
                 <artifactId>bulade-donor-authorization</artifactId>
-                <version>${donor.version}</version>
+                <version>${revision}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
 
     <build>
         <plugins>
+            <!-- 统一 revision 版本 -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>flatten-maven-plugin</artifactId>
+                <version>${flatten-maven-plugin.version}</version>
+                <configuration>
+                    <flattenMode>resolveCiFriendliesOnly</flattenMode>
+                    <updatePomFile>true</updatePomFile>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>flatten</goal>
+                        </goals>
+                        <id>flatten</id>
+                        <phase>process-resources</phase>
+                    </execution>
+                    <execution>
+                        <goals>
+                            <goal>clean</goal>
+                        </goals>
+                        <id>flatten.clean</id>
+                        <phase>clean</phase>
+                    </execution>
+                </executions>
+            </plugin>
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>

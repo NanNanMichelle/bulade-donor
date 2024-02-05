@@ -4,7 +4,7 @@ import com.bulade.donor.application.payload.request.AdminSignInReq;
 import com.bulade.donor.application.payload.response.AuthLoginResp;
 import com.bulade.donor.application.manage.AdminAuthenticationService;
 import com.bulade.donor.common.enums.UserType;
-import com.bulade.donor.framework.biz.operatelog.core.annotations.OperateLog;
+import com.bulade.donor.framework.operatelog.core.annotations.OperateLog;
 import com.bulade.donor.system.model.User;
 import com.bulade.donor.system.service.UsersService;
 import io.swagger.v3.oas.annotations.Operation;
