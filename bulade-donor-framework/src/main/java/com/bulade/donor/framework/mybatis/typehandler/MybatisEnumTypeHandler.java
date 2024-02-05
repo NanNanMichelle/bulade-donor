@@ -1,4 +1,4 @@
-package com.bulade.donor.framework.typehandler;
+package com.bulade.donor.framework.mybatis.typehandler;
 
 import com.bulade.donor.common.annotation.EnumValue;
 import com.bulade.donor.common.enums.IEnum;
