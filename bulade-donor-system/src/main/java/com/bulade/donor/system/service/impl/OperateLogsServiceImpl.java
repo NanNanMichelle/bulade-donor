@@ -13,12 +13,9 @@ public class OperateLogsServiceImpl implements OperateLogsService {
     @Resource
     private OperateLogsMapper operateLogsMapper;
 
-    @Resource
-    private OperateLogConvert operateLogConvert;
-
     @Override
     public Integer insert(OperateLogCreateBO createReqBO) {
-        var operateLog = operateLogConvert.convertBoToModel(createReqBO);
+        var operateLog = OperateLogConvert.INSTANCE.convertBoToModel(createReqBO);
         return operateLogsMapper.insert(operateLog);
     }
 }
