@@ -19,7 +19,7 @@ mybatis:
     call-setters-on-nulls: true
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
     mapUnderscoreToCamelCase: true
-    default-enum-type-handler: com.bulade.donor.framework.typehandler.CompositeEnumTypeHandler
+    default-enum-type-handler: com.bulade.donor.framework.mybatis.typehandler.CompositeEnumTypeHandler
 
 donor:
   security:
