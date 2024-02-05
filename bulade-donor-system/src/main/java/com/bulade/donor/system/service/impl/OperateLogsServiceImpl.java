@@ -15,6 +15,7 @@ public class OperateLogsServiceImpl implements OperateLogsService {
 
     @Resource
     private OperateLogConvert operateLogConvert;
+
     @Override
     public Integer insert(OperateLogCreateBO createReqBO) {
         var operateLog = operateLogConvert.convertBoToModel(createReqBO);
