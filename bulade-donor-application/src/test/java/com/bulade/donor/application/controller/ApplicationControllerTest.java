@@ -37,7 +37,7 @@ public class ApplicationControllerTest {
     private ApplicationContext context;
 
     @Autowired
-    WebProperties webProperties;
+    private WebProperties webProperties;
 
     private String prefix = "";
 
