@@ -1,5 +1,6 @@
 package com.bulade.donor.application.controller;
 
+import com.bulade.donor.framework.web.config.WebProperties;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -35,17 +36,23 @@ public class ApplicationControllerTest {
     @Autowired
     private ApplicationContext context;
 
+    @Autowired
+    WebProperties webProperties;
+
+    private String prefix = "";
+
     @BeforeEach
     public void setUp(WebApplicationContext webApplicationContext,
                       RestDocumentationContextProvider restDocumentation) {
         this.mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext)
             .apply(documentationConfiguration(restDocumentation))
             .build();
+        this.prefix = webProperties.getAdminApi().getPrefix();
     }
 
     @Test
     public void testHello() throws Exception {
-        this.mockMvc.perform(MockMvcRequestBuilders.get("/api/admin/hello")
+        this.mockMvc.perform(MockMvcRequestBuilders.get(prefix + "/hello")
                 .param("name", "aaa")
                 .header("login_user_type", 2)
                 .accept(MediaType.APPLICATION_JSON))
