@@ -16,7 +16,10 @@ public class WebFrameworkUtils {
 
     private static final String REQUEST_ATTRIBUTE_LOGIN_USER_TYPE = "login_user_type";
 
-    public WebFrameworkUtils(WebProperties webProperties) {
+    private WebProperties properties;
+
+    public WebFrameworkUtils(final WebProperties webProperties) {
+        this.properties = webProperties;
     }
 
     public static Integer getLoginUserType(HttpServletRequest request) {
@@ -26,7 +29,7 @@ public class WebFrameworkUtils {
         return (Integer) request.getAttribute(REQUEST_ATTRIBUTE_LOGIN_USER_TYPE);
     }
 
-    public static CommonResponse<?> getCommonResult(HttpServletRequest request) {
+    public static CommonResponse<?> getCommonResult(final HttpServletRequest request) {
         return (CommonResponse<?>) request.getAttribute(REQUEST_ATTRIBUTE_COMMON_RESULT);
     }
 
