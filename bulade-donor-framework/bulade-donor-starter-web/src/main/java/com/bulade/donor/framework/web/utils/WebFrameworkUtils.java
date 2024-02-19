@@ -19,7 +19,7 @@ public class WebFrameworkUtils {
 
     private static WebProperties properties;
 
-    public WebFrameworkUtils() {
+    private WebFrameworkUtils() {
     }
 
     public WebFrameworkUtils(final WebProperties webProperties) {
