@@ -21,7 +21,7 @@ public class WebFrameworkUtils {
     public WebFrameworkUtils() {
     }
 
-    public WebFrameworkUtils(WebProperties webProperties) {
+    public WebFrameworkUtils(final WebProperties webProperties) {
         WebFrameworkUtils.properties = webProperties;
     }
 
