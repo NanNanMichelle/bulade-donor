@@ -1,8 +1,7 @@
-package com.bulade.donor.framework.web.utils;
+package com.bulade.donor.framework.web.config;
 
 import com.bulade.donor.common.core.CommonResponse;
 import com.bulade.donor.common.enums.UserType;
-import com.bulade.donor.framework.web.config.WebProperties;
 import jakarta.servlet.ServletRequest;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.web.context.request.RequestAttributes;
@@ -22,7 +21,7 @@ public class WebFrameworkUtils {
     private WebFrameworkUtils() {
     }
 
-    public WebFrameworkUtils(final WebProperties webProperties) {
+    protected WebFrameworkUtils(final WebProperties webProperties) {
         WebFrameworkUtils.properties = webProperties;
     }
 

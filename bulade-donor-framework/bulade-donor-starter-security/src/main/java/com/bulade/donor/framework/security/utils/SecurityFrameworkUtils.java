@@ -2,7 +2,7 @@ package com.bulade.donor.framework.security.utils;
 
 import cn.hutool.core.text.CharSequenceUtil;
 import com.bulade.donor.framework.security.LoginUser;
-import com.bulade.donor.framework.web.utils.WebFrameworkUtils;
+import com.bulade.donor.framework.web.config.WebFrameworkUtils;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.lang.Nullable;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

@@ -5,7 +5,6 @@ import com.bulade.donor.framework.web.apilog.service.ApiErrorLogFrameworkService
 import com.bulade.donor.framework.web.core.BuladeFastJsonHttpMessageConverter;
 import com.bulade.donor.framework.web.core.filter.CacheRequestBodyFilter;
 import com.bulade.donor.framework.web.core.handler.GlobalExceptionHandler;
-import com.bulade.donor.framework.web.utils.WebFrameworkUtils;
 import jakarta.annotation.Resource;
 import jakarta.servlet.Filter;
 import org.springframework.beans.factory.annotation.Value;

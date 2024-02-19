@@ -11,7 +11,7 @@ import com.bulade.donor.common.utils.servlet.ServletUtils;
 import com.bulade.donor.framework.operatelog.core.annotations.OperateLog;
 import com.bulade.donor.framework.operatelog.core.enums.OperateTypeEnum;
 import com.bulade.donor.framework.operatelog.core.service.OperateLogFrameworkService;
-import com.bulade.donor.framework.web.utils.WebFrameworkUtils;
+import com.bulade.donor.framework.web.config.WebFrameworkUtils;
 import com.google.common.collect.Maps;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;

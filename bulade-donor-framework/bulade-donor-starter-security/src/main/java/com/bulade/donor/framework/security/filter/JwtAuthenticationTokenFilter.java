@@ -7,7 +7,7 @@ import com.bulade.donor.framework.security.api.TokenApi;
 import com.bulade.donor.framework.security.config.SecurityProperties;
 import com.bulade.donor.common.exception.UnAuthorizedException;
 import com.bulade.donor.framework.security.utils.SecurityFrameworkUtils;
-import com.bulade.donor.framework.web.utils.WebFrameworkUtils;
+import com.bulade.donor.framework.web.config.WebFrameworkUtils;
 import jakarta.annotation.Resource;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
