@@ -10,9 +10,6 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 public class WebFrameworkUtils {
 
-    private WebFrameworkUtils() {
-    }
-
     private static final String REQUEST_ATTRIBUTE_LOGIN_USER_ID = "login_user_id";
 
     private static final String REQUEST_ATTRIBUTE_COMMON_RESULT = "common_result";

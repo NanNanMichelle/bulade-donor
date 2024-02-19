@@ -7,7 +7,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.lang.Nullable;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -15,7 +14,6 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -109,7 +107,7 @@ public class SecurityFrameworkUtils {
         // 创建 Authentication，并设置到上下文
         var scopes = loginUser.getScopes();
         List<SimpleGrantedAuthority> authorities = List.of();
-        if(!CollectionUtils.isEmpty(scopes)){
+        if (!CollectionUtils.isEmpty(scopes)) {
             authorities = loginUser.getScopes().stream().map(t -> new SimpleGrantedAuthority(t.toString())).toList();
         }
 

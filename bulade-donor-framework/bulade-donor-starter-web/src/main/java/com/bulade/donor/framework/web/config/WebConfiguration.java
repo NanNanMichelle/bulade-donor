@@ -10,7 +10,6 @@ import jakarta.annotation.Resource;
 import jakarta.servlet.Filter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
-import org.springframework.boot.autoconfigure.web.client.RestTemplateAutoConfiguration;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
@@ -68,8 +67,8 @@ public class WebConfiguration implements WebMvcConfigurer {
     }
 
     @Bean
+    @SuppressWarnings("InstantiationOfUtilityClass")
     public WebFrameworkUtils webFrameworkUtils(WebProperties webProperties) {
-        // 由于 WebFrameworkUtils 需要使用到 webProperties 属性，所以注册为一个 Bean
         return new WebFrameworkUtils(webProperties);
     }
 
@@ -121,8 +120,6 @@ public class WebConfiguration implements WebMvcConfigurer {
 
     /**
      * 创建 RestTemplate 实例
-     *
-     * @param restTemplateBuilder {@link RestTemplateAutoConfiguration#restTemplateBuilder}
      */
     @Bean
     public RestTemplate restTemplate(RestTemplateBuilder restTemplateBuilder) {
