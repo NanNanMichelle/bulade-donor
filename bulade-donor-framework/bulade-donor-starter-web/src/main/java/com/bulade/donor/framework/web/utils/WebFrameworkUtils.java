@@ -19,6 +19,9 @@ public class WebFrameworkUtils {
 
     private static WebProperties properties;
 
+    protected WebFrameworkUtils() {
+    }
+
     public WebFrameworkUtils(WebProperties webProperties) {
         WebFrameworkUtils.properties = webProperties;
     }
