@@ -16,7 +16,7 @@ public class WebFrameworkUtils {
 
     private static final String REQUEST_ATTRIBUTE_LOGIN_USER_TYPE = "login_user_type";
 
-    private WebProperties properties;
+    public WebProperties properties;
 
     public WebFrameworkUtils(final WebProperties webProperties) {
         this.properties = webProperties;
