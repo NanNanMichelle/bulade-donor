@@ -67,8 +67,8 @@ public class WebConfiguration implements WebMvcConfigurer {
 
     @Bean
     @SuppressWarnings("InstantiationOfUtilityClass")
-    public WebFrameworkUtils webFrameworkUtils(WebProperties webProperties) {
-        return new WebFrameworkUtils(webProperties);
+    public WebFrameworkUtils webFrameworkUtils(WebProperties properties) {
+        return new WebFrameworkUtils(properties);
     }
 
     @Bean
