@@ -15,3 +15,12 @@ knife4j:
   enable: true
   setting:
     language: zh_cn
+
+donor:
+  info:
+    version: 1.0.0
+    base-package: com.bulade.donor
+  swagger:
+    title: 献血服务
+    description: 提供管理后台所有功能
+    version: ${donor.info.version}

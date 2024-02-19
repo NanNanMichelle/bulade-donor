@@ -68,6 +68,9 @@ com.bulade.donor
 │           └── config
 │           └── core
 │       └── xss
+│       └── web
+│           └── apilog
+│       └── mybatis
 │       └── job                           // 定时任务
 │       └── ip                            // IP 拓展、区域
 │       └── cache                         // 缓存
@@ -77,9 +80,10 @@ com.bulade.donor
 │       └── pay                           // 支付：微信、支付宝
 │       └── face                          //人脸识别
 │       └── flowable
-│       └── monitor
 │       └── mq
+├── authorization     // 权限
 ├── system            // 系统功能
+│       └── api
 │       └── bo
 │       └── dto
 │       └── convert
@@ -87,8 +91,7 @@ com.bulade.donor
 │       └── dao
 │       └── service
 │           └── impl
-├── infra             // 基础设施
-├── member            // 会员中心
+│       └── member  // 会员中心
 ├── biz               // 业务
 │       └── navigation                     // 献血导航
 │       └── ranking                        // 献血排行

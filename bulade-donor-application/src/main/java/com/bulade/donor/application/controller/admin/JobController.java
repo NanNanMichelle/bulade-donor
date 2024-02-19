@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Tag(name = "管理后台 - 定时任务")
 @RestController
-@RequestMapping("/api/admin/job")
+@RequestMapping("/job")
 @Validated
 public class JobController {
 

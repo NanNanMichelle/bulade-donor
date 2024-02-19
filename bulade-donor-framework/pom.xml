@@ -6,10 +6,21 @@
     <parent>
         <groupId>com.bulade.donor</groupId>
         <artifactId>bulade-donor</artifactId>
-        <version>1.0-SNAPSHOT</version>
+        <version>${revision}</version>
     </parent>
 
     <artifactId>bulade-donor-framework</artifactId>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>bulade-donor-common</module>
+        <module>bulade-donor-starter-job</module>
+        <module>bulade-donor-starter-ip</module>
+        <module>bulade-donor-starter-web</module>
+        <module>bulade-donor-starter-mybatis</module>
+        <module>bulade-donor-starter-security</module>
+        <module>bulade-donor-starter-biz-operatelog</module>
+    </modules>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
@@ -18,55 +29,4 @@
         <transmittable-thread-local.version>2.14.5</transmittable-thread-local.version>
     </properties>
 
-    <dependencies>
-        <dependency>
-            <groupId>com.bulade.donor</groupId>
-            <artifactId>bulade-donor-common</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-redis</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-security</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.github.xiaoymin</groupId>
-            <artifactId>knife4j-openapi3-jakarta-spring-boot-starter</artifactId>
-            <version>4.5.0</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springdoc</groupId>
-            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
-            <version>2.3.0</version>
-        </dependency>
-
-        <!-- Spring 核心 -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-aop</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
-            <version>4.0.1</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.mybatis</groupId>
-            <artifactId>mybatis</artifactId>
-            <version>3.5.14</version>
-            <scope>compile</scope>
-        </dependency>
-
-        <!-- Job 定时任务相关 -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-quartz</artifactId>
-        </dependency>
-    </dependencies>
 </project>

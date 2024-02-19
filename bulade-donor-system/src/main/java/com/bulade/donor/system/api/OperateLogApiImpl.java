@@ -1,10 +1,10 @@
 package com.bulade.donor.system.api;
 
 import com.bulade.donor.common.utils.monitor.TracerUtils;
-import com.bulade.donor.framework.biz.operatelog.api.OperateLogApi;
-import com.bulade.donor.framework.biz.operatelog.bo.OperateLogCreateBO;
 import com.bulade.donor.system.service.OperateLogsService;
 import jakarta.annotation.Resource;
+import com.bulade.donor.framework.operatelog.api.OperateLogApi;
+import com.bulade.donor.framework.operatelog.bo.OperateLogCreateBO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;

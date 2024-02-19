@@ -19,7 +19,7 @@ mybatis:
     call-setters-on-nulls: true
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
     mapUnderscoreToCamelCase: true
-    default-enum-type-handler: com.bulade.donor.framework.typehandler.CompositeEnumTypeHandler
+    default-enum-type-handler: com.bulade.donor.framework.mybatis.typehandler.CompositeEnumTypeHandler
 
 donor:
   security:
@@ -29,6 +29,9 @@ donor:
     session-timeout: 30m
     mock-enable: true
     mock-secret: test
+  web:
+    admin-ui:
+      url: http://127.0.0.1:${server.port} # Admin 管理后台 UI 的地址
 
 jwt:
   signing.key: nEuBwbvzrXzKmijgDvmbSx8ODyw5PGRJ0vj64t+LWzA=

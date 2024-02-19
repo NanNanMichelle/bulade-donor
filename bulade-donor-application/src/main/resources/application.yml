@@ -21,15 +21,6 @@ spring:
     active:
       - dev
       - swagger
-  # 文件上传
-  servlet:
-    multipart:
-      max-request-size: 5MB # 单个文件大小
-      max-file-size: 5MB # 设置总上传的文件大小
-    # 资源信息
-#    messages:
-      # 国际化资源文件路径
-    # basename: static/i18n/messages
 
 # MyBatis
 mybatis:
@@ -39,13 +30,13 @@ mybatis:
     call-setters-on-nulls: true
     mapUnderscoreToCamelCase: true
 #    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
-    default-enum-type-handler: com.bulade.donor.framework.typehandler.CompositeEnumTypeHandler
+    default-enum-type-handler: com.bulade.donor.framework.mybatis.typehandler.CompositeEnumTypeHandler
 
 # 日志配置
-logging:
-  level:
-    com.bulade.donor: debug
-    org.springframework: warn
+#logging:
+#  level:
+#    com.bulade.donor: debug
+#    org.springframework: warn
 
 # token配置
 token:
