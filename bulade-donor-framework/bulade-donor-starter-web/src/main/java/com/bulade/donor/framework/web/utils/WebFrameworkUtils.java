@@ -1,6 +1,7 @@
 package com.bulade.donor.framework.web.utils;
 
 import com.bulade.donor.common.core.CommonResponse;
+import com.bulade.donor.framework.web.config.WebProperties;
 import jakarta.servlet.ServletRequest;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.web.context.request.RequestAttributes;
@@ -17,6 +18,12 @@ public class WebFrameworkUtils {
     private static final String REQUEST_ATTRIBUTE_COMMON_RESULT = "common_result";
 
     private static final String REQUEST_ATTRIBUTE_LOGIN_USER_TYPE = "login_user_type";
+
+    private static WebProperties properties;
+
+    public WebFrameworkUtils(WebProperties webProperties) {
+        WebFrameworkUtils.properties = webProperties;
+    }
 
     public static Integer getLoginUserType(HttpServletRequest request) {
         if (request == null) {
@@ -67,10 +74,9 @@ public class WebFrameworkUtils {
 
     public static HttpServletRequest getRequest() {
         RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();
-        if (!(requestAttributes instanceof ServletRequestAttributes)) {
+        if (!(requestAttributes instanceof ServletRequestAttributes servletRequestAttributes)) {
             return null;
         }
-        ServletRequestAttributes servletRequestAttributes = (ServletRequestAttributes) requestAttributes;
         return servletRequestAttributes.getRequest();
     }
 
