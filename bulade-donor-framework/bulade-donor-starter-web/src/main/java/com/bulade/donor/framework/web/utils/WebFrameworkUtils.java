@@ -16,13 +16,7 @@ public class WebFrameworkUtils {
 
     private static final String REQUEST_ATTRIBUTE_LOGIN_USER_TYPE = "login_user_type";
 
-    private static WebProperties properties;
-
-    public WebFrameworkUtils() {
-    }
-
     public WebFrameworkUtils(final WebProperties webProperties) {
-        WebFrameworkUtils.properties = webProperties;
     }
 
     public static Integer getLoginUserType(HttpServletRequest request) {
