@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.*;
 
 @Tag(name = "管理员-平台")
 @RestController("adminController")
-@RequestMapping("/api/admin")
 @Validated
 public class AdminsController {
 

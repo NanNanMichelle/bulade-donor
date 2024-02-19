@@ -11,7 +11,7 @@ import com.bulade.donor.common.utils.monitor.TracerUtils;
 import com.bulade.donor.common.utils.servlet.ServletUtils;
 import com.bulade.donor.framework.web.apilog.bo.ApiErrorLogCreateBO;
 import com.bulade.donor.framework.web.apilog.service.ApiErrorLogFrameworkService;
-import com.bulade.donor.framework.web.utils.WebFrameworkUtils;
+import com.bulade.donor.framework.web.config.WebFrameworkUtils;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;

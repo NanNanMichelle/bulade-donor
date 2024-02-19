@@ -2,7 +2,7 @@ package com.bulade.donor.framework.web.core.handler;
 
 import com.bulade.donor.common.annotation.IgnoreResponseAdvice;
 import com.bulade.donor.common.core.CommonResponse;
-import com.bulade.donor.framework.web.utils.WebFrameworkUtils;
+import com.bulade.donor.framework.web.config.WebFrameworkUtils;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.MediaType;
 import org.springframework.http.server.ServerHttpRequest;

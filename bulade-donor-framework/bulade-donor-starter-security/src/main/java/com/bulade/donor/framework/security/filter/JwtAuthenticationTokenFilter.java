@@ -7,7 +7,7 @@ import com.bulade.donor.framework.security.api.TokenApi;
 import com.bulade.donor.framework.security.config.SecurityProperties;
 import com.bulade.donor.common.exception.UnAuthorizedException;
 import com.bulade.donor.framework.security.utils.SecurityFrameworkUtils;
-import com.bulade.donor.framework.web.utils.WebFrameworkUtils;
+import com.bulade.donor.framework.web.config.WebFrameworkUtils;
 import jakarta.annotation.Resource;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -15,10 +15,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.lang.NonNull;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 import org.springframework.web.servlet.HandlerExceptionResolver;
@@ -60,27 +56,13 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
                 }
             }
             if (Objects.nonNull(user)) {
-                setLoginUser(user, request);
+                SecurityFrameworkUtils.setLoginUser(user, request);
             } else {
                 renderException(request, response, "未找到有效用户");
                 return;
             }
         }
         filterChain.doFilter(request, response);
-    }
-
-    public static void setLoginUser(LoginUser user, HttpServletRequest request) {
-        // 创建 Authentication，并设置到上下文
-        var authorities = user.getScopes().stream().map(t -> new SimpleGrantedAuthority(t.toString())).toList();
-        var authentication = new UsernamePasswordAuthenticationToken(
-            user, null, authorities);
-        authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-
-        // 额外设置到 request 中，用于 ApiAccessLogFilter 可以获取到用户编号；
-        // 原因是，Spring Security 的 Filter 在 ApiAccessLogFilter 后面，在它记录访问日志时，线上上下文已经没有用户编号等信息
-        WebFrameworkUtils.setLoginUserId(request, user.getId());
-        WebFrameworkUtils.setLoginUserType(request, user.getUserType());
     }
 
     private void renderException(HttpServletRequest request, HttpServletResponse response, String message) {

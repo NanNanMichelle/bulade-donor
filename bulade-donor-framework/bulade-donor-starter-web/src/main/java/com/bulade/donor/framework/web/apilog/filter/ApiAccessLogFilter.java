@@ -10,7 +10,7 @@ import com.bulade.donor.common.utils.monitor.TracerUtils;
 import com.bulade.donor.common.utils.servlet.ServletUtils;
 import com.bulade.donor.framework.web.apilog.bo.ApiAccessLogCreateBO;
 import com.bulade.donor.framework.web.apilog.service.ApiAccessLogFrameworkService;
-import com.bulade.donor.framework.web.utils.WebFrameworkUtils;
+import com.bulade.donor.framework.web.config.WebFrameworkUtils;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

@@ -1,11 +1,20 @@
 package com.bulade.donor.framework.security.utils;
 
 import cn.hutool.core.text.CharSequenceUtil;
+import com.bulade.donor.framework.security.LoginUser;
+import com.bulade.donor.framework.web.config.WebFrameworkUtils;
 import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.lang.Nullable;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
+import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
+
+import java.util.List;
 
 /**
  * 安全服务工具类
@@ -56,6 +65,56 @@ public class SecurityFrameworkUtils {
             return null;
         }
         return context.getAuthentication();
+    }
+
+    /**
+     * 获取当前用户
+     *
+     * @return 当前用户
+     */
+    @Nullable
+    public static LoginUser getLoginUser() {
+        Authentication authentication = getAuthentication();
+        if (authentication == null) {
+            return null;
+        }
+        return authentication.getPrincipal() instanceof LoginUser ? (LoginUser) authentication.getPrincipal() : null;
+    }
+
+    @Nullable
+    public static Long getLoginUserId() {
+        LoginUser loginUser = getLoginUser();
+        return loginUser != null ? loginUser.getId() : null;
+    }
+
+    /**
+     * 设置当前用户
+     *
+     * @param loginUser 登录用户
+     * @param request   请求
+     */
+    public static void setLoginUser(LoginUser loginUser, HttpServletRequest request) {
+        var authentication = buildAuthentication(loginUser, request);
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+
+        // 额外设置到 request 中，用于 ApiAccessLogFilter 可以获取到用户编号；
+        // 原因是，Spring Security 的 Filter 在 ApiAccessLogFilter 后面，在它记录访问日志时，线上上下文已经没有用户编号等信息
+        WebFrameworkUtils.setLoginUserId(request, loginUser.getId());
+        WebFrameworkUtils.setLoginUserType(request, loginUser.getUserType());
+    }
+
+    private static Authentication buildAuthentication(LoginUser loginUser, HttpServletRequest request) {
+        // 创建 Authentication，并设置到上下文
+        var scopes = loginUser.getScopes();
+        List<SimpleGrantedAuthority> authorities = List.of();
+        if (!CollectionUtils.isEmpty(scopes)) {
+            authorities = loginUser.getScopes().stream().map(t -> new SimpleGrantedAuthority(t.toString())).toList();
+        }
+
+        var authenticationToken = new UsernamePasswordAuthenticationToken(
+            loginUser, null, authorities);
+        authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+        return authenticationToken;
     }
 
 }
