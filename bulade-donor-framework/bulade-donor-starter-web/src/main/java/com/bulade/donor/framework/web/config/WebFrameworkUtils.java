@@ -21,8 +21,8 @@ public class WebFrameworkUtils {
     private WebFrameworkUtils() {
     }
 
-    protected WebFrameworkUtils(final WebProperties webProperties) {
-        WebFrameworkUtils.properties = webProperties;
+    protected WebFrameworkUtils(final WebProperties properties) {
+        WebFrameworkUtils.properties = properties;
     }
 
     public static Integer getLoginUserType(HttpServletRequest request) {
