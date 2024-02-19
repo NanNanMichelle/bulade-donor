@@ -1,6 +1,7 @@
 package com.bulade.donor.framework.web.utils;
 
 import com.bulade.donor.common.core.CommonResponse;
+import com.bulade.donor.common.enums.UserType;
 import com.bulade.donor.framework.web.config.WebProperties;
 import jakarta.servlet.ServletRequest;
 import jakarta.servlet.http.HttpServletRequest;
@@ -16,15 +17,23 @@ public class WebFrameworkUtils {
 
     private static final String REQUEST_ATTRIBUTE_LOGIN_USER_TYPE = "login_user_type";
 
-    private WebProperties properties;
+    private static WebProperties properties;
 
     public WebFrameworkUtils(final WebProperties webProperties) {
-        this.properties = webProperties;
+        WebFrameworkUtils.properties = webProperties;
     }
 
     public static Integer getLoginUserType(HttpServletRequest request) {
         if (request == null) {
             return null;
+        }
+        var userType = (Integer) request.getAttribute(REQUEST_ATTRIBUTE_LOGIN_USER_TYPE);
+        if (userType != null) {
+            return userType;
+        }
+        // 2. 其次，基于 URL 前缀的约定
+        if (request.getServletPath().startsWith(properties.getAdminApi().getPrefix())) {
+            return UserType.ADMIN.getCode();
         }
         return (Integer) request.getAttribute(REQUEST_ATTRIBUTE_LOGIN_USER_TYPE);
     }
