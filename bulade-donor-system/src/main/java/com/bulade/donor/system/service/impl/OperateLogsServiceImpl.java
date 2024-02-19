@@ -1,6 +1,6 @@
 package com.bulade.donor.system.service.impl;
 
-import com.bulade.donor.framework.biz.operatelog.bo.OperateLogCreateBO;
+import com.bulade.donor.framework.operatelog.bo.OperateLogCreateBO;
 import com.bulade.donor.system.convert.OperateLogConvert;
 import com.bulade.donor.system.dao.OperateLogsMapper;
 import com.bulade.donor.system.service.OperateLogsService;
