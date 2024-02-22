@@ -19,6 +19,7 @@
         <module>bulade-donor-devops</module>
         <module>bulade-donor-tenant</module>
         <module>bulade-donor-user</module>
+        <module>bulade-donor-biz</module>
     </modules>
 
     <parent>
