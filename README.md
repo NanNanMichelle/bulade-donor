@@ -30,7 +30,7 @@
 #### 持久层
 * ORM 框架： MyBatis 3.x
 * 数据库：MySQL 8.2.0
-* 缓存：Redis 
+* 缓存：Redis
 
 ### 中间件 x
 * 工作流引擎：Flowable 7
@@ -45,7 +45,7 @@
 * 待定：Java Bean 转换: MapStruct 1.5.5.Final [UserConvert.java](bulade-donor-system%2Fsrc%2Fmain%2Fjava%2Fcom%2Fbulade%2Fdonor%2Fsystem%2Fconvert%2FUserConvert.java)
 * 消除冗长的 Java 代码: Lombok 1.18.30
 * Spring REST Docs 3.2.x [示例](bulade-donor-application%2Fsrc%2Fmain%2Fasciidoc%2Findex.adoc)
-* 数据库版本控制管理工具：Flyway 9.22.3 支持MySql 8.1.0 
+* 数据库版本控制管理工具：Flyway 9.22.3 支持MySql 8.1.0
 [Flyway.md](docs%2Fconvention%2FFlyway.md)
 
 
@@ -56,31 +56,28 @@
 ### 模块
 ```
 com.bulade.donor
-├── common            // 工具类
-│       └── core                          // 核心控制
-│       └── enums                         // 通用枚举
-│       └── exception                     // 通用异常
-│       └── utils                         // 通用类处理
-│       └── annotation                    // 自定义注解
-│       └── constant                      // 通用常量
 ├── framework         // 框架拓展
-│       └── security                      // 权限控制
+│       └── common    // 工具类
+│         └── core                          // 核心控制
+│         └── enums                         // 通用枚举
+│         └── exception                     // 通用异常
+│         └── utils                         // 通用类处理
+│         └── annotation                    // 自定义注解
+│         └── constant                      // 通用常量
+│       └── starter-security                      // 权限控制
 │           └── config
 │           └── core
-│       └── xss
-│       └── web
-│           └── apilog
-│       └── mybatis
-│       └── job                           // 定时任务
-│       └── ip                            // IP 拓展、区域
-│       └── cache                         // 缓存
-│       └── upload                        // 附件上传
-│       └── sms                           // 短信
-│       └── mail                          // 邮件
-│       └── pay                           // 支付：微信、支付宝
-│       └── face                          //人脸识别
-│       └── flowable
-│       └── mq
+│       └── starter-web
+│       └── starter-mybatis
+│       └── starter-job                           // 定时任务
+│       └── starter-ip                            // IP 拓展、区域
+│       └── starter-cache                         // 缓存
+│       └── starter-file                          // 附件上传
+│       └── starter-biz-sms                       // 短信
+│       └── starter-biz-mail                      // 邮件
+│       └── starter-biz-pay                       // 支付：微信、支付宝
+│       └── xxx
+
 ├── authorization     // 权限
 ├── system            // 系统功能
 │       └── api
@@ -91,7 +88,10 @@ com.bulade.donor
 │       └── dao
 │       └── service
 │           └── impl
-│       └── member  // 会员中心
+├── admin             // 管理员
+├── devops            // 运维，研发
+├── tenant            // 客户，租户
+├── user              // c端用户，会员
 ├── biz               // 业务
 │       └── navigation                     // 献血导航
 │       └── ranking                        // 献血排行
@@ -108,8 +108,8 @@ com.bulade.donor
 │       └── manage
 
 ```
-
-![献血服务.png](docs%2F%E7%8C%AE%E8%A1%80%E6%9C%8D%E5%8A%A1.png)
+技术架构图
+https://www.processon.com/view/link/65d56810c9284762417c44a2
 
 ### 项目信息
 [项目信息](docs%2Fproject%2FREADME.md)
