@@ -4,18 +4,4 @@
 * [swagger](..%2F..%2Fbulade-donor-application%2Fsrc%2Fmain%2Fresources%2Fapplication-swagger.yml)
   * http://localhost:48080/doc.html
   * http://localhost:48080/swagger-ui/index.html
-
-
-#### 模块
-* [common 通用模块](..%2F..%2Fbulade-donor-common%2FREADME.md)
-* [系统功能](bulade-donor-system%2FREADME.md)
-* [基础设施](bulade-donor-infra%2FREADME.md)
-* [会员中心](bulade-donor-member%2FREADME.md)
-* 业务服务
-
-
-#### 测试
-* [Spring REST Docs 示例](..%2F..%2Fbulade-donor-application%2Fsrc%2Fmain%2Fasciidoc%2Findex.adoc)
-
-#### 系统日志
-[log.md](log.md)
+* [Flyway.md](..%2Fconvention%2FFlyway.md)
