@@ -17,7 +17,16 @@ public class WebProperties {
     @NotNull(message = "Admin API 不能为空")
     private Api adminApi = new Api("/admin-api", "**.controller.admin.**");
 
-    @NotNull(message = "Admin UI 不能为空")
+    @NotNull(message = "devops API 不能为空")
+    private Api devopsApi = new Api("/devops-api", "**.controller.devops.**");
+
+    @NotNull(message = "tenant API 不能为空")
+    private Api tenantApi = new Api("/tenant-api", "**.controller.tenant.**");
+
+    @NotNull(message = "app API 不能为空")
+    private Api appApi = new Api("/app-api", "**.controller.app.**");
+
+    //Admin UI
     private Ui adminUi;
 
     @Data

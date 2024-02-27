@@ -1,5 +1,6 @@
-package com.bulade.donor.application.manage;
+package com.bulade.donor.application.manage.impl;
 
+import com.bulade.donor.application.manage.AdminAuthenticationService;
 import com.bulade.donor.common.enums.*;
 import com.bulade.donor.common.exception.BusinessException;
 import com.bulade.donor.common.utils.monitor.TracerUtils;
