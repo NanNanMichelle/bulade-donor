@@ -25,5 +25,5 @@ com.bulade.donor
 [Spring REST Docs 示例](..%2F..%2Fbulade-donor-application%2Fsrc%2Fmain%2Fasciidoc%2Findex.adoc)
 
 技术架构图
-![技术架构.png](%E6%8A%80%E6%9C%AF%E6%9E%B6%E6%9E%84.png)
+https://www.processon.com/diagraming/65d5576564fc700e502d61e4
 
