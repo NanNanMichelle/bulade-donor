@@ -1,13 +1,13 @@
 ```
 ├── system            // 系统功能
-│       └── api
-│       └── bo
-│       └── dto
-│       └── convert
-│       └── model
-│       └── dao
+│       └── dao       // Mapper xml
 │       └── service
 │           └── impl
+│       └── model     // Model 对应 table
+│       └── bo        // service 层入参
+│       └── dto       // service 层出参
+│       └── convert   // BO DTO Model 转换
+│       └── api       // 实现外部 interface
 ```
 
 |序号 | 功能   | 描述                             |
@@ -23,5 +23,6 @@
 |  | 登录日志 | 系统登录日志记录查询，包含登录异常|
 |  | 通知公告 | 系统通知公告信息发布维护|
 |  | 地区管理 | 展示省份、城市、区镇等城市信息，支持 IP 对应城市|
-|  | 短信管理  | xxxxxx                         |
-|  | 邮件管理  | xxxxxx                         |
+|  | 短信管理 | xxxxxx                         |
+|  | 邮件管理 | xxxxxx                         |
+|  | 服务管理 | xxxxxx                         |
