@@ -1,7 +1,7 @@
 # 数据源配置
 spring:
   datasource:
-    url: jdbc:mysql://127.0.0.1:3306/bulade_donor_test?autoReconnect=true&useUnicode=true&characterEncoding=utf8&useSSL=false
+    url: jdbc:mysql://127.0.0.1:3306/bulade_donor?autoReconnect=true&useUnicode=true&characterEncoding=utf8&useSSL=false
     username: root
     password: root
     driver-class-name: com.mysql.cj.jdbc.Driver

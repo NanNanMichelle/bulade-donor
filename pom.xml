@@ -14,7 +14,7 @@
         <module>bulade-donor-framework</module>
         <module>bulade-donor-application</module>
         <module>bulade-donor-coverage</module>
-        <module>bulade-donor-authorization</module>
+<!--        <module>bulade-donor-authorization</module>-->
         <module>bulade-donor-admin</module>
         <module>bulade-donor-devops</module>
         <module>bulade-donor-tenant</module>

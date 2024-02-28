@@ -1,7 +1,7 @@
 package com.bulade.donor.system.api;
 
-import com.bulade.donor.authorization.enums.RoleType;
-import com.bulade.donor.authorization.service.GrantedAuthorityService;
+import com.bulade.donor.system.authorization.enums.RoleType;
+import com.bulade.donor.system.authorization.service.GrantedAuthorityService;
 import com.bulade.donor.common.enums.UserType;
 import com.bulade.donor.framework.security.api.TokenApi;
 import com.bulade.donor.framework.security.dto.AccessTokenCheckDTO;
