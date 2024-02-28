@@ -1,7 +1,7 @@
 package com.bulade.donor.system.api;
 
-import com.bulade.donor.authorization.enums.PermissionType;
-import com.bulade.donor.authorization.service.PermissionsService;
+import com.bulade.donor.system.authorization.enums.PermissionType;
+import com.bulade.donor.system.authorization.service.PermissionsService;
 import com.bulade.donor.framework.security.api.PermissionApi;
 import com.bulade.donor.framework.security.dto.PermissionDTO;
 import jakarta.annotation.Resource;
